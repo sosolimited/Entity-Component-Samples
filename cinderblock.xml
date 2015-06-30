@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<cinder>
+<block
+	name		= "Entity Component System"
+	id			= "com.sosolimited.entities"
+	author	= "sosolimited"
+	summary = "Sample implementation of scene graph and graphics using EntityX"
+	license	= "MIT"
+	library	= "EntityX"
+	git			= "git@github.com:sosolimited/Entity-Component-Sample.git"
+	>
+	<supports os="macosx" />
+	<!-- Sample Systems and Components -->
+	<includePath>src/soso</includePath>
+	<headerPattern>src/soso/entityx/config.h</headerPattern>
+	<headerPattern>src/soso/*.h</headerPattern>
+	<sourcePattern>src/soso/*.cpp</sourcePattern>
+
+	<!-- EntityX -->
+	<includePath>src/entityx</includePath>
+	<headerPattern>src/entityx/entityx/*.h</headerPattern>
+	<!-- Unfortunately we can't just match on *.cc since EntityX has _Test.cc for each file -->
+	<sourcePattern>src/entityx/entityx/Entity.cc</sourcePattern>
+	<sourcePattern>src/entityx/entityx/Event.cc</sourcePattern>
+	<sourcePattern>src/entityx/entityx/System.cc</sourcePattern>
+	<sourcePattern>src/entityx/entityx/help/Pool.cc</sourcePattern>
+</block>
+</cinder>
