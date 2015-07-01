@@ -147,6 +147,28 @@ void updateExpires(entityx::EntityManager &entities, double dt) {
 auto perlinFlow = createFlowFunction(0.1f);
 auto borderWrap = createWrapFunction(Rectf(0, 0, 640, 480));
 
+/// Assigns the value of one entity's component to another.
+/// Use when cloning an entity.
+template <typename Component>
+entityx::Entity cloneComponents(entityx::Entity from, entityx::Entity to) {
+	auto handle = from.component<Component>();
+	if (handle) {
+		to.assign_from_copy(*handle.get());
+	}
+
+	return to;
+}
+
+/// Producer function for cloning multiple components.
+/// cloneComponents<Position, Life, Verlet, Seek>(from, entities.create());
+template <typename Component1, typename Component2, typename ... Others>
+entityx::Entity cloneComponents(entityx::Entity from, entityx::Entity to) {
+	cloneComponents<Component1>(from, to);
+	cloneComponents<Component2, Others...>(from, to);
+
+	return to;
+}
+
 } // namespace
 
 class EntityCreationApp : public App {
@@ -163,6 +185,8 @@ private:
 	entityx::EventManager	 events;
 	entityx::EntityManager entities;
 	entityx::SystemManager systems;
+	uint32_t							 num_dots = 0;
+	static const uint32_t	 max_dots = 1024;
 };
 
 EntityCreationApp::EntityCreationApp()
@@ -186,12 +210,19 @@ entityx::Entity EntityCreationApp::createDot(const ci::vec3 &position, float dia
 	dot.assign<Circle>(diameter);
 	dot.assign<Flow>();
 
+	num_dots += 1;
+
 	auto exp = dot.assign<Expires>(randFloat(4.0f, 6.0f));
 
 	exp->lastWish = [this, diameter] (entityx::Entity e) {
-		if (diameter > 3.0f) {
+		num_dots -= 1;
+
+		if (diameter > 3.0f && num_dots < max_dots) {
 			auto pos = e.component<Position>()->position;
-			auto l = createDot(pos, diameter * 0.8f);
+
+			auto l = entities.create();
+			cloneComponents<Position, Verlet, Circle>(e, l);
+//			auto l = createDot(pos, diameter * 0.8f);
 			auto r = createDot(pos, diameter * 0.81f);
 
 			auto dir = randVec3();
@@ -226,6 +257,8 @@ void EntityCreationApp::draw()
 
 	entityx::ComponentHandle<Circle>		ch;
 	entityx::ComponentHandle<Position>	ph;
+	// Why is this cooler than just calling draw on each item?
+	// We can do smart things based on what we know about our world and have a clear function call order.
 	for (auto e : entities.entities_with_components(ch, ph)) {
 		gl::ScopedModelMatrix mat;
 		gl::translate(vec2(ph->position));
