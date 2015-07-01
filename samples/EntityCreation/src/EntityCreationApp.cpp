@@ -78,7 +78,7 @@ public:
 		for (auto e : entities.entities_with_components(v, p)) {
 			auto vel = p->position - v->previous_position;
 			v->previous_position = p->position;
-			p->position += vel * 0.96f;
+			p->position += vel * 0.985f;
 		}
 	}
 
@@ -186,10 +186,10 @@ entityx::Entity EntityCreationApp::createDot(const ci::vec3 &position, float dia
 	dot.assign<Circle>(diameter);
 	dot.assign<Flow>();
 
-	auto exp = dot.assign<Expires>(mix(2.0f, randFloat(4.0f, 6.0f), diameter / 36.0f));
+	auto exp = dot.assign<Expires>(randFloat(4.0f, 6.0f));
 
 	exp->lastWish = [this, diameter] (entityx::Entity e) {
-		if (diameter > 10.0f) {
+		if (diameter > 3.0f) {
 			auto pos = e.component<Position>()->position;
 			auto l = createDot(pos, diameter * 0.8f);
 			auto r = createDot(pos, diameter * 0.81f);
@@ -206,6 +206,7 @@ entityx::Entity EntityCreationApp::createDot(const ci::vec3 &position, float dia
 
 void EntityCreationApp::mouseDown( MouseEvent event )
 {
+	createDot(vec3(event.getPos(), 0), 49.0f);
 }
 
 void EntityCreationApp::update()
