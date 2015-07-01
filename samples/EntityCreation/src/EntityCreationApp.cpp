@@ -220,9 +220,9 @@ entityx::Entity EntityCreationApp::createDot(const ci::vec3 &position, float dia
 		if (diameter > 3.0f && num_dots < max_dots) {
 			auto pos = e.component<Position>()->position;
 
-			auto l = entities.create();
-			cloneComponents<Position, Verlet, Circle>(e, l);
-//			auto l = createDot(pos, diameter * 0.8f);
+//			auto l = entities.create();
+//			cloneComponents<Position, Verlet, Circle>(e, l);
+			auto l = createDot(pos, diameter * 0.8f);
 			auto r = createDot(pos, diameter * 0.81f);
 
 			auto dir = randVec3();
