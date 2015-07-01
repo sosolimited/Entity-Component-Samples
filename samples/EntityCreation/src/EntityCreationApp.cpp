@@ -5,6 +5,7 @@
 #include "entityx/System.h"
 #include "TransformComponent.h"
 #include "cinder/Perlin.h"
+#include "cinder/Rand.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -40,6 +41,16 @@ struct Flow {
 
 struct Jitter {
 	ci::vec3 range = ci::vec3(1.0f);
+};
+
+struct Expires {
+	Expires() = default;
+	explicit Expires(float time)
+	: time(time)
+	{}
+
+	float										time = 1.0f;
+	std::function<void (entityx::Entity)>	lastWish;
 };
 
 ///
@@ -85,7 +96,7 @@ auto createFlowFunction(float scale) {
 		entityx::ComponentHandle<Flow>		 fh;
 
 		for (auto e : entities.entities_with_components(ph, fh)) {
-			ph->position += perlin.dfBm(ph->position * scale) * fh->influence;
+			ph->position += perlin.dfBm(ph->position * scale) * fh->influence * vec3(1, 1, 0.1);
 		}
 	};
 }
@@ -120,6 +131,19 @@ auto createWrapFunction(const ci::Rectf &bounds) {
 	};
 }
 
+void updateExpires(entityx::EntityManager &entities, double dt) {
+	entityx::ComponentHandle<Expires> h;
+	for (auto e : entities.entities_with_components(h)) {
+    h->time -= dt;
+		if (h->time < 0.0f) {
+			if (h->lastWish) {
+				h->lastWish(e);
+			}
+			e.destroy();
+		}
+	}
+}
+
 auto perlinFlow = createFlowFunction(0.1f);
 auto borderWrap = createWrapFunction(Rectf(0, 0, 640, 480));
 
@@ -133,6 +157,8 @@ public:
 	void mouseDown( MouseEvent event ) override;
 	void update() override;
 	void draw() override;
+
+	entityx::Entity createDot(const ci::vec3 &position, float diameter);
 private:
 	entityx::EventManager	 events;
 	entityx::EntityManager entities;
@@ -149,11 +175,33 @@ void EntityCreationApp::setup()
 	systems.add<VerletSystem>();
 	systems.configure();
 
+	auto dot = createDot(vec3(getWindowCenter(), 0.0f), 36.0f);
+}
+
+entityx::Entity EntityCreationApp::createDot(const ci::vec3 &position, float diameter)
+{
 	auto dot = entities.create();
-	dot.assign<Position>(vec3(100, 100, 0));
+	dot.assign<Position>(position);
 	dot.assign<Verlet>();
-	dot.assign<Circle>(12.0f);
+	dot.assign<Circle>(diameter);
 	dot.assign<Flow>();
+
+	auto exp = dot.assign<Expires>(mix(2.0f, randFloat(4.0f, 6.0f), diameter / 36.0f));
+
+	exp->lastWish = [this, diameter] (entityx::Entity e) {
+		if (diameter > 10.0f) {
+			auto pos = e.component<Position>()->position;
+			auto l = createDot(pos, diameter * 0.8f);
+			auto r = createDot(pos, diameter * 0.81f);
+
+			auto dir = randVec3();
+
+			l.component<Position>()->position -= dir * diameter * 0.5f;
+			r.component<Position>()->position += dir * diameter * 0.5f;
+		}
+	};
+
+	return dot;
 }
 
 void EntityCreationApp::mouseDown( MouseEvent event )
@@ -162,9 +210,12 @@ void EntityCreationApp::mouseDown( MouseEvent event )
 
 void EntityCreationApp::update()
 {
-	perlinFlow(entities, 1.0 / 60.0);
-	systems.update<VerletSystem>(1.0 / 60.0);
+	auto dt = 1.0 / 60.0;
+
+	perlinFlow(entities, dt);
+	systems.update<VerletSystem>(dt);
 	borderWrap(entities);
+	updateExpires(entities, dt);
 }
 
 void EntityCreationApp::draw()
@@ -176,7 +227,7 @@ void EntityCreationApp::draw()
 	entityx::ComponentHandle<Position>	ph;
 	for (auto e : entities.entities_with_components(ch, ph)) {
 		gl::ScopedModelMatrix mat;
-		gl::translate(ph->position);
+		gl::translate(vec2(ph->position));
 		gl::drawSolidCircle(vec2(0), ch->radius());
 	}
 }
