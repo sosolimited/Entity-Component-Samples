@@ -190,6 +190,7 @@ void attachChildren(HierarchyHandle root, entityx::Entity child1, entityx::Entit
 }
 
 /// Create a hierarchy where all children are parented to a root.
+/// Compose multiple calls to makeHierarchy to create deeper hierarchies.
 template <typename ... Children>
 entityx::Entity makeHierarchy(entityx::Entity root, Children... children) {
 	auto root_handle = makeHierarchy(root);
@@ -242,12 +243,15 @@ void EntityCreationApp::createTestHierarchy()
 	auto d = entities.create();
 	auto e = entities.create();
 
-	makeHierarchy(a, b, makeHierarchy(c, d));
-	makeHierarchy(a, b, c);
-	makeHierarchy(b, e);
+	makeHierarchy(a, makeHierarchy(b, e), makeHierarchy(c, d));
 
 	auto expected_children = vector<HierarchyHandle>{ b.component<Hierarchy>(), c.component<Hierarchy>() };
 	assert(a.component<Hierarchy>()->children() == expected_children);
+
+	b.destroy();
+	assert(! e.valid());
+	a.destroy();
+	assert(! d.valid());
 }
 
 entityx::Entity EntityCreationApp::createDot(const ci::vec3 &position, float diameter)
