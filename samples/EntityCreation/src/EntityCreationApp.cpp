@@ -172,24 +172,28 @@ entityx::Entity cloneComponents(entityx::Entity from, entityx::Entity to) {
 using HierarchyHandle = entityx::ComponentHandle<soso::TransformComponent>;
 using Hierarchy = soso::TransformComponent;
 
+/// Make a hierarchy component for an entity.
 HierarchyHandle makeHierarchy(entityx::Entity a) {
 	return a.has_component<Hierarchy>() ? a.component<Hierarchy>() : a.assign<Hierarchy>(a);
 }
 
-void attachChild(HierarchyHandle root, entityx::Entity child) {
+/// Attach a child to a parent in a hierarchy.
+void attachChildren(HierarchyHandle root, entityx::Entity child) {
 	root->appendChild(makeHierarchy(child));
 }
 
+/// Attach multiple children to a parent in a hierarchy.
 template <typename ... Children>
-void attachChild(HierarchyHandle root, entityx::Entity child1, entityx::Entity child2, Children ... children) {
-	attachChild(root, child1);
-	attachChild(root, child2, std::forward<Children>(children)...);
+void attachChildren(HierarchyHandle root, entityx::Entity child1, entityx::Entity child2, Children ... children) {
+	attachChildren(root, child1);
+	attachChildren(root, child2, std::forward<Children>(children)...);
 }
 
+/// Create a hierarchy where all children are parented to a root.
 template <typename ... Children>
 entityx::Entity makeHierarchy(entityx::Entity root, Children... children) {
 	auto root_handle = makeHierarchy(root);
-	attachChild(root_handle, std::forward<Children>(children)...);
+	attachChildren(root_handle, std::forward<Children>(children)...);
 	return root;
 }
 
@@ -239,6 +243,8 @@ void EntityCreationApp::createTestHierarchy()
 	auto e = entities.create();
 
 	makeHierarchy(a, b, makeHierarchy(c, d));
+	makeHierarchy(a, b, c);
+	makeHierarchy(b, e);
 
 	auto expected_children = vector<HierarchyHandle>{ b.component<Hierarchy>(), c.component<Hierarchy>() };
 	assert(a.component<Hierarchy>()->children() == expected_children);
