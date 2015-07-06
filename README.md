@@ -61,9 +61,16 @@ When you cross the line between straightforward to manage as a shallow inheritan
 
 We can still use some of the approaches used in Entity Component Systems when we aren't actually breaking our objects into components. Using systems to perform actions based on our collection of objects is a great technique regardless of how those objects are defined. For example, ECS forces the issue of having a renderer separate from objects, which lets you make smart choices about render order, batching, instancing, and layering. If you are building a collection of objects, consider moving some of the logic about what you do with those objects outside of them. Our software is comprised of data and actions on that data. Keeping the two separate can give us flexibility in changing how we act on the data while keeping the data the same.
 
+Keep in mind that your project is likely to change while you are working on it. The flexibility provided by an ECS can make it easier to try out different ideas and change direction mid-development.
+
 
 How to use Entities
 -------------------
+
+### Examples
+
+Flat world: no hierarchy between entities. Create physics bodies, say.
+Clusters: orbiting entities in hierarchies (based on my earlier treent sample).
 
 ### Aggregating Entities (A Graph, Tree, or Group)
 
