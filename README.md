@@ -15,9 +15,57 @@ http://scottbilas.com/files/2002/gdc_san_jose/game_objects_slides.pdf
 What is an Entity?
 ------------------
 
+### Where did this idea come from?
 
-Aggregating Entities (A Graph, Tree, or Group)
-----------------------------------------------
+Entity component systems as a design pattern come from the game industry. There, they are used to define game objects in a way that is more flexible than the previous pattern of a game object inheritance tree.
+
+Inheritance tree:
+GameObject base class defines every common attribute and behavior. Subclasses specialize those behaviors through virtual method overrides and add other functionality as needed.
+
+Entity Component Systems:
+Components define the attributes needed to perform a given behavior. Systems act on components to create a behavior.
+
+Some attributes:
+Positionable
+Draggable
+Physics Shape
+Sprite Animation
+Renderable Shape
+Particle Emission
+
+### Why Entities?
+
+If you have a world of heterogeneous things, ECS can be a great choice.
+
+Entities are good for providing flexibility in the following:
+Flexible type creation: easy to tweak behavior by adding new components and changing which ones you use.
+Memory layout can be more efficient.
+
+If you have a moment to build some tools to support your project:
+- Runtime object definition.
+- Easier to build tools that create game objects.
+- Adding scripting support is comparatively straightforward.
+
+### Why Not Entities?
+
+If your world is only comprised of homogeneous things, ECS doesn’t provide much benefit.
+
+Sometimes concerns are intertwined. Entities don’t provide a natural way to model this.
+Debugging becomes more challenging. LLDB doesn’t have smarts when it comes to unpacking a set of components.
+
+If you only have one type of thing in your world (and you really aren't going to be adding others), it is more straightforward to keep a list of that type.
+
+When you cross the line between straightforward to manage as a shallow inheritance hierarchy and better managed as a set of components and systems is a matter of judgment. We are still working that out with our projects.
+
+### Lessons from Entities
+
+We can still use some of the approaches used in Entity Component Systems when we aren't actually breaking our objects into components. Using systems to perform actions based on our collection of objects is a great technique regardless of how those objects are defined. For example, ECS forces the issue of having a renderer separate from objects, which lets you make smart choices about render order, batching, instancing, and layering. If you are building a collection of objects, consider moving some of the logic about what you do with those objects outside of them. Our software is comprised of data and actions on that data. Keeping the two separate can give us flexibility in changing how we act on the data while keeping the data the same.
+
+
+How to use Entities
+-------------------
+
+### Aggregating Entities (A Graph, Tree, or Group)
 
 So, how we we describe an aggregation of aggregations? We can use a component.
 
@@ -102,4 +150,3 @@ Can this interface be implemented through a Component?
 BehaviorComponent
 
 Occasionally, you may want to run a special function every frame for just one component.
-
