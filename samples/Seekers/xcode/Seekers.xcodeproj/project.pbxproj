@@ -22,6 +22,7 @@
 		67C03F41C15B498E9539DA48 /* SeekersApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34AF18820C8E4CCBA91F9274 /* SeekersApp.cpp */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		993136E493394D609C138253 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 942824A1AAD64043BA81C690 /* CinderApp.icns */; };
+		9CDCF79F1B4C54460021AFBF /* VerletPhysicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CDCF79C1B4C54460021AFBF /* VerletPhysicsSystem.cpp */; };
 		A21A7D70E7D24ED1819420C7 /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F92F5D9BC4020B32EDE07 /* Pool.cc */; };
 		AC40829C2A734D348E238F8D /* Event.cc in Sources */ = {isa = PBXBuildFile; fileRef = CB673A8D7AE1426BBDE69244 /* Event.cc */; };
 /* End PBXBuildFile section */
@@ -48,12 +49,17 @@
 		7D193629B59E402B9C3F42F1 /* Entity.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Entity.cc; path = ../../../src/entityx/entityx/Entity.cc; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Seekers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Seekers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		942824A1AAD64043BA81C690 /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CinderApp.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; };
+		9CDCF7961B4C54460021AFBF /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		9CDCF7971B4C54460021AFBF /* HierarchyComponentT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HierarchyComponentT.h; sourceTree = "<group>"; };
+		9CDCF7981B4C54460021AFBF /* TransformComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformComponent.h; sourceTree = "<group>"; };
+		9CDCF79B1B4C54460021AFBF /* VerletBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerletBody.h; sourceTree = "<group>"; };
+		9CDCF79C1B4C54460021AFBF /* VerletPhysicsSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VerletPhysicsSystem.cpp; sourceTree = "<group>"; };
+		9CDCF79D1B4C54460021AFBF /* VerletPhysicsSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerletPhysicsSystem.h; sourceTree = "<group>"; };
 		A9F54EFA778243F2A23D603C /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Event.h; path = ../../../src/entityx/entityx/Event.h; sourceTree = "<group>"; };
 		BDAD95BEC7A746439A0AFFEA /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = System.h; path = ../../../src/entityx/entityx/System.h; sourceTree = "<group>"; };
 		CB673A8D7AE1426BBDE69244 /* Event.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Event.cc; path = ../../../src/entityx/entityx/Event.cc; sourceTree = "<group>"; };
 		CDE128FD5D8C490FB2A73A02 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
 		D6E87AD74B7542A0B250439D /* quick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = quick.h; path = ../../../src/entityx/entityx/quick.h; sourceTree = "<group>"; };
-		DEF82CAAD998456C9C7FF8D2 /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../../../src/soso/entityx/config.h; sourceTree = "<group>"; };
 		EB8CDF1C8A094D579A41F467 /* System.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = System.cc; path = ../../../src/entityx/entityx/System.cc; sourceTree = "<group>"; };
 		F653A5F9C9864D82BC664877 /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Entity.h; path = ../../../src/entityx/entityx/Entity.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,14 +135,6 @@
 				7B7F92F5D9BC4020B32EDE07 /* Pool.cc */,
 			);
 			name = help;
-			sourceTree = "<group>";
-		};
-		15322CA8CB654A0A91D0C3FF /* soso */ = {
-			isa = PBXGroup;
-			children = (
-				F3E221D88FF84B19BD91D319 /* entityx */,
-			);
-			name = soso;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -219,21 +217,35 @@
 			name = entityx;
 			sourceTree = "<group>";
 		};
+		9CDCF7941B4C54460021AFBF /* soso */ = {
+			isa = PBXGroup;
+			children = (
+				9CDCF7951B4C54460021AFBF /* entityx */,
+				9CDCF7971B4C54460021AFBF /* HierarchyComponentT.h */,
+				9CDCF7981B4C54460021AFBF /* TransformComponent.h */,
+				9CDCF79B1B4C54460021AFBF /* VerletBody.h */,
+				9CDCF79C1B4C54460021AFBF /* VerletPhysicsSystem.cpp */,
+				9CDCF79D1B4C54460021AFBF /* VerletPhysicsSystem.h */,
+			);
+			name = soso;
+			path = ../../../src/soso;
+			sourceTree = "<group>";
+		};
+		9CDCF7951B4C54460021AFBF /* entityx */ = {
+			isa = PBXGroup;
+			children = (
+				9CDCF7961B4C54460021AFBF /* config.h */,
+			);
+			path = entityx;
+			sourceTree = "<group>";
+		};
 		D9B0669509AF433FA79B9518 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				15322CA8CB654A0A91D0C3FF /* soso */,
+				9CDCF7941B4C54460021AFBF /* soso */,
 				7E045DD2E68A4005A4E0EAF3 /* entityx */,
 			);
 			name = src;
-			sourceTree = "<group>";
-		};
-		F3E221D88FF84B19BD91D319 /* entityx */ = {
-			isa = PBXGroup;
-			children = (
-				DEF82CAAD998456C9C7FF8D2 /* config.h */,
-			);
-			name = entityx;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +313,7 @@
 			files = (
 				67C03F41C15B498E9539DA48 /* SeekersApp.cpp in Sources */,
 				2DC94B78F23C4EBCAEF207FA /* Entity.cc in Sources */,
+				9CDCF79F1B4C54460021AFBF /* VerletPhysicsSystem.cpp in Sources */,
 				AC40829C2A734D348E238F8D /* Event.cc in Sources */,
 				3D7353312F8E49C8897B5B95 /* System.cc in Sources */,
 				A21A7D70E7D24ED1819420C7 /* Pool.cc in Sources */,
