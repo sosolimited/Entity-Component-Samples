@@ -45,7 +45,7 @@ void SeekersApp::setup()
 	e.assign<PhysicsAttraction>();
 	auto body = e.assign<VerletBody>( vec3( getWindowCenter(), 0.0f ) );
 	body->drag = 0.05f;
-//	body->nudge(vec3(500.0f, 0.0f, -500.0f));
+	body->nudge(vec3(500.0f, 0.0f, -500.0f));
 
 	auto attractor = entities.create();
 	attractor.assign<VerletBody>( vec3( 100.0f, 100.0f, 50.0f ) );
