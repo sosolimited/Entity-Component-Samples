@@ -82,8 +82,8 @@ Seekers:
 			- previous position
 			- friction
 			- acceleration
-		- Target
-			- position
+		- Attractor
+			- strength
 		- Attraction
 			- strength
 		- VerletConstraint

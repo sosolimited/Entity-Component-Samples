@@ -23,6 +23,7 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		993136E493394D609C138253 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 942824A1AAD64043BA81C690 /* CinderApp.icns */; };
 		9CDCF79F1B4C54460021AFBF /* VerletPhysicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CDCF79C1B4C54460021AFBF /* VerletPhysicsSystem.cpp */; };
+		9CDCF7A41B4C645A0021AFBF /* PhysicsAttractorSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CDCF7A21B4C645A0021AFBF /* PhysicsAttractorSystem.cpp */; };
 		A21A7D70E7D24ED1819420C7 /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F92F5D9BC4020B32EDE07 /* Pool.cc */; };
 		AC40829C2A734D348E238F8D /* Event.cc in Sources */ = {isa = PBXBuildFile; fileRef = CB673A8D7AE1426BBDE69244 /* Event.cc */; };
 /* End PBXBuildFile section */
@@ -55,6 +56,10 @@
 		9CDCF79B1B4C54460021AFBF /* VerletBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerletBody.h; sourceTree = "<group>"; };
 		9CDCF79C1B4C54460021AFBF /* VerletPhysicsSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VerletPhysicsSystem.cpp; sourceTree = "<group>"; };
 		9CDCF79D1B4C54460021AFBF /* VerletPhysicsSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerletPhysicsSystem.h; sourceTree = "<group>"; };
+		9CDCF7A01B4C635C0021AFBF /* PhysicsAttractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicsAttractor.h; path = ../src/PhysicsAttractor.h; sourceTree = "<group>"; };
+		9CDCF7A11B4C63710021AFBF /* PhysicsAttraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicsAttraction.h; path = ../src/PhysicsAttraction.h; sourceTree = "<group>"; };
+		9CDCF7A21B4C645A0021AFBF /* PhysicsAttractorSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PhysicsAttractorSystem.cpp; path = ../src/PhysicsAttractorSystem.cpp; sourceTree = "<group>"; };
+		9CDCF7A31B4C645A0021AFBF /* PhysicsAttractorSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicsAttractorSystem.h; path = ../src/PhysicsAttractorSystem.h; sourceTree = "<group>"; };
 		A9F54EFA778243F2A23D603C /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Event.h; path = ../../../src/entityx/entityx/Event.h; sourceTree = "<group>"; };
 		BDAD95BEC7A746439A0AFFEA /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = System.h; path = ../../../src/entityx/entityx/System.h; sourceTree = "<group>"; };
 		CB673A8D7AE1426BBDE69244 /* Event.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Event.cc; path = ../../../src/entityx/entityx/Event.cc; sourceTree = "<group>"; };
@@ -98,6 +103,10 @@
 			isa = PBXGroup;
 			children = (
 				34AF18820C8E4CCBA91F9274 /* SeekersApp.cpp */,
+				9CDCF7A01B4C635C0021AFBF /* PhysicsAttractor.h */,
+				9CDCF7A11B4C63710021AFBF /* PhysicsAttraction.h */,
+				9CDCF7A21B4C645A0021AFBF /* PhysicsAttractorSystem.cpp */,
+				9CDCF7A31B4C645A0021AFBF /* PhysicsAttractorSystem.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -313,6 +322,7 @@
 			files = (
 				67C03F41C15B498E9539DA48 /* SeekersApp.cpp in Sources */,
 				2DC94B78F23C4EBCAEF207FA /* Entity.cc in Sources */,
+				9CDCF7A41B4C645A0021AFBF /* PhysicsAttractorSystem.cpp in Sources */,
 				9CDCF79F1B4C54460021AFBF /* VerletPhysicsSystem.cpp in Sources */,
 				AC40829C2A734D348E238F8D /* Event.cc in Sources */,
 				3D7353312F8E49C8897B5B95 /* System.cc in Sources */,
