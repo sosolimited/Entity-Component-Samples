@@ -25,7 +25,7 @@ GameObject base class defines every common attribute and behavior. Subclasses sp
 Entity Component Systems:
 Components define the attributes needed to perform a given behavior. Systems act on components to create a behavior.
 
-Some attributes:
+Some possible attributes:
 Positionable
 Draggable
 Physics Shape
@@ -38,8 +38,9 @@ Particle Emission
 If you have a world of heterogeneous things, ECS can be a great choice.
 
 Entities are good for providing flexibility in the following:
-Flexible type creation: easy to tweak behavior by adding new components and changing which ones you use.
-Memory layout can be more efficient.
+- Flexible type creation: easy to tweak behavior by adding new components and changing which ones you use.
+- Clear separation of different functionality.
+- Memory layout can be more efficient.
 
 If you have a moment to build some tools to support your project:
 - Runtime object definition.
@@ -48,37 +49,90 @@ If you have a moment to build some tools to support your project:
 
 ### Why Not Entities?
 
-If your world is only comprised of homogeneous things, ECS doesn’t provide much benefit.
-
-Sometimes concerns are intertwined. Entities don’t provide a natural way to model this.
-Debugging becomes more challenging. LLDB doesn’t have smarts when it comes to unpacking a set of components.
-
-If you only have one type of thing in your world (and you really aren't going to be adding others), it is more straightforward to keep a list of that type.
+- If your world is only comprised of homogeneous things, ECS doesn’t provide much benefit.
+	- If you only have one type of thing in your world (and you _really_ aren't going to be adding others), you can just keep a vector<Type>.
+- Debugging becomes more challenging. LLDB doesn’t have smarts when it comes to unpacking a set of components.
 
 When you cross the line between straightforward to manage as a shallow inheritance hierarchy and better managed as a set of components and systems is a matter of judgment. We are still working that out with our projects.
 
-### Lessons from Entities
+### Great Ideas from Entities
 
-We can still use some of the approaches used in Entity Component Systems when we aren't actually breaking our objects into components. Using systems to perform actions based on our collection of objects is a great technique regardless of how those objects are defined. For example, ECS forces the issue of having a renderer separate from objects, which lets you make smart choices about render order, batching, instancing, and layering. If you are building a collection of objects, consider moving some of the logic about what you do with those objects outside of them. Our software is comprised of data and actions on that data. Keeping the two separate can give us flexibility in changing how we act on the data while keeping the data the same.
+We can still use some of the approaches used in Entity Component Systems when we aren't breaking our objects into components. If you decide not to use an ECS, keep the following lessons in mind.
 
 Keep in mind that your project is likely to change while you are working on it. The flexibility provided by an ECS can make it easier to try out different ideas and change direction mid-development.
 
+#### Act on similar things as a group.
+
+Instead of having every object manage its own drawing or update behavior, define that behavior in a function that acts of a collection of those objects. First, this makes it easy to swap out one behavior for another without changing the collection of objects. Also, it makes defining certain behaviors, like flocking, more natural. Finally, batching can enable efficiencies in many operations, like rendering.
+
+If you have many similar objects, consider moving some of the logic about what you do with those objects outside of them. You can think of this like a particle system, where the system applies functions to a collection of particles.
 
 How to use Entities
 -------------------
 
 ### Examples
 
-Flat world: no hierarchy between entities. Create physics bodies, say.
+Seekers:
+	- Create targets an seekers
+	- Make a target draggable
+	- JSON scene definition
+	- Components:
+		- VerletBody
+			- position
+			- previous position
+			- friction
+			- acceleration
+		- Target
+			- position
+		- Attraction
+			- strength
+		- VerletConstraint
+			- VerletBody a, b
+			- fixed distance
+		- RenderMesh
+			- gl::BatchRef from svg
+		- Name
+			- name
+
 Clusters: orbiting entities in hierarchies (based on my earlier treent sample).
+	- Create central planet and add satellites in orbit around it.
+	- Components:
+		- HierarchicalPosition version of VerletBody
+			- orientation
+			- pivot
+			- scale
+		- Shape
+			- Cube, Sphere, Cone
+			- Instanced rendering
+		- Name
 
-### Aggregating Entities (A Graph, Tree, or Group)
+Entity Lifetime Management
+--------------------------
 
-So, how we we describe an aggregation of aggregations? We can use a component.
+```c++
+// Alpha:
+auto e = entities.create();
 
-There are lots of things to consider when building up a hierarchy component, but at its most basic, it should enable traversal of the hierarchy and access to each entity along the way. We care about a few more things, like having a reason to traverse the hierarchy and object lifetime management. Our Hierarchy component template provides the following:
+// Omega:
+e.destroy();
+```
 
-1) Ordered traversal of the group of entities.
+Entity lifetimes are managed by the EntityManager. If we don’t do anything with an entity after it is created, it will be destroyed when the EntityManager falls out of scope. Usually, this coincides with our program closing.
+
+We can also explicitly destroy entities before our program is closed.
+
+One thing to watch out for is losing track of entities. Most of the time, this isn't an issue. However, if you have entities that aren’t visible on screen it might not be obvious when they exist after you intended to destroy them.
+
+Adding Special Functions to a Particular Aggregation
+----------------------------------------------------
+
+### Aggregating Entities (Tree, Graph, or Group)
+
+In addition to describing individual entity attributes, we can use components to describe relationships between entities.
+
+There are lots of things to consider when building up a hierarchy component. At its most basic, it should enable traversal of the hierarchy, providing ordered access to each entity along the way. In C++, we also care about object lifetime management, so we make the lifetime of branches dependent on their root. Our Hierarchy component template provides the following:
+
+1) Access to parent, self, and child entities.
 2) Lifetime management. Since there is no garbage collection in standard c++, we make sure the leaves are cleaned up with the root of the hierarchy.
 3) A template type defining the properties that it makes sense to keep in a hierarchical tree (position, transparency).
 
@@ -123,25 +177,6 @@ makeHierarchy(menu,
 	menu_item_c);
 ```
 
-Entity Lifetime Management
---------------------------
-
-```c++
-// Alpha:
-auto e = entities.create();
-
-// Omega:
-e.destroy();
-```
-
-Entity lifetimes are managed by the EntityManager. If we don’t do anything with an entity after it is created, it will be destroyed when the EntityManager falls out of scope. Usually, this coincides with our program closing.
-
-We can also explicitly destroy entities before our program is closed.
-
-One thing to watch out for is losing track of entities. Most of the time, this isn't an issue. However, if you have entities that aren’t visible on screen it might not be obvious when they exist after you intended to destroy them.
-
-Adding Special Functions to a Particular Aggregation
-----------------------------------------------------
 
 ### Custom Controls
 
