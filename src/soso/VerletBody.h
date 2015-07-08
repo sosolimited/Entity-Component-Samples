@@ -11,6 +11,7 @@
 
 namespace soso {
 
+/// A point-mass for verlet simulation.
 struct VerletBody
 {
 
@@ -33,6 +34,27 @@ ci::vec3	previous_position;
 ci::vec3	acceleration;
 float			drag = 0.1f;
 
+};
+
+/// A distance constraint between two bodies
+struct VerletDistanceConstraint
+{
+	using BodyHandle = entityx::ComponentHandle<VerletBody>;
+
+	VerletDistanceConstraint( BodyHandle a, BodyHandle b )
+	: a( a ),
+		b( b ),
+		distance( glm::distance( a->position, b->position ) )
+	{}
+
+	VerletDistanceConstraint( BodyHandle a, BodyHandle b, float distance )
+	: a( a ),
+		b( b ),
+		distance( distance )
+	{}
+
+	BodyHandle a, b;
+	float distance;
 };
 
 } // namespace soso

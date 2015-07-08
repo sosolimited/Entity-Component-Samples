@@ -9,6 +9,7 @@
 #include "VerletBody.h"
 
 #include "cinder/Log.h"
+#include "cinder/Rand.h"
 
 using namespace soso;
 using namespace cinder;
@@ -43,5 +44,27 @@ void VerletPhysicsSystem::update( EntityManager &entities, EventManager &events,
 		// TODO: consider alternative approaches to this.
 		b.acceleration = vec3(0);
 		previous_dt = dt;
+	}
+
+	// solve constraints
+	ComponentHandle<VerletDistanceConstraint> constraint;
+	const auto constraint_iterations = 2;
+	for( auto __unused e : entities.entities_with_components( constraint ) )
+	{
+		for( int i = 0; i < constraint_iterations; i += 1 ) {
+			auto &a = *constraint->a.get();
+			auto &b = *constraint->b.get();
+
+			auto center = (a.position + b.position) / 2.0f;
+			auto delta = a.position - b.position;
+			auto len = glm::length( delta );
+			if( len < std::numeric_limits<float>::epsilon() ) {
+				delta = randVec3();
+				len = 1.0f;
+			}
+			delta *= constraint->distance / (len * 2.0f); // get half delta
+			a.position = center + delta;
+			b.position = center - delta;
+		}
 	}
 }
