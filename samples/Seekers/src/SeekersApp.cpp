@@ -10,41 +10,14 @@
 #include "PhysicsAttractorSystem.h"
 #include "BehaviorSystem.h"
 #include "Behavior.h"
+#include "MouseFollow.h"
+
+#include "cinder/Rand.h"
 
 using namespace ci;
 using namespace ci::app;
 using namespace std;
 using namespace soso;
-
-class MouseFollow : public BehaviorBase
-{
-public:
-	MouseFollow( entityx::Entity entity, float strength = 1.0f )
-	: BehaviorBase( entity ),
-		_strength( strength )
-	{
-		_body = entity.has_component<VerletBody>() ? entity.component<VerletBody>() : entity.assign<VerletBody>();
-	}
-
-	void mouseMove( const MouseEvent &event ) override {
-		_target = vec3( event.getPos(), 0.0f );
-	}
-
-	void update( double dt ) override {
-		auto delta = _target - _body->position;
-		if( glm::length2( delta ) < 1.0f && glm::length2( _body->velocity() ) < 1.0f ) {
-			_body->place( _target );
-		}
-		else {
-			_body->nudge( delta * _strength );
-		}
-	}
-
-private:
-	entityx::ComponentHandle<VerletBody>	_body;
-	ci::vec3															_target;
-	float																	_strength = 1.0f;
-};
 
 class SeekersApp : public App {
 public:
@@ -81,11 +54,11 @@ void SeekersApp::setup()
 	body->nudge(vec3(500.0f, 0.0f, -500.0f));
 
 	auto attractor = entities.create();
-	attractor.assign<VerletBody>( vec3( 100.0f, 100.0f, 50.0f ) );
+	attractor.assign<VerletBody>( vec3( 320.0f, 240.0f, 100.0f ) );
 	attractor.assign<PhysicsAttractor>();
 
 	attractor = entities.create();
-	attractor.assign<VerletBody>( vec3( 400.0f, 500.0f, -50.0f ) )->drag = 0.24f;
+	attractor.assign<VerletBody>( vec3( 400.0f, 500.0f, -150.0f ) )->drag = 0.24f;
 	attractor.assign<PhysicsAttractor>();
 	assignBehavior<MouseFollow>( attractor, 2.4f );
 }
@@ -95,7 +68,7 @@ void SeekersApp::mouseDown( MouseEvent event )
 	auto e = entities.create();
 	e.assign<PhysicsAttraction>( 0.5f );
 	auto body = e.assign<VerletBody>( vec3( event.getPos(), 0.0f ) );
-	body->drag = 0.05f;
+	body->drag = randFloat(0.04f, 0.08f);
 }
 
 void SeekersApp::update()
@@ -125,7 +98,6 @@ void SeekersApp::draw()
 		auto attr = e.component<PhysicsAttractor>();
 		auto size = attr ? 8.0f : 24.0f;
 		gl::drawSphere( body->position, size );
-
 		if( attr ) {
 			gl::ScopedModelMatrix mat;
 			gl::translate( body->position );
