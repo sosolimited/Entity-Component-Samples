@@ -36,7 +36,6 @@ public:
 
 	virtual ~BehaviorBase() = default;
 
-	/// Call update function.
 	virtual void update( entityx::TimeDelta dt ) {}
 
 	virtual void mouseMove( const ci::app::MouseEvent &event ) {}
@@ -49,6 +48,7 @@ private:
 	entityx::Entity	_entity;
 };
 
+/// Construct and assign a behavior of type B to an entity.
 template <typename B, typename ... Params>
 std::shared_ptr<B> assignBehavior( entityx::Entity entity, Params&& ... params )
 {
@@ -59,7 +59,7 @@ std::shared_ptr<B> assignBehavior( entityx::Entity entity, Params&& ... params )
 }
 
 /*
-// For now, require assignment to go initialize the behavior with the entity.
+// For now, we require assignBehavior to initialize the behavior with the entity.
 // This prevents unexpected behavior if two entities have the same behavior attached to them.
 // If we move to passing the entity into each virtual method, we could share behaviors across entities.
 inline void assignBehavior( entityx::Entity entity, const BehaviorRef &behavior )
@@ -69,8 +69,10 @@ inline void assignBehavior( entityx::Entity entity, const BehaviorRef &behavior 
 }
 */
 
+/// Remove all behaviors of type B from entity.
+/// e.g. removeBehaviorsOfType<Seeker>( entity );
 template <typename B>
-void removeBehavior( entityx::Entity entity )
+void removeBehaviorsOfType( entityx::Entity entity )
 {
 	auto component = entity.component<BehaviorComponent>();
 	if (component) {
@@ -81,6 +83,7 @@ void removeBehavior( entityx::Entity entity )
 	}
 }
 
+/// Remove a specific behavior from an entity.
 inline void removeBehavior( entityx::Entity entity, const BehaviorRef &behavior )
 {
 	auto component = entity.component<BehaviorComponent>();
