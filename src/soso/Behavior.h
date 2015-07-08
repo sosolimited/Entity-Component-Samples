@@ -58,4 +58,36 @@ std::shared_ptr<B> assignBehavior( entityx::Entity entity, Params&& ... params )
 	return behavior;
 }
 
+/*
+// For now, require assignment to go initialize the behavior with the entity.
+// This prevents unexpected behavior if two entities have the same behavior attached to them.
+// If we move to passing the entity into each virtual method, we could share behaviors across entities.
+inline void assignBehavior( entityx::Entity entity, const BehaviorRef &behavior )
+{
+	auto component = entity.has_component<BehaviorComponent>() ? entity.component<BehaviorComponent>() : entity.assign<BehaviorComponent>();
+	component->behaviors.push_back( behavior );
+}
+*/
+
+template <typename B>
+void removeBehavior( entityx::Entity entity )
+{
+	auto component = entity.component<BehaviorComponent>();
+	if (component) {
+		auto &b = component->behaviors;
+		b.erase( std::remove_if( b.begin(), b.end(), [] (const BehaviorRef &behavior) {
+			return std::dynamic_pointer_cast<B>( behavior );
+		} ), b.end() );
+	}
+}
+
+inline void removeBehavior( entityx::Entity entity, const BehaviorRef &behavior )
+{
+	auto component = entity.component<BehaviorComponent>();
+	if (component) {
+		auto &b = component->behaviors;
+		b.erase( std::remove( b.begin(), b.end(), behavior ), b.end() );
+	}
+}
+
 } // namespace soso
