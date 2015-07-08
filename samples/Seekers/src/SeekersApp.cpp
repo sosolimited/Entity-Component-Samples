@@ -8,11 +8,43 @@
 #include "PhysicsAttractor.h"
 #include "PhysicsAttraction.h"
 #include "PhysicsAttractorSystem.h"
+#include "BehaviorSystem.h"
+#include "Behavior.h"
 
 using namespace ci;
 using namespace ci::app;
 using namespace std;
 using namespace soso;
+
+class MouseFollow : public BehaviorBase
+{
+public:
+	using BehaviorBase::BehaviorBase; // inherit ctor
+
+	MouseFollow( entityx::Entity entity )
+	: BehaviorBase( entity )
+	{
+		_body = entity.component<VerletBody>();
+	}
+
+	void mouseMove( const MouseEvent &event ) override {
+		_target = vec3( event.getPos(), 0.0f );
+	}
+
+	void update( double dt ) override {
+		auto delta = _target - _body->position;
+		if( glm::length2( delta ) < 1.0f && glm::length2( _body->velocity() ) < 1.0f ) {
+			_body->place( _target );
+		}
+		else {
+			_body->nudge( delta * 2.4f );
+		}
+	}
+
+private:
+	entityx::ComponentHandle<VerletBody>	_body;
+	ci::vec3															_target;
+};
 
 class SeekersApp : public App {
 public:
@@ -39,6 +71,7 @@ void SeekersApp::setup()
 {
 	systems.add<VerletPhysicsSystem>();
 	systems.add<PhysicsAttractorSystem>();
+	systems.add<BehaviorSystem>( entities );
 	systems.configure();
 
 	auto e = entities.create();
@@ -52,8 +85,9 @@ void SeekersApp::setup()
 	attractor.assign<PhysicsAttractor>();
 
 	attractor = entities.create();
-	attractor.assign<VerletBody>( vec3( 400.0f, 500.0f, -50.0f ) );
+	attractor.assign<VerletBody>( vec3( 400.0f, 500.0f, -50.0f ) )->drag = 0.24f;
 	attractor.assign<PhysicsAttractor>();
+	assignBehavior<MouseFollow>( attractor );
 }
 
 void SeekersApp::mouseDown( MouseEvent event )
@@ -72,6 +106,7 @@ void SeekersApp::update()
     dt = 1.0 / 60.0;
 	}
 
+	systems.update<BehaviorSystem>( dt );
 	systems.update<PhysicsAttractorSystem>( dt );
 	systems.update<VerletPhysicsSystem>( dt );
 }

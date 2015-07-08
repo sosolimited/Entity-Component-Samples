@@ -22,6 +22,7 @@
 		67C03F41C15B498E9539DA48 /* SeekersApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34AF18820C8E4CCBA91F9274 /* SeekersApp.cpp */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		993136E493394D609C138253 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 942824A1AAD64043BA81C690 /* CinderApp.icns */; };
+		9C290A3F1B4D71D1002E3E51 /* BehaviorSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C290A3D1B4D71D1002E3E51 /* BehaviorSystem.cpp */; };
 		9CDCF79F1B4C54460021AFBF /* VerletPhysicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CDCF79C1B4C54460021AFBF /* VerletPhysicsSystem.cpp */; };
 		9CDCF7A41B4C645A0021AFBF /* PhysicsAttractorSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CDCF7A21B4C645A0021AFBF /* PhysicsAttractorSystem.cpp */; };
 		A21A7D70E7D24ED1819420C7 /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F92F5D9BC4020B32EDE07 /* Pool.cc */; };
@@ -50,6 +51,9 @@
 		7D193629B59E402B9C3F42F1 /* Entity.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Entity.cc; path = ../../../src/entityx/entityx/Entity.cc; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Seekers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Seekers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		942824A1AAD64043BA81C690 /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CinderApp.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; };
+		9C290A3D1B4D71D1002E3E51 /* BehaviorSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BehaviorSystem.cpp; sourceTree = "<group>"; };
+		9C290A3E1B4D71D1002E3E51 /* BehaviorSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BehaviorSystem.h; sourceTree = "<group>"; };
+		9C290A401B4D71DB002E3E51 /* Behavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Behavior.h; sourceTree = "<group>"; };
 		9CDCF7961B4C54460021AFBF /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		9CDCF7971B4C54460021AFBF /* HierarchyComponentT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HierarchyComponentT.h; sourceTree = "<group>"; };
 		9CDCF7981B4C54460021AFBF /* TransformComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformComponent.h; sourceTree = "<group>"; };
@@ -235,6 +239,9 @@
 				9CDCF79B1B4C54460021AFBF /* VerletBody.h */,
 				9CDCF79C1B4C54460021AFBF /* VerletPhysicsSystem.cpp */,
 				9CDCF79D1B4C54460021AFBF /* VerletPhysicsSystem.h */,
+				9C290A3D1B4D71D1002E3E51 /* BehaviorSystem.cpp */,
+				9C290A3E1B4D71D1002E3E51 /* BehaviorSystem.h */,
+				9C290A401B4D71DB002E3E51 /* Behavior.h */,
 			);
 			name = soso;
 			path = ../../../src/soso;
@@ -320,6 +327,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C290A3F1B4D71D1002E3E51 /* BehaviorSystem.cpp in Sources */,
 				67C03F41C15B498E9539DA48 /* SeekersApp.cpp in Sources */,
 				2DC94B78F23C4EBCAEF207FA /* Entity.cc in Sources */,
 				9CDCF7A41B4C645A0021AFBF /* PhysicsAttractorSystem.cpp in Sources */,

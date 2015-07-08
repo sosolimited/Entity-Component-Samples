@@ -23,6 +23,10 @@ VerletBody(const ci::vec3 &position, float drag = 0.1f)
 
 /// Change velocity so the body will move \a amount over one second if there is no friction.
 void nudge(const ci::vec3 &amount) { acceleration += amount * 60.0f; }
+/// Place the body at a given position with no velocity.
+void place(const ci::vec3 &pos) { position = pos; previous_position = pos; }
+/// Instantaneous velocity, assuming fixed timestep.
+ci::vec3 velocity() const { return position - previous_position; }
 
 ci::vec3	position;
 ci::vec3	previous_position;
