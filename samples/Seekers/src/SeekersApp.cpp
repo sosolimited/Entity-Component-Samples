@@ -23,7 +23,7 @@ public:
 	: BehaviorBase( entity ),
 		_strength( strength )
 	{
-		_body = entity.component<VerletBody>();
+		_body = entity.has_component<VerletBody>() ? entity.component<VerletBody>() : entity.assign<VerletBody>();
 	}
 
 	void mouseMove( const MouseEvent &event ) override {
