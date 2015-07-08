@@ -51,6 +51,12 @@ void VerletPhysicsSystem::update( EntityManager &entities, EventManager &events,
 	const auto constraint_iterations = 2;
 	for( auto __unused e : entities.entities_with_components( constraint ) )
 	{
+		if( (! constraint->a.valid()) || (! constraint->b.valid()) ) {
+			// would be cooler if the bodies knew about all constraints on them so this couldn't happen.
+			constraint.remove();
+			continue;
+		}
+
 		for( int i = 0; i < constraint_iterations; i += 1 ) {
 			auto &a = *constraint->a.get();
 			auto &b = *constraint->b.get();

@@ -65,6 +65,7 @@ void SeekersApp::setup()
 
 void SeekersApp::mouseDown( MouseEvent event )
 {
+	// Put into a chain with the previous entity.
 	auto e = entities.create();
 	e.assign<PhysicsAttraction>( 0.5f );
 	auto body = e.assign<VerletBody>( vec3( event.getPos(), 0.0f ) );
