@@ -19,10 +19,9 @@ using namespace soso;
 class MouseFollow : public BehaviorBase
 {
 public:
-	using BehaviorBase::BehaviorBase; // inherit ctor
-
-	MouseFollow( entityx::Entity entity )
-	: BehaviorBase( entity )
+	MouseFollow( entityx::Entity entity, float strength = 1.0f )
+	: BehaviorBase( entity ),
+		_strength( strength )
 	{
 		_body = entity.component<VerletBody>();
 	}
@@ -37,13 +36,14 @@ public:
 			_body->place( _target );
 		}
 		else {
-			_body->nudge( delta * 2.4f );
+			_body->nudge( delta * _strength );
 		}
 	}
 
 private:
 	entityx::ComponentHandle<VerletBody>	_body;
 	ci::vec3															_target;
+	float																	_strength = 1.0f;
 };
 
 class SeekersApp : public App {
@@ -87,7 +87,7 @@ void SeekersApp::setup()
 	attractor = entities.create();
 	attractor.assign<VerletBody>( vec3( 400.0f, 500.0f, -50.0f ) )->drag = 0.24f;
 	attractor.assign<PhysicsAttractor>();
-	assignBehavior<MouseFollow>( attractor );
+	assignBehavior<MouseFollow>( attractor, 2.4f );
 }
 
 void SeekersApp::mouseDown( MouseEvent event )
