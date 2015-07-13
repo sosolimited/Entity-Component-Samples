@@ -1,0 +1,460 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		006D720419952D00008149E2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006D720219952D00008149E2 /* AVFoundation.framework */; };
+		006D720519952D00008149E2 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006D720319952D00008149E2 /* CoreMedia.framework */; };
+		0091D8F90E81B9330029341E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0091D8F80E81B9330029341E /* OpenGL.framework */; };
+		00B784B30FF439BC000DE1D7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784AF0FF439BC000DE1D7 /* Accelerate.framework */; };
+		00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */; };
+		00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B10FF439BC000DE1D7 /* AudioUnit.framework */; };
+		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
+		00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995581B128DF400A5C623 /* IOKit.framework */; };
+		00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
+		2DC94B78F23C4EBCAEF207FA /* Entity.cc in Sources */ = {isa = PBXBuildFile; fileRef = 7D193629B59E402B9C3F42F1 /* Entity.cc */; };
+		3D7353312F8E49C8897B5B95 /* System.cc in Sources */ = {isa = PBXBuildFile; fileRef = EB8CDF1C8A094D579A41F467 /* System.cc */; };
+		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
+		67C03F41C15B498E9539DA48 /* SeekersApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34AF18820C8E4CCBA91F9274 /* SeekersApp.cpp */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		993136E493394D609C138253 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 942824A1AAD64043BA81C690 /* CinderApp.icns */; };
+		9C290A3F1B4D71D1002E3E51 /* BehaviorSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C290A3D1B4D71D1002E3E51 /* BehaviorSystem.cpp */; };
+		9C290A431B4DB316002E3E51 /* MouseFollow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C290A411B4DB316002E3E51 /* MouseFollow.cpp */; };
+		9CDCF79F1B4C54460021AFBF /* VerletPhysicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CDCF79C1B4C54460021AFBF /* VerletPhysicsSystem.cpp */; };
+		9CDCF7A41B4C645A0021AFBF /* PhysicsAttractorSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CDCF7A21B4C645A0021AFBF /* PhysicsAttractorSystem.cpp */; };
+		A21A7D70E7D24ED1819420C7 /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F92F5D9BC4020B32EDE07 /* Pool.cc */; };
+		AC40829C2A734D348E238F8D /* Event.cc in Sources */ = {isa = PBXBuildFile; fileRef = CB673A8D7AE1426BBDE69244 /* Event.cc */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		006D720219952D00008149E2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		006D720319952D00008149E2 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		0091D8F80E81B9330029341E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		00B784AF0FF439BC000DE1D7 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		00B784B10FF439BC000DE1D7 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		00B784B20FF439BC000DE1D7 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		00B995581B128DF400A5C623 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		00B995591B128DF400A5C623 /* IOSurface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOSurface.framework; path = System/Library/Frameworks/IOSurface.framework; sourceTree = SDKROOT; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		1F1B9F5285B04028B00BA209 /* Seekers_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = Seekers_Prefix.pch; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		2B48C571E41E45D585282C91 /* entityx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = entityx.h; path = ../../../src/entityx/entityx/entityx.h; sourceTree = "<group>"; };
+		34AF18820C8E4CCBA91F9274 /* SeekersApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = SeekersApp.cpp; path = ../src/SeekersApp.cpp; sourceTree = "<group>"; };
+		5323E6B10EAFCA74003A9687 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
+		6C1FC09CBEC04955AFD8387B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B7F92F5D9BC4020B32EDE07 /* Pool.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Pool.cc; path = ../../../src/entityx/entityx/help/Pool.cc; sourceTree = "<group>"; };
+		7D193629B59E402B9C3F42F1 /* Entity.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Entity.cc; path = ../../../src/entityx/entityx/Entity.cc; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* Seekers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Seekers.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		942824A1AAD64043BA81C690 /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CinderApp.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; };
+		9C290A3D1B4D71D1002E3E51 /* BehaviorSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BehaviorSystem.cpp; sourceTree = "<group>"; };
+		9C290A3E1B4D71D1002E3E51 /* BehaviorSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BehaviorSystem.h; sourceTree = "<group>"; };
+		9C290A401B4D71DB002E3E51 /* Behavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Behavior.h; sourceTree = "<group>"; };
+		9C290A411B4DB316002E3E51 /* MouseFollow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MouseFollow.cpp; path = ../src/MouseFollow.cpp; sourceTree = "<group>"; };
+		9C290A421B4DB316002E3E51 /* MouseFollow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MouseFollow.h; path = ../src/MouseFollow.h; sourceTree = "<group>"; };
+		9CDCF7961B4C54460021AFBF /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		9CDCF7971B4C54460021AFBF /* HierarchyComponentT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HierarchyComponentT.h; sourceTree = "<group>"; };
+		9CDCF7981B4C54460021AFBF /* TransformComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformComponent.h; sourceTree = "<group>"; };
+		9CDCF79B1B4C54460021AFBF /* VerletBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerletBody.h; sourceTree = "<group>"; };
+		9CDCF79C1B4C54460021AFBF /* VerletPhysicsSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VerletPhysicsSystem.cpp; sourceTree = "<group>"; };
+		9CDCF79D1B4C54460021AFBF /* VerletPhysicsSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerletPhysicsSystem.h; sourceTree = "<group>"; };
+		9CDCF7A01B4C635C0021AFBF /* PhysicsAttractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicsAttractor.h; path = ../src/PhysicsAttractor.h; sourceTree = "<group>"; };
+		9CDCF7A11B4C63710021AFBF /* PhysicsAttraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicsAttraction.h; path = ../src/PhysicsAttraction.h; sourceTree = "<group>"; };
+		9CDCF7A21B4C645A0021AFBF /* PhysicsAttractorSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PhysicsAttractorSystem.cpp; path = ../src/PhysicsAttractorSystem.cpp; sourceTree = "<group>"; };
+		9CDCF7A31B4C645A0021AFBF /* PhysicsAttractorSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicsAttractorSystem.h; path = ../src/PhysicsAttractorSystem.h; sourceTree = "<group>"; };
+		A9F54EFA778243F2A23D603C /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Event.h; path = ../../../src/entityx/entityx/Event.h; sourceTree = "<group>"; };
+		BDAD95BEC7A746439A0AFFEA /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = System.h; path = ../../../src/entityx/entityx/System.h; sourceTree = "<group>"; };
+		CB673A8D7AE1426BBDE69244 /* Event.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Event.cc; path = ../../../src/entityx/entityx/Event.cc; sourceTree = "<group>"; };
+		CDE128FD5D8C490FB2A73A02 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
+		D6E87AD74B7542A0B250439D /* quick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = quick.h; path = ../../../src/entityx/entityx/quick.h; sourceTree = "<group>"; };
+		EB8CDF1C8A094D579A41F467 /* System.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = System.cc; path = ../../../src/entityx/entityx/System.cc; sourceTree = "<group>"; };
+		F653A5F9C9864D82BC664877 /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Entity.h; path = ../../../src/entityx/entityx/Entity.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				006D720419952D00008149E2 /* AVFoundation.framework in Frameworks */,
+				006D720519952D00008149E2 /* CoreMedia.framework in Frameworks */,
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				0091D8F90E81B9330029341E /* OpenGL.framework in Frameworks */,
+				5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */,
+				00B784B30FF439BC000DE1D7 /* Accelerate.framework in Frameworks */,
+				00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */,
+				00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */,
+				00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */,
+				00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */,
+				00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		01B97315FEAEA392516A2CEA /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				773B44BF7A744E43BC04AD47 /* Entity Component System */,
+			);
+			name = Blocks;
+			sourceTree = "<group>";
+		};
+		080E96DDFE201D6D7F000001 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				34AF18820C8E4CCBA91F9274 /* SeekersApp.cpp */,
+				9CDCF7A01B4C635C0021AFBF /* PhysicsAttractor.h */,
+				9CDCF7A11B4C63710021AFBF /* PhysicsAttraction.h */,
+				9CDCF7A21B4C645A0021AFBF /* PhysicsAttractorSystem.cpp */,
+				9CDCF7A31B4C645A0021AFBF /* PhysicsAttractorSystem.h */,
+				9C290A411B4DB316002E3E51 /* MouseFollow.cpp */,
+				9C290A421B4DB316002E3E51 /* MouseFollow.h */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				006D720219952D00008149E2 /* AVFoundation.framework */,
+				006D720319952D00008149E2 /* CoreMedia.framework */,
+				00B784AF0FF439BC000DE1D7 /* Accelerate.framework */,
+				00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */,
+				00B784B10FF439BC000DE1D7 /* AudioUnit.framework */,
+				00B784B20FF439BC000DE1D7 /* CoreAudio.framework */,
+				5323E6B10EAFCA74003A9687 /* CoreVideo.framework */,
+				0091D8F80E81B9330029341E /* OpenGL.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				00B995581B128DF400A5C623 /* IOKit.framework */,
+				00B995591B128DF400A5C623 /* IOSurface.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		10B9683ACBD74E39BCBB45F1 /* help */ = {
+			isa = PBXGroup;
+			children = (
+				7B7F92F5D9BC4020B32EDE07 /* Pool.cc */,
+			);
+			name = help;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* Seekers.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* Seekers */ = {
+			isa = PBXGroup;
+			children = (
+				01B97315FEAEA392516A2CEA /* Blocks */,
+				29B97315FDCFA39411CA2CEA /* Headers */,
+				080E96DDFE201D6D7F000001 /* Source */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = Seekers;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				CDE128FD5D8C490FB2A73A02 /* Resources.h */,
+				1F1B9F5285B04028B00BA209 /* Seekers_Prefix.pch */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				942824A1AAD64043BA81C690 /* CinderApp.icns */,
+				6C1FC09CBEC04955AFD8387B /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		38D9044080B048258DCAB2EF /* entityx */ = {
+			isa = PBXGroup;
+			children = (
+				F653A5F9C9864D82BC664877 /* Entity.h */,
+				2B48C571E41E45D585282C91 /* entityx.h */,
+				A9F54EFA778243F2A23D603C /* Event.h */,
+				D6E87AD74B7542A0B250439D /* quick.h */,
+				BDAD95BEC7A746439A0AFFEA /* System.h */,
+				7D193629B59E402B9C3F42F1 /* Entity.cc */,
+				CB673A8D7AE1426BBDE69244 /* Event.cc */,
+				EB8CDF1C8A094D579A41F467 /* System.cc */,
+				10B9683ACBD74E39BCBB45F1 /* help */,
+			);
+			name = entityx;
+			sourceTree = "<group>";
+		};
+		773B44BF7A744E43BC04AD47 /* Entity Component System */ = {
+			isa = PBXGroup;
+			children = (
+				D9B0669509AF433FA79B9518 /* src */,
+			);
+			name = "Entity Component System";
+			sourceTree = "<group>";
+		};
+		7E045DD2E68A4005A4E0EAF3 /* entityx */ = {
+			isa = PBXGroup;
+			children = (
+				38D9044080B048258DCAB2EF /* entityx */,
+			);
+			name = entityx;
+			sourceTree = "<group>";
+		};
+		9CDCF7941B4C54460021AFBF /* soso */ = {
+			isa = PBXGroup;
+			children = (
+				9CDCF7951B4C54460021AFBF /* entityx */,
+				9CDCF7971B4C54460021AFBF /* HierarchyComponentT.h */,
+				9CDCF7981B4C54460021AFBF /* TransformComponent.h */,
+				9CDCF79B1B4C54460021AFBF /* VerletBody.h */,
+				9CDCF79C1B4C54460021AFBF /* VerletPhysicsSystem.cpp */,
+				9CDCF79D1B4C54460021AFBF /* VerletPhysicsSystem.h */,
+				9C290A3D1B4D71D1002E3E51 /* BehaviorSystem.cpp */,
+				9C290A3E1B4D71D1002E3E51 /* BehaviorSystem.h */,
+				9C290A401B4D71DB002E3E51 /* Behavior.h */,
+			);
+			name = soso;
+			path = ../../../src/soso;
+			sourceTree = "<group>";
+		};
+		9CDCF7951B4C54460021AFBF /* entityx */ = {
+			isa = PBXGroup;
+			children = (
+				9CDCF7961B4C54460021AFBF /* config.h */,
+			);
+			path = entityx;
+			sourceTree = "<group>";
+		};
+		D9B0669509AF433FA79B9518 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				9CDCF7941B4C54460021AFBF /* soso */,
+				7E045DD2E68A4005A4E0EAF3 /* entityx */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* Seekers */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Seekers" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Seekers;
+			productInstallPath = "$(HOME)/Applications";
+			productName = Seekers;
+			productReference = 8D1107320486CEB800E47090 /* Seekers.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Seekers" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* Seekers */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* Seekers */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				993136E493394D609C138253 /* CinderApp.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C290A3F1B4D71D1002E3E51 /* BehaviorSystem.cpp in Sources */,
+				9C290A431B4DB316002E3E51 /* MouseFollow.cpp in Sources */,
+				67C03F41C15B498E9539DA48 /* SeekersApp.cpp in Sources */,
+				2DC94B78F23C4EBCAEF207FA /* Entity.cc in Sources */,
+				9CDCF7A41B4C645A0021AFBF /* PhysicsAttractorSystem.cpp in Sources */,
+				9CDCF79F1B4C54460021AFBF /* VerletPhysicsSystem.cpp in Sources */,
+				AC40829C2A734D348E238F8D /* Event.cc in Sources */,
+				3D7353312F8E49C8897B5B95 /* System.cc in Sources */,
+				A21A7D70E7D24ED1819420C7 /* Pool.cc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Seekers_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder_d.a\"";
+				PRODUCT_NAME = Seekers;
+				SYMROOT = ./build;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_FAST_MATH = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Seekers_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NDEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder.a\"";
+				PRODUCT_NAME = Seekers;
+				STRIP_INSTALLED_PRODUCT = YES;
+				SYMROOT = ./build;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = x86_64;
+				CINDER_PATH = ../../../../..;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../../../src/soso ../../../src/entityx";
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = x86_64;
+				CINDER_PATH = ../../../../..;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../../../src/soso ../../../src/entityx";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Seekers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Seekers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

@@ -38,9 +38,12 @@ Particle Emission
 If you have a world of heterogeneous things, ECS can be a great choice.
 
 Entities are good for providing flexibility in the following:
-- Flexible type creation: easy to tweak behavior by adding new components and changing which ones you use.
+- Flexible type creation: easy to tweak behavior by adding new components and combining existing components differently.
 - Clear separation of different functionality.
+	- This makes reasoning about and testing code simpler.
 - Memory layout can be more efficient.
+	- EntityX puts every component in a semi-contiguous array, which makes it cache efficient.
+	- Dynamic allocation (e.g. `make_shared`, `make_unique`, `new`), by contrast, doesn't necessarily group things together.
 
 If you have a moment to build some tools to support your project:
 - Runtime object definition.
@@ -72,39 +75,43 @@ How to use Entities
 
 ### Examples
 
-Seekers:
-	- Create targets an seekers
-	- Make a target draggable
-	- JSON scene definition
-	- Components:
-		- VerletBody
-			- position
-			- previous position
-			- friction
-			- acceleration
-		- Target
-			- position
-		- Attraction
-			- strength
-		- VerletConstraint
-			- VerletBody a, b
-			- fixed distance
-		- RenderMesh
-			- gl::BatchRef from svg
-		- Name
-			- name
+#### Gravity Wells
 
-Clusters: orbiting entities in hierarchies (based on my earlier treent sample).
-	- Create central planet and add satellites in orbit around it.
-	- Components:
-		- HierarchicalPosition version of VerletBody
-			- orientation
-			- pivot
-			- scale
-		- Shape
-			- Cube, Sphere, Cone
-			- Instanced rendering
-		- Name
+Objects fly through the world and are pulled toward attractors.
+
+Scene defined in JSON.
+
+- Components:
+	- VerletBody
+		- position
+		- previous position
+		- friction
+		- acceleration
+	- Attractor (pulls things toward it)
+		- strength
+	- Attraction (is attracted to attractors)
+		- strength
+	- VerletConstraint
+		- VerletBody a, b
+		- fixed distance
+	- RenderMesh
+		- gl::BatchRef from svg
+	- Name
+		- name
+
+#### Star Clusters
+
+Satellites in layered orbit around central star.
+
+- Components:
+	- HierarchicalPosition version of VerletBody
+		- orientation
+		- pivot
+		- scale
+	- Shape
+		- Cube, Sphere, Cone
+		- Instanced rendering
+	- Name
 
 Entity Lifetime Management
 --------------------------
