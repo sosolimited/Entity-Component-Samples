@@ -1,0 +1,449 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		006D720419952D00008149E2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006D720219952D00008149E2 /* AVFoundation.framework */; };
+		006D720519952D00008149E2 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006D720319952D00008149E2 /* CoreMedia.framework */; };
+		0091D8F90E81B9330029341E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0091D8F80E81B9330029341E /* OpenGL.framework */; };
+		00B784B30FF439BC000DE1D7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784AF0FF439BC000DE1D7 /* Accelerate.framework */; };
+		00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */; };
+		00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B10FF439BC000DE1D7 /* AudioUnit.framework */; };
+		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
+		00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995581B128DF400A5C623 /* IOKit.framework */; };
+		00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
+		04CD891AF4444D9DB8DF96FD /* HierarchicalOrbitsApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0C142BF80B94E6DB41963D7 /* HierarchicalOrbitsApp.cpp */; };
+		177F839582284B5EA36776A9 /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0F49EAC0F04F43C98D6ADDE0 /* Pool.cc */; };
+		4314E5AF4ECD4703812C534E /* TransformSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ACDDD19C7CD4E36B8DED953 /* TransformSystem.cpp */; };
+		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
+		5B54DD11E9CA48C4B22B7921 /* BehaviorSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 333B34A8770147F29AD3F6B4 /* BehaviorSystem.cpp */; };
+		74B210B7029F4043944699D9 /* Entity.cc in Sources */ = {isa = PBXBuildFile; fileRef = BA6A8CAE576348F68679C43F /* Entity.cc */; };
+		7858F3B330D34A749BF58961 /* System.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6C8896D13AD84E3287771B50 /* System.cc */; };
+		8C120E26D8934020BCF202DF /* Event.cc in Sources */ = {isa = PBXBuildFile; fileRef = 4FA05A7DC94942948E5DDC5A /* Event.cc */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		9C7689311B545C580089C2C4 /* RenderFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C76892F1B545C580089C2C4 /* RenderFunctions.cpp */; };
+		AB6BCEC283E345B69881DC68 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5B404EFEEB5E4B26A8780AC9 /* CinderApp.icns */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		006D720219952D00008149E2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		006D720319952D00008149E2 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		0091D8F80E81B9330029341E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		00B784AF0FF439BC000DE1D7 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		00B784B10FF439BC000DE1D7 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		00B784B20FF439BC000DE1D7 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		00B995581B128DF400A5C623 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		00B995591B128DF400A5C623 /* IOSurface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOSurface.framework; path = System/Library/Frameworks/IOSurface.framework; sourceTree = SDKROOT; };
+		0CFD9BE88C3B4545943939B3 /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = System.h; path = ../../../src/entityx/entityx/System.h; sourceTree = "<group>"; };
+		0F49EAC0F04F43C98D6ADDE0 /* Pool.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Pool.cc; path = ../../../src/entityx/entityx/help/Pool.cc; sourceTree = "<group>"; };
+		10106DEE5A1B4D9FA9BDA641 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		255FC5418E8A4AF1BCA7CAEF /* TransformSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TransformSystem.h; path = ../../../src/soso/TransformSystem.h; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		333B34A8770147F29AD3F6B4 /* BehaviorSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = BehaviorSystem.cpp; path = ../../../src/soso/BehaviorSystem.cpp; sourceTree = "<group>"; };
+		33F8E91E33ED49B09183E67B /* Transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Transform.h; path = ../../../src/soso/Transform.h; sourceTree = "<group>"; };
+		4FA05A7DC94942948E5DDC5A /* Event.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Event.cc; path = ../../../src/entityx/entityx/Event.cc; sourceTree = "<group>"; };
+		5323E6B10EAFCA74003A9687 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
+		5840F2D923A545BDA8217C93 /* entityx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = entityx.h; path = ../../../src/entityx/entityx/entityx.h; sourceTree = "<group>"; };
+		5B404EFEEB5E4B26A8780AC9 /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CinderApp.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; };
+		6C8896D13AD84E3287771B50 /* System.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = System.cc; path = ../../../src/entityx/entityx/System.cc; sourceTree = "<group>"; };
+		74CF7A2CB1154301900E3631 /* HierarchyComponentT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HierarchyComponentT.h; path = ../../../src/soso/HierarchyComponentT.h; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* HierarchicalOrbits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HierarchicalOrbits.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9406FBFF2C5E4860843041C8 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
+		9ACDDD19C7CD4E36B8DED953 /* TransformSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = TransformSystem.cpp; path = ../../../src/soso/TransformSystem.cpp; sourceTree = "<group>"; };
+		9C76892E1B545B0E0089C2C4 /* RenderLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderLayer.h; path = ../../../src/soso/RenderLayer.h; sourceTree = "<group>"; };
+		9C76892F1B545C580089C2C4 /* RenderFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderFunctions.cpp; path = ../src/RenderFunctions.cpp; sourceTree = "<group>"; };
+		9C7689301B545C580089C2C4 /* RenderFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderFunctions.h; path = ../src/RenderFunctions.h; sourceTree = "<group>"; };
+		A429DB469662401A99BABE82 /* HierarchicalOrbits_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = HierarchicalOrbits_Prefix.pch; sourceTree = "<group>"; };
+		A86402EB37E94E528446A846 /* Behavior.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Behavior.h; path = ../../../src/soso/Behavior.h; sourceTree = "<group>"; };
+		B10F1606A7B64F72BF47EE5B /* quick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = quick.h; path = ../../../src/entityx/entityx/quick.h; sourceTree = "<group>"; };
+		BA6A8CAE576348F68679C43F /* Entity.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Entity.cc; path = ../../../src/entityx/entityx/Entity.cc; sourceTree = "<group>"; };
+		BA93CF3B2FE14876A3611AE2 /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../../../src/soso/entityx/config.h; sourceTree = "<group>"; };
+		BC801B6656BE423E95984F07 /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Entity.h; path = ../../../src/entityx/entityx/Entity.h; sourceTree = "<group>"; };
+		D4B60A37706342F6BA1E6C1C /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Event.h; path = ../../../src/entityx/entityx/Event.h; sourceTree = "<group>"; };
+		ED2FCFE4392347329A16115E /* BehaviorSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BehaviorSystem.h; path = ../../../src/soso/BehaviorSystem.h; sourceTree = "<group>"; };
+		F0C142BF80B94E6DB41963D7 /* HierarchicalOrbitsApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = HierarchicalOrbitsApp.cpp; path = ../src/HierarchicalOrbitsApp.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				006D720419952D00008149E2 /* AVFoundation.framework in Frameworks */,
+				006D720519952D00008149E2 /* CoreMedia.framework in Frameworks */,
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				0091D8F90E81B9330029341E /* OpenGL.framework in Frameworks */,
+				5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */,
+				00B784B30FF439BC000DE1D7 /* Accelerate.framework in Frameworks */,
+				00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */,
+				00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */,
+				00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */,
+				00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */,
+				00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		01B97315FEAEA392516A2CEA /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				F7CAE7A7FDC641F99A52DD3D /* Entity Component System */,
+			);
+			name = Blocks;
+			sourceTree = "<group>";
+		};
+		080E96DDFE201D6D7F000001 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				F0C142BF80B94E6DB41963D7 /* HierarchicalOrbitsApp.cpp */,
+				9C76892F1B545C580089C2C4 /* RenderFunctions.cpp */,
+				9C7689301B545C580089C2C4 /* RenderFunctions.h */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				006D720219952D00008149E2 /* AVFoundation.framework */,
+				006D720319952D00008149E2 /* CoreMedia.framework */,
+				00B784AF0FF439BC000DE1D7 /* Accelerate.framework */,
+				00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */,
+				00B784B10FF439BC000DE1D7 /* AudioUnit.framework */,
+				00B784B20FF439BC000DE1D7 /* CoreAudio.framework */,
+				5323E6B10EAFCA74003A9687 /* CoreVideo.framework */,
+				0091D8F80E81B9330029341E /* OpenGL.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				00B995581B128DF400A5C623 /* IOKit.framework */,
+				00B995591B128DF400A5C623 /* IOSurface.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* HierarchicalOrbits.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1AFD6B5EAB174F4CB601B633 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				61E1002F08A34BEEB46DB707 /* soso */,
+				6DA494EA5319401F932DE5CD /* entityx */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* HierarchicalOrbits */ = {
+			isa = PBXGroup;
+			children = (
+				01B97315FEAEA392516A2CEA /* Blocks */,
+				29B97315FDCFA39411CA2CEA /* Headers */,
+				080E96DDFE201D6D7F000001 /* Source */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = HierarchicalOrbits;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				9406FBFF2C5E4860843041C8 /* Resources.h */,
+				A429DB469662401A99BABE82 /* HierarchicalOrbits_Prefix.pch */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5B404EFEEB5E4B26A8780AC9 /* CinderApp.icns */,
+				10106DEE5A1B4D9FA9BDA641 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		446C7BF4E0724225B86421FF /* entityx */ = {
+			isa = PBXGroup;
+			children = (
+				BC801B6656BE423E95984F07 /* Entity.h */,
+				5840F2D923A545BDA8217C93 /* entityx.h */,
+				D4B60A37706342F6BA1E6C1C /* Event.h */,
+				B10F1606A7B64F72BF47EE5B /* quick.h */,
+				0CFD9BE88C3B4545943939B3 /* System.h */,
+				BA6A8CAE576348F68679C43F /* Entity.cc */,
+				4FA05A7DC94942948E5DDC5A /* Event.cc */,
+				6C8896D13AD84E3287771B50 /* System.cc */,
+				EF45D486F7504597ACD6C08E /* help */,
+			);
+			name = entityx;
+			sourceTree = "<group>";
+		};
+		61E1002F08A34BEEB46DB707 /* soso */ = {
+			isa = PBXGroup;
+			children = (
+				90B7C9A469444AB9A7C032F6 /* entityx */,
+				A86402EB37E94E528446A846 /* Behavior.h */,
+				ED2FCFE4392347329A16115E /* BehaviorSystem.h */,
+				74CF7A2CB1154301900E3631 /* HierarchyComponentT.h */,
+				33F8E91E33ED49B09183E67B /* Transform.h */,
+				255FC5418E8A4AF1BCA7CAEF /* TransformSystem.h */,
+				333B34A8770147F29AD3F6B4 /* BehaviorSystem.cpp */,
+				9ACDDD19C7CD4E36B8DED953 /* TransformSystem.cpp */,
+				9C76892E1B545B0E0089C2C4 /* RenderLayer.h */,
+			);
+			name = soso;
+			sourceTree = "<group>";
+		};
+		6DA494EA5319401F932DE5CD /* entityx */ = {
+			isa = PBXGroup;
+			children = (
+				446C7BF4E0724225B86421FF /* entityx */,
+			);
+			name = entityx;
+			sourceTree = "<group>";
+		};
+		90B7C9A469444AB9A7C032F6 /* entityx */ = {
+			isa = PBXGroup;
+			children = (
+				BA93CF3B2FE14876A3611AE2 /* config.h */,
+			);
+			name = entityx;
+			sourceTree = "<group>";
+		};
+		EF45D486F7504597ACD6C08E /* help */ = {
+			isa = PBXGroup;
+			children = (
+				0F49EAC0F04F43C98D6ADDE0 /* Pool.cc */,
+			);
+			name = help;
+			sourceTree = "<group>";
+		};
+		F7CAE7A7FDC641F99A52DD3D /* Entity Component System */ = {
+			isa = PBXGroup;
+			children = (
+				1AFD6B5EAB174F4CB601B633 /* src */,
+			);
+			name = "Entity Component System";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* HierarchicalOrbits */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "HierarchicalOrbits" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HierarchicalOrbits;
+			productInstallPath = "$(HOME)/Applications";
+			productName = HierarchicalOrbits;
+			productReference = 8D1107320486CEB800E47090 /* HierarchicalOrbits.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "HierarchicalOrbits" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* HierarchicalOrbits */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* HierarchicalOrbits */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB6BCEC283E345B69881DC68 /* CinderApp.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04CD891AF4444D9DB8DF96FD /* HierarchicalOrbitsApp.cpp in Sources */,
+				5B54DD11E9CA48C4B22B7921 /* BehaviorSystem.cpp in Sources */,
+				4314E5AF4ECD4703812C534E /* TransformSystem.cpp in Sources */,
+				74B210B7029F4043944699D9 /* Entity.cc in Sources */,
+				8C120E26D8934020BCF202DF /* Event.cc in Sources */,
+				9C7689311B545C580089C2C4 /* RenderFunctions.cpp in Sources */,
+				7858F3B330D34A749BF58961 /* System.cc in Sources */,
+				177F839582284B5EA36776A9 /* Pool.cc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = HierarchicalOrbits_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder_d.a\"";
+				PRODUCT_NAME = HierarchicalOrbits;
+				SYMROOT = ./build;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_FAST_MATH = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = HierarchicalOrbits_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NDEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder.a\"";
+				PRODUCT_NAME = HierarchicalOrbits;
+				STRIP_INSTALLED_PRODUCT = YES;
+				SYMROOT = ./build;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = x86_64;
+				CINDER_PATH = ../../../../..;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../../../src/soso ../../../src/entityx";
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = x86_64;
+				CINDER_PATH = ../../../../..;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../../../src/soso ../../../src/entityx";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "HierarchicalOrbits" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "HierarchicalOrbits" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
