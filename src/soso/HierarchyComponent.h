@@ -12,28 +12,26 @@
 namespace soso {
 
 ///
-/// A component containing a hierarchy of entities with a given Derived component.
-/// Inherit into a Transform component to build a scene graph. e.g. `class Transform : public HierarchyComponentT<Transform>`
+/// A component containing a hierarchy of entities.
 ///
-template <typename Derived>
-class HierarchyComponentT
+class HierarchyComponent
 {
 public:
-	using Handle = entityx::ComponentHandle<Derived>;
+	using Handle = entityx::ComponentHandle<HierarchyComponent>;
 
 	/// Returns an invalid handle to type.
-	static constexpr Handle invalidHandle() { return Handle(); }
+	static Handle invalidHandle() { return Handle(); }
 
 	/// Constructs an invalid HierarchyComponentT.
-	HierarchyComponentT() = delete;
+	HierarchyComponent() = delete;
 	/// Constructs a HierarchyComponentT for the provided entity.
 	/// We store the entity so during hierarchical iteration other components may be accessed.
-	explicit HierarchyComponentT(entityx::Entity entity)
+	explicit HierarchyComponent(entityx::Entity entity)
 	: _entity(entity)
 	{}
 	/// Remove references to self on destruction.
 	/// Also destroy all children when destroyed.
-	virtual ~HierarchyComponentT()
+	~HierarchyComponent()
 	{
 		removeFromParent();
 		for( auto &child : _children ) {
@@ -67,66 +65,57 @@ public:
 	void destroyChildren();
 
 	/// Visit all of this components' descendents depth-first. TODO: separate visitor patterns from data.
-	void descend(const std::function<void (const Derived &parent, Derived &child)> &fn);
+	void descend(const std::function<void (const HierarchyComponent &parent, HierarchyComponent &child)> &fn);
 	/// Visit all of this components' ancestors. TODO: separate visitor patterns from data.
-	void ascend(const std::function<void (const Derived &child, Derived &parent)> &fn);
+	void ascend(const std::function<void (const HierarchyComponent &child, HierarchyComponent &parent)> &fn);
 
 	/// Visit all of this components' descendents depth-first until the visitor function returns false.
 	/// Stops descending when function returns true.
-	void descendUntil(const std::function<bool (const Derived &parent, Derived &child)> &fn);
+	void descendUntil(const std::function<bool (const HierarchyComponent &parent, HierarchyComponent &child)> &fn);
 
 	/// Visit all of this components' ancestors until the visitor function returns false.
 	/// Stops ascending when function returns true.
-	void ascendUntil(const std::function<bool (const Derived &child, Derived &parent)> &fn);
+	void ascendUntil(const std::function<bool (const HierarchyComponent &child, HierarchyComponent &parent)> &fn);
 
 private:
 	entityx::Entity						_entity;
 	Handle										_parent = invalidHandle();
 	std::vector<Handle>				_children;
 
-	/// Returns a pointer to this as derived type.
-	Derived* self() { return static_cast<Derived*>(this); }
 	/// Returns a handle to this component.
-	Handle handle() { return _entity.component<Derived>(); }
+	Handle handle() { return _entity.component<HierarchyComponent>(); }
 
 	/// Remove an entity from this hierarchy. Use handle->removeFromParent() to safely remove an item from its hierarchy.
-	void removeChild(entityx::ComponentHandle<Derived> handle);
+	void removeChild(Handle handle);
 };
 
 #pragma mark - Template Implementation
 
-template <typename T>
-void HierarchyComponentT<T>::removeFromParent()
+void HierarchyComponent::removeFromParent()
 {
 	if( _parent ) {
 		_parent->removeChild( handle() );
 	}
 }
 
-template <typename T>
-typename HierarchyComponentT<T>::Handle HierarchyComponentT<T>::appendChild(entityx::Entity child)
+HierarchyComponent::Handle HierarchyComponent::appendChild(entityx::Entity child)
 {
-	auto handle = child.component<T>();
-	if (! handle) {
-		handle = child.assign<T>(child);
-	}
+	auto handle = child.has_component<HierarchyComponent>() ? child.component<HierarchyComponent>() : child.assign<HierarchyComponent>(child);
 
 	appendChild(handle);
 	return handle;
 }
 
-template <typename T>
-void HierarchyComponentT<T>::appendChild(Handle child_handle)
+void HierarchyComponent::appendChild(Handle child_handle)
 {
-	if (child_handle.get() != self()) {
+	if (child_handle.get() != this) {
 		child_handle->removeFromParent();
 		child_handle->_parent = handle();
 		_children.push_back(child_handle);
 	}
 }
 
-template <typename T>
-void HierarchyComponentT<T>::removeChild(entityx::ComponentHandle<T> handle)
+void HierarchyComponent::removeChild(Handle handle)
 {
 	if (handle) {
 		handle->_parent = invalidHandle();
@@ -135,8 +124,7 @@ void HierarchyComponentT<T>::removeChild(entityx::ComponentHandle<T> handle)
 	}
 }
 
-template <typename T>
-void HierarchyComponentT<T>::destroyChildren()
+void HierarchyComponent::destroyChildren()
 {
 	for( auto &child : _children ) {
 		child->_parent = invalidHandle();
@@ -145,43 +133,38 @@ void HierarchyComponentT<T>::destroyChildren()
 	_children.clear();
 }
 
-template <typename T>
-void HierarchyComponentT<T>::descend( const std::function<void (const T&, T&)> &fn )
+void HierarchyComponent::descend( const std::function<void (const HierarchyComponent&, HierarchyComponent&)> &fn )
 {
 	for( auto &c : _children ) {
-		fn( *self(), *c.get() );
+		fn( *this, *c.get() );
 		c->descend( fn );
 	}
 }
 
-template <typename T>
-void HierarchyComponentT<T>::ascend( const std::function<void (const T&, T&)> &fn )
+void HierarchyComponent::ascend( const std::function<void (const HierarchyComponent&, HierarchyComponent&)> &fn )
 {
 	if( _parent ) {
-		fn( *self(), *_parent.get() );
+		fn( *this, *_parent.get() );
 		_parent->ascend( fn );
 	}
 }
 
-
-template <typename T>
-void HierarchyComponentT<T>::descendUntil( const std::function<bool (const T&, T&)> &fn )
+void HierarchyComponent::descendUntil( const std::function<bool (const HierarchyComponent&, HierarchyComponent&)> &fn )
 {
 	for( auto &c : _children ) {
-		auto reached_end = fn( *self(), *c.get() );
+		auto reached_end = fn( *this, *c.get() );
 		if (! reached_end) {
-			c->descend( fn );
+			c->descendUntil( fn );
 		}
 	}
 }
 
-template <typename T>
-void HierarchyComponentT<T>::ascendUntil( const std::function<bool (const T&, T&)> &fn )
+void HierarchyComponent::ascendUntil( const std::function<bool (const HierarchyComponent&, HierarchyComponent&)> &fn )
 {
 	if( _parent ) {
-		auto reached_end = fn( *self(), *_parent.get() );
+		auto reached_end = fn( *this, *_parent.get() );
 		if (! reached_end) {
-			_parent->ascend( fn );
+			_parent->ascendUntil( fn );
 		}
 	}
 }

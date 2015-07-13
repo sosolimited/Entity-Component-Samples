@@ -11,6 +11,18 @@ https://github.com/alecthomas/entityx
 http://cowboyprogramming.com/2007/01/05/evolve-your-heirachy/
 http://scottbilas.com/files/2002/gdc_san_jose/game_objects_slides.pdf
 
+Building and Running
+--------------------
+
+Clone this repository into the `blocks/` directory of a recent version of the Cinder master branch.
+
+```
+cd cinder/blocks/
+git clone git@github.com:sosolimited/Entity-Component-Sample.git --recursive
+```
+
+Open up the samples in XCode and you should be good to go.
+
 
 What is an Entity?
 ------------------
