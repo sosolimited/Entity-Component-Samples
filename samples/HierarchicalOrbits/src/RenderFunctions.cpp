@@ -8,6 +8,7 @@
 #include "RenderFunctions.h"
 
 #include "Transform.h"
+#include "Circle.h"
 #include "RenderLayer.h"
 #include "entityx/Entity.h"
 #include "cinder/gl/gl.h"
@@ -15,11 +16,6 @@
 using namespace soso;
 using namespace cinder;
 
-///
-/// When render order isn't important (as is the general case with opaque geometry),
-/// we can just go through and draw everything directly.
-/// Note that we could easily batch these draw circle calls without changing the underlying entities.
-///
 void soso::renderAllEntitiesAsCircles(entityx::EntityManager &entities)
 {
 	entityx::ComponentHandle<Transform> transform;
@@ -27,16 +23,32 @@ void soso::renderAllEntitiesAsCircles(entityx::EntityManager &entities)
 		gl::ScopedModelMatrix mat;
 		gl::multModelMatrix(transform->worldTransform());
 		gl::drawSolidCircle(vec2(0), 12.0f);
-
-		app::console() << "Position: " << transform->position << ", transform: " << (transform->worldTransform() * vec4(0, 0, 0, 1)) << std::endl;
 	}
 }
 
-///
-/// Often, you want to implicitly draw children in front, and children in order.
-/// Like buttons with a background and a text label.
-/// Scene graphs provide a natural way to model these issues and make sure drawn shapes stay together.
-///
+void soso::renderCircles(entityx::EntityManager &entities)
+{
+	entityx::ComponentHandle<Transform> transform;
+	entityx::ComponentHandle<Circle>		circle;
+
+	gl::ScopedColor color(Color(1.0f, 1.0f, 1.0f));
+	for (auto __unused e : entities.entities_with_components(transform, circle)) {
+		gl::ScopedModelMatrix mat;
+		gl::color(circle->color);
+		gl::multModelMatrix(transform->worldTransform());
+
+		/*
+		// rotate back to billboard the shape
+		// doesn't work.
+		auto forward = vec3(1, 0, 0);
+		auto transformed = vec3(transform->worldTransform() * vec4(forward, 0)); // orientation only
+		auto q = glm::rotation(transformed, forward);
+		*/
+
+		gl::drawSolidCircle(vec2(0), circle->radius);
+	}
+}
+
 void soso::renderEntitiesWithGraph(entityx::EntityManager &entities)
 {
 	std::vector<ci::mat4> render_data;

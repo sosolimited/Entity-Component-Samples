@@ -60,6 +60,7 @@
 		9C76892E1B545B0E0089C2C4 /* RenderLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderLayer.h; path = ../../../src/soso/RenderLayer.h; sourceTree = "<group>"; };
 		9C76892F1B545C580089C2C4 /* RenderFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderFunctions.cpp; path = ../src/RenderFunctions.cpp; sourceTree = "<group>"; };
 		9C7689301B545C580089C2C4 /* RenderFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderFunctions.h; path = ../src/RenderFunctions.h; sourceTree = "<group>"; };
+		9C9774A31B546D7B0017EAF7 /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Circle.h; path = ../src/Circle.h; sourceTree = "<group>"; };
 		A429DB469662401A99BABE82 /* HierarchicalOrbits_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = HierarchicalOrbits_Prefix.pch; sourceTree = "<group>"; };
 		A86402EB37E94E528446A846 /* Behavior.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Behavior.h; path = ../../../src/soso/Behavior.h; sourceTree = "<group>"; };
 		B10F1606A7B64F72BF47EE5B /* quick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = quick.h; path = ../../../src/entityx/entityx/quick.h; sourceTree = "<group>"; };
@@ -104,6 +105,7 @@
 		080E96DDFE201D6D7F000001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				9C9774A31B546D7B0017EAF7 /* Circle.h */,
 				F0C142BF80B94E6DB41963D7 /* HierarchicalOrbitsApp.cpp */,
 				9C76892F1B545C580089C2C4 /* RenderFunctions.cpp */,
 				9C7689301B545C580089C2C4 /* RenderFunctions.h */,

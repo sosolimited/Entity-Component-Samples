@@ -40,7 +40,7 @@ struct Transform : public HierarchyComponentT<Transform>
 		_world_transform = transform * _local_transform;
 	}
 
-	ci::mat4 calcLocalTransform() const { return glm::translate( position + pivot ) * glm::toMat4( orientation ) * glm::scale( scale ) * glm::translate( - pivot ); }
+	ci::mat4 calcLocalTransform() const { return glm::translate(position + pivot) * glm::toMat4(orientation) * glm::scale(scale) * glm::translate(- pivot / scale); }
 
 private:
 	ci::mat4	_world_transform;

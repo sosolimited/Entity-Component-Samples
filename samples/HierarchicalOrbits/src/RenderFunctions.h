@@ -25,6 +25,7 @@ namespace soso {
 /// Note that we could easily batch these draw circle calls without changing the underlying entities.
 ///
 void renderAllEntitiesAsCircles(entityx::EntityManager &entities);
+void renderCircles(entityx::EntityManager &entities);
 
 ///
 /// Often, you want to implicitly draw children in front, and children in order.
