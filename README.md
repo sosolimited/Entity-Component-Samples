@@ -1,11 +1,7 @@
 Entity-Component-Sample
 =======================
 
-Didactic sample applications built using Entity Component Systems on top of EntityX. View the samples in the `samples/` directory.
-
-- Entity Creation
-- Gravity Wells
-- Star Clusters
+Didactic sample applications built using Entity Component Systems (ECS) on top of EntityX. Read more about ECS below, and open the samples in XCode to give them a whirl.
 
 Other places to read about entities:
 
@@ -13,52 +9,52 @@ Other places to read about entities:
 - http://cowboyprogramming.com/2007/01/05/evolve-your-heirachy/
 - http://scottbilas.com/files/2002/gdc_san_jose/game_objects_slides.pdf
 
-Building and Running
---------------------
+Samples
+-------
 
-### Building Cinder
+You can find the following samples in the `samples/` directory. All were tested using in XCode 6.4.
 
-Clone and build Cinder on your machine. Note that we clone recursively in order to get submodules initialized.
+### Entity Creation
 
-I keep a directory with a handful of Cinder versions on my machine. That way I can sketch things out a bit more quickly and keep old sketches working if they were built against a specific version of Cinder.
+Demonstrates the basics of Entity creation, Component definition, and control through Systems.
 
-```
-- Code
-	- cinder
-		- master
-		- v0.8.6
-		- v0.8.5
-```
+### Gravity Wells
 
-To get the master directory as above:
+Objects fly through the world and are pulled toward attractors.
 
-```
-mkdir -p Code/cinder
-cd Code/cinder
-git clone --branch master git@github.com:sosolimited/Cinder.git master --recursive
-cd master/xcode
-./fullbuild.sh
-```
+Scene defined in JSON.
 
-To clone and build Cinder in a new directory ignoring folder structure, do the following:
+- Components:
+	- VerletBody
+		- position
+		- previous position
+		- friction
+		- acceleration
+	- Attractor (pulls things toward it)
+		- strength
+	- Attraction (is attracted to attractors)
+		- strength
+	- VerletConstraint
+		- VerletBody a, b
+		- fixed distance
+	- RenderMesh
+		- gl::BatchRef from svg
+	- Name
+		- name
 
-```
-git clone git@github.com:sosolimited/Cinder.git --recursive
-cd Cinder/xcode
-./fullbuild.sh
-```
+### Star Clusters
 
-### Building these Samples
+Satellites in layered orbit around central star.
 
-Clone this repository into the `blocks/` directory of a recent version of the Cinder master branch. Note that we clone recursively in order to get submodules initialized.
-
-```
-cd Cinder/blocks/
-git clone git@github.com:sosolimited/Entity-Component-Sample.git --recursive
-```
-
-Open up the samples in XCode and you should be good to go.
-
+- Components:
+	- HierarchicalPosition version of VerletBody
+		- orientation
+		- pivot
+		- scale
+	- Shape
+		- Cube, Sphere, Cone
+		- Instanced rendering
+	- Name
 
 What is an Entity?
 ------------------
@@ -69,19 +65,40 @@ Entity Component Systems are excellent for describing worlds of independent elem
 
 Entity component systems as a design pattern come from the game industry. There, they are used to define game objects in a way that is more flexible than the previous pattern of a game object inheritance tree.
 
-In an inheritance tree, a GameObject base class defines every common attribute and behavior. Subclasses specialize those behaviors through virtual method overrides and add other functionality as needed.
+In an inheritance tree, a GameObject base class defines every common attribute and behavior. Subclasses specialize those behaviors through virtual method overrides and add other functionality as needed. At its most basic, the inheritance tree might look like the following:
 
-In an Entity Component System, an Entity is defined by the aggregation of a number of attributes, which are stored in components. components define the attributes needed to perform a given behavior. An entity is simply an aggregation of attributes called components.
+```
+class GameObject {
+	virtual void update() {}
+	// stores position, render data, whatnot
+};
 
-Entity Component Systems are excellent for describing worlds of independent elements with varied behaviors. Within an ECS, objects in the world, `entities`, are just an aggregation of attributes, `components`, that happen to be associated with each other.
+class FlockingThing : public GameObject {
+	void update() override {} // does the flocking
+};
 
-Some possible attributes:
-Positionable
-Draggable
-Physics Shape
-Sprite Animation
-Renderable Shape
-Particle Emission
+class VideoPlayer : public GameObject  {
+	void update() override {} // plays a video
+};
+
+class FlockingVideo : public FlockingThing {
+	void update() override {} // duplicates behavior from video...
+}
+```
+
+Because of the consistent interface, objects in the inheritance tree are easy to compose into a scene graph. While at first this feels great, it can quickly take on many layers of responsibility. Challenges arise in determining where particular functionality should go, and avoiding duplicate behavior. More challenging is untangling the tree of function calls when debugging or trying to eke out more performance from an application (should the blur be a child of the flocking element, or did we only use the graph for placement of those objects?).
+
+So, while simple hierarchies of GameObject-like structures can be wonderful, they can also become unwieldy pretty quickly.
+
+[DIAGRAM: Scene graph tree]
+
+In an Entity Component System, objects in the world, `entities`, are just an aggregation of attributes, `components`, that happen to be associated with each other. Each Component stores the set of attributes needed to perform a single behavior, and components are manipulated by Systems to change the state of the world.
+
+At its most basic an ECS can be thought of as a table with every component as a column and every entity as a row. Instead of traversing the objects in a graph, we usually step through the table and use each component we are interested in.
+
+[DIAGRAM: Components and Entities as a table]
+
+[DIAGRAM: System traversing the table]
 
 ### Why Entities?
 
@@ -102,11 +119,14 @@ If you have a moment to build some tools to support your project:
 
 ### Why Not Entities?
 
-- If your world is only comprised of homogeneous things, ECS doesn’t provide much benefit.
-	- If you only have one type of thing in your world (and you _really_ aren't going to be adding others), you can just keep a vector<Type>.
-- Debugging becomes more challenging. LLDB doesn’t have smarts when it comes to unpacking a set of components.
+You may not want to use entities for your project for a few reasons:
 
-When you cross the line between straightforward to manage as a shallow inheritance hierarchy and better managed as a set of components and systems is a matter of judgment. We are still working that out with our projects.
+- Everything in the world is the same or very similar (maybe make a particle system).
+- There are only a few types of things in the world.
+
+Other downsides to using entities regardless of your project:
+
+- Your debugger becomes less useful. LLDB doesn’t have smarts when it comes to unpacking a set of components, so you may need to write your own debugging tools.
 
 ### Great Ideas from Entities
 
@@ -193,49 +213,48 @@ makeHierarchy(menu,
 	menu_item_c);
 ```
 
-Samples
--------
+Building and Running
+--------------------
 
-You can find the following samples in the `samples/` directory.
+### Building Cinder
 
-### Entity Creation
+Clone and build Cinder on your machine. Note that we clone recursively in order to get submodules initialized.
 
-Demonstrates the basics of Entity creation, Component definition, and control through Systems.
+I keep a directory with a handful of Cinder versions on my machine. That way I can sketch things out a bit more quickly and keep old sketches working if they were built against a specific version of Cinder.
 
-### Gravity Wells
+```
+- Code
+	- cinder
+		- master
+		- v0.8.6
+		- v0.8.5
+```
 
-Objects fly through the world and are pulled toward attractors.
+To get the master directory as above:
 
-Scene defined in JSON.
+```
+mkdir -p Code/cinder
+cd Code/cinder
+git clone --branch master git@github.com:sosolimited/Cinder.git master --recursive
+cd master/xcode
+./fullbuild.sh
+```
 
-- Components:
-	- VerletBody
-		- position
-		- previous position
-		- friction
-		- acceleration
-	- Attractor (pulls things toward it)
-		- strength
-	- Attraction (is attracted to attractors)
-		- strength
-	- VerletConstraint
-		- VerletBody a, b
-		- fixed distance
-	- RenderMesh
-		- gl::BatchRef from svg
-	- Name
-		- name
+To clone and build Cinder in a new directory ignoring folder structure, do the following:
 
-### Star Clusters
+```
+git clone git@github.com:sosolimited/Cinder.git --recursive
+cd Cinder/xcode
+./fullbuild.sh
+```
 
-Satellites in layered orbit around central star.
+### Building these Samples
 
-- Components:
-	- HierarchicalPosition version of VerletBody
-		- orientation
-		- pivot
-		- scale
-	- Shape
-		- Cube, Sphere, Cone
-		- Instanced rendering
-	- Name
+Clone this repository into the `blocks/` directory of a recent version of the Cinder master branch. Note that we clone recursively in order to get submodules initialized.
+
+```
+cd Cinder/blocks/
+git clone git@github.com:sosolimited/Entity-Component-Sample.git --recursive
+```
+
+Open up the samples in XCode and you should be good to go.
