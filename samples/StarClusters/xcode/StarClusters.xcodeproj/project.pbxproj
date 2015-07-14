@@ -55,7 +55,7 @@
 		5B404EFEEB5E4B26A8780AC9 /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CinderApp.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; };
 		6C8896D13AD84E3287771B50 /* System.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = System.cc; path = ../../../src/entityx/entityx/System.cc; sourceTree = "<group>"; };
 		74CF7A2CB1154301900E3631 /* HierarchyComponentT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HierarchyComponentT.h; path = ../../../src/soso/HierarchyComponentT.h; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* HierarchicalOrbits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HierarchicalOrbits.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* StarClusters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarClusters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9406FBFF2C5E4860843041C8 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
 		9ACDDD19C7CD4E36B8DED953 /* TransformSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = TransformSystem.cpp; path = ../../../src/soso/TransformSystem.cpp; sourceTree = "<group>"; };
 		9C4AFD031B55552500473F18 /* Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Draggable.h; path = ../src/Draggable.h; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 		9C76892F1B545C580089C2C4 /* RenderFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderFunctions.cpp; path = ../src/RenderFunctions.cpp; sourceTree = "<group>"; };
 		9C7689301B545C580089C2C4 /* RenderFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderFunctions.h; path = ../src/RenderFunctions.h; sourceTree = "<group>"; };
 		9C9774A31B546D7B0017EAF7 /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Circle.h; path = ../src/Circle.h; sourceTree = "<group>"; };
-		A429DB469662401A99BABE82 /* HierarchicalOrbits_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = HierarchicalOrbits_Prefix.pch; sourceTree = "<group>"; };
+		A429DB469662401A99BABE82 /* StarClusters_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StarClusters_Prefix.pch; sourceTree = "<group>"; };
 		A86402EB37E94E528446A846 /* Behavior.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Behavior.h; path = ../../../src/soso/Behavior.h; sourceTree = "<group>"; };
 		B10F1606A7B64F72BF47EE5B /* quick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = quick.h; path = ../../../src/entityx/entityx/quick.h; sourceTree = "<group>"; };
 		BA6A8CAE576348F68679C43F /* Entity.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Entity.cc; path = ../../../src/entityx/entityx/Entity.cc; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D1107320486CEB800E47090 /* HierarchicalOrbits.app */,
+				8D1107320486CEB800E47090 /* StarClusters.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -181,7 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				9406FBFF2C5E4860843041C8 /* Resources.h */,
-				A429DB469662401A99BABE82 /* HierarchicalOrbits_Prefix.pch */,
+				A429DB469662401A99BABE82 /* StarClusters_Prefix.pch */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -271,9 +271,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8D1107260486CEB800E47090 /* HierarchicalOrbits */ = {
+		8D1107260486CEB800E47090 /* StarClusters */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "HierarchicalOrbits" */;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "StarClusters" */;
 			buildPhases = (
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
@@ -283,10 +283,10 @@
 			);
 			dependencies = (
 			);
-			name = HierarchicalOrbits;
+			name = StarClusters;
 			productInstallPath = "$(HOME)/Applications";
 			productName = HierarchicalOrbits;
-			productReference = 8D1107320486CEB800E47090 /* HierarchicalOrbits.app */;
+			productReference = 8D1107320486CEB800E47090 /* StarClusters.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -296,7 +296,7 @@
 			isa = PBXProject;
 			attributes = {
 			};
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "HierarchicalOrbits" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "StarClusters" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -310,7 +310,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8D1107260486CEB800E47090 /* HierarchicalOrbits */,
+				8D1107260486CEB800E47090 /* StarClusters */,
 			);
 		};
 /* End PBXProject section */
@@ -356,7 +356,7 @@
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = HierarchicalOrbits_Prefix.pch;
+				GCC_PREFIX_HEADER = StarClusters_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -365,7 +365,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder_d.a\"";
-				PRODUCT_NAME = HierarchicalOrbits;
+				PRODUCT_NAME = StarClusters;
 				SYMROOT = ./build;
 				WRAPPER_EXTENSION = app;
 			};
@@ -382,7 +382,7 @@
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = HierarchicalOrbits_Prefix.pch;
+				GCC_PREFIX_HEADER = StarClusters_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"NDEBUG=1",
 					"$(inherited)",
@@ -391,7 +391,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder.a\"";
-				PRODUCT_NAME = HierarchicalOrbits;
+				PRODUCT_NAME = StarClusters;
 				STRIP_INSTALLED_PRODUCT = YES;
 				SYMROOT = ./build;
 				WRAPPER_EXTENSION = app;
@@ -435,7 +435,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "HierarchicalOrbits" */ = {
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "StarClusters" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4B08A954540054247B /* Debug */,
@@ -444,7 +444,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "HierarchicalOrbits" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "StarClusters" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
