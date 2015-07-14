@@ -246,9 +246,7 @@ Given the above JSON, you might imagine how you can describe a whole project’s
 
 ### Using a Set of Components
 
-Systems look for entities that have a specific combination of components and use those components to perform actions. For example, a circle drawing system might draw everything with a transform and circle component, and set the color if the entity has an optional style component.
-
-Notice below that inside the loop both the transform and circle handles are guaranteed to be valid. When we want to access another component from the entity they are associated with, we need to check whether that new component is valid before using it.
+Systems look for entities that have a specific combination of components and use those components to perform actions. For example, a circle drawing system might draw every entity that has a transform and circle component, and set the color if the entity also has an optional style component.
 
 ```c++
 ComponentHandle<Transform>  xf;
@@ -261,6 +259,8 @@ for (auto e : entities.entities_with_components(xf, cc)) {
   drawCircle(xf->position, cc->radius);
 }
 ```
+
+Inside the loop above, both the transform and circle handles are guaranteed to be valid. This guarantee is provided by the `entities_with_components` function, which skips any entity that doesn’t have all the components we specify in the function call. When we want to access a different component of the entity the requested components are associated with, we need to check whether that new component is valid before using it.
 
 ### Adding Custom Behavior to a Specific Entity
 
