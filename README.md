@@ -1,3 +1,28 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Entity-Component-Sample](#entity-component-sample)
+  - [Samples](#samples)
+    - [Entity Creation](#entity-creation)
+    - [Gravity Wells](#gravity-wells)
+    - [Star Clusters](#star-clusters)
+  - [What is an Entity?](#what-is-an-entity)
+    - [Where did this idea come from?](#where-did-this-idea-come-from)
+    - [Why Entities?](#why-entities)
+    - [Why Not Entities?](#why-not-entities)
+    - [Great Ideas from Entities](#great-ideas-from-entities)
+      - [Act on similar things as a group.](#act-on-similar-things-as-a-group)
+  - [How to use Entities](#how-to-use-entities)
+    - [The Lifecycle of an Entity](#the-lifecycle-of-an-entity)
+    - [Adding Custom Behavior to a Specific Entity](#adding-custom-behavior-to-a-specific-entity)
+    - [Grouping Entities Together](#grouping-entities-together)
+  - [Building and Running](#building-and-running)
+    - [Building Cinder](#building-cinder)
+    - [Building these Samples](#building-these-samples)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 Entity-Component-Sample
 =======================
 
