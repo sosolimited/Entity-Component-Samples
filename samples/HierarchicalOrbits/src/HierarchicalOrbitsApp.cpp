@@ -128,11 +128,14 @@ void HierarchicalOrbitsApp::setup()
 
 void HierarchicalOrbitsApp::keyDown(KeyEvent event)
 {
-	shrinkPastSolarSystems();
+	if (event.getCode() == KeyEvent::KEY_c)
+	{
+		shrinkPastSolarSystems();
 
-	auto center = vec2(getWindowCenter());
-	auto offset = randVec2() * vec2(getWindowSize()) * 0.5f;
-	createSolarSystem(vec3(center + offset, 0.0f));
+		auto center = vec2(getWindowCenter());
+		auto offset = randVec2() * vec2(getWindowSize()) * 0.5f;
+		createSolarSystem(vec3(center + offset, 0.0f));
+	}
 }
 
 void HierarchicalOrbitsApp::shrinkPastSolarSystems()
