@@ -1,7 +1,7 @@
 Entity-Component-Sample
 =======================
 
-Didactic sample applications built using Entity Component Systems (ECS) on top of EntityX. Read more about ECS below, and open the samples in XCode to give them a whirl.
+Didactic sample applications built using Entity Component Systems (ECS) on top of [EntityX](https://github.com/alecthomas/entityx). Read more about ECS below, and open the samples in XCode to give them a whirl.
 
 ### Contents
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -194,6 +194,8 @@ How to use Entities
 -------------------
 
 Below we discuss some common tasks and how you might accomplish them using Entities and Components. The common Systems and Components referred to below are used in the samples and can be adapted for most projects.
+
+The syntax below is based on the EntityX library and C++11. You may use a different library or language, and the same concepts will apply.
 
 ### The Lifecycle of an Entity
 
