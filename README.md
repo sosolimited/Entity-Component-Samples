@@ -7,9 +7,9 @@ Entity Component Systems are excellent for describing worlds of independent elem
 
 Other things to read about entities:
 
-https://github.com/alecthomas/entityx
-http://cowboyprogramming.com/2007/01/05/evolve-your-heirachy/
-http://scottbilas.com/files/2002/gdc_san_jose/game_objects_slides.pdf
+https://github.com/alecthomas/entityx 
+http://cowboyprogramming.com/2007/01/05/evolve-your-heirachy/ 
+http://scottbilas.com/files/2002/gdc_san_jose/game_objects_slides.pdf 
 
 Building and Running
 --------------------
