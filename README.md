@@ -24,6 +24,8 @@ Didactic sample applications built using Entity Component Systems (ECS) on top o
   - [Your Program is Just Data and Functions](#your-program-is-just-data-and-functions)
 - [How to use Entities](#how-to-use-entities)
   - [The Lifecycle of an Entity](#the-lifecycle-of-an-entity)
+  - [Adding and Removing Components](#adding-and-removing-components)
+  - [Using a Set of Components](#using-a-set-of-components)
   - [Adding Custom Behavior to a Specific Entity](#adding-custom-behavior-to-a-specific-entity)
   - [Grouping Entities Together](#grouping-entities-together)
 - [Building and Running](#building-and-running)
