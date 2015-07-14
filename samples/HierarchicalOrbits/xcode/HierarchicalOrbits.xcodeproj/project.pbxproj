@@ -25,6 +25,7 @@
 		7858F3B330D34A749BF58961 /* System.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6C8896D13AD84E3287771B50 /* System.cc */; };
 		8C120E26D8934020BCF202DF /* Event.cc in Sources */ = {isa = PBXBuildFile; fileRef = 4FA05A7DC94942948E5DDC5A /* Event.cc */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		9C4AFD061B55557200473F18 /* DragSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C4AFD041B55557200473F18 /* DragSystem.cpp */; };
 		9C7689311B545C580089C2C4 /* RenderFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C76892F1B545C580089C2C4 /* RenderFunctions.cpp */; };
 		AB6BCEC283E345B69881DC68 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5B404EFEEB5E4B26A8780AC9 /* CinderApp.icns */; };
 /* End PBXBuildFile section */
@@ -57,6 +58,9 @@
 		8D1107320486CEB800E47090 /* HierarchicalOrbits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HierarchicalOrbits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9406FBFF2C5E4860843041C8 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
 		9ACDDD19C7CD4E36B8DED953 /* TransformSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = TransformSystem.cpp; path = ../../../src/soso/TransformSystem.cpp; sourceTree = "<group>"; };
+		9C4AFD031B55552500473F18 /* Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Draggable.h; path = ../src/Draggable.h; sourceTree = "<group>"; };
+		9C4AFD041B55557200473F18 /* DragSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DragSystem.cpp; path = ../src/DragSystem.cpp; sourceTree = "<group>"; };
+		9C4AFD051B55557200473F18 /* DragSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DragSystem.h; path = ../src/DragSystem.h; sourceTree = "<group>"; };
 		9C76892E1B545B0E0089C2C4 /* RenderLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderLayer.h; path = ../../../src/soso/RenderLayer.h; sourceTree = "<group>"; };
 		9C76892F1B545C580089C2C4 /* RenderFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderFunctions.cpp; path = ../src/RenderFunctions.cpp; sourceTree = "<group>"; };
 		9C7689301B545C580089C2C4 /* RenderFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderFunctions.h; path = ../src/RenderFunctions.h; sourceTree = "<group>"; };
@@ -109,6 +113,9 @@
 				F0C142BF80B94E6DB41963D7 /* HierarchicalOrbitsApp.cpp */,
 				9C76892F1B545C580089C2C4 /* RenderFunctions.cpp */,
 				9C7689301B545C580089C2C4 /* RenderFunctions.h */,
+				9C4AFD031B55552500473F18 /* Draggable.h */,
+				9C4AFD041B55557200473F18 /* DragSystem.cpp */,
+				9C4AFD051B55557200473F18 /* DragSystem.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -328,6 +335,7 @@
 				5B54DD11E9CA48C4B22B7921 /* BehaviorSystem.cpp in Sources */,
 				4314E5AF4ECD4703812C534E /* TransformSystem.cpp in Sources */,
 				74B210B7029F4043944699D9 /* Entity.cc in Sources */,
+				9C4AFD061B55557200473F18 /* DragSystem.cpp in Sources */,
 				8C120E26D8934020BCF202DF /* Event.cc in Sources */,
 				9C7689311B545C580089C2C4 /* RenderFunctions.cpp in Sources */,
 				7858F3B330D34A749BF58961 /* System.cc in Sources */,

@@ -33,6 +33,7 @@ struct Transform : public HierarchyComponentT<Transform>
 
 	const ci::mat4& worldTransform() const { return _world_transform; }
 	const ci::mat4& localTransform() const { return _local_transform; }
+	ci::vec3 worldPoint() const { return ci::vec3(worldTransform() *  ci::vec4(0, 0, 0, 1)); }
 
 	/// Compose a transform into this transform's world transform.
 	void composeTransform(const ci::mat4 &transform) {

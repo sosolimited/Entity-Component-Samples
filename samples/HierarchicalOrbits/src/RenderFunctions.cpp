@@ -18,6 +18,8 @@ using namespace cinder;
 
 void soso::renderAllEntitiesAsCircles(entityx::EntityManager &entities)
 {
+	gl::ScopedDepth depth(true, true);
+
 	entityx::ComponentHandle<Transform> transform;
 	for (auto __unused e : entities.entities_with_components(transform)) {
 		gl::ScopedModelMatrix mat;
@@ -28,28 +30,60 @@ void soso::renderAllEntitiesAsCircles(entityx::EntityManager &entities)
 
 void soso::renderCircles(entityx::EntityManager &entities)
 {
+	gl::ScopedDepth depth(true, true);
+
 	entityx::ComponentHandle<Transform> transform;
 	entityx::ComponentHandle<Circle>		circle;
 
 	gl::ScopedColor color(Color(1.0f, 1.0f, 1.0f));
 	for (auto __unused e : entities.entities_with_components(transform, circle)) {
 		gl::ScopedModelMatrix mat;
+		auto q = inverse(normalize(quat_cast(transform->worldTransform()))); // billboard the shapes; mostly works
+		gl::multModelMatrix(transform->worldTransform() * glm::mat4_cast(q));
 		gl::color(circle->color);
-		gl::multModelMatrix(transform->worldTransform());
-
-		/*
-		// rotate back to billboard the shape
-		// doesn't work.
-		auto forward = vec3(1, 0, 0);
-		auto transformed = vec3(transform->worldTransform() * vec4(forward, 0)); // orientation only
-		auto q = glm::rotation(transformed, forward);
-		*/
 
 		gl::drawSolidCircle(vec2(0), circle->radius);
 	}
 }
 
-void soso::renderEntitiesWithGraph(entityx::EntityManager &entities)
+void soso::renderCirclesDepthSorted(entityx::EntityManager &entities)
+{
+	struct RenderInfo {
+		ci::vec3	position;
+		float			radius = 1.0f;
+		ci::Color color;
+
+	};
+	std::vector<RenderInfo> circles;
+
+	auto insertion_point = [&circles] (float depth) {
+			auto iter = circles.begin();
+			while (iter != circles.end() && depth < iter->position.z) {
+				++iter;
+			}
+			return iter;
+		};
+
+	entityx::ComponentHandle<Transform> transform;
+	entityx::ComponentHandle<Circle>		circle;
+
+	for (auto __unused e : entities.entities_with_components(transform, circle)) {
+		auto pos = vec3(transform->worldTransform() * vec4(0, 0, 0, 1));
+		circles.insert(insertion_point(pos.z), RenderInfo{pos, circle->radius, circle->color});
+	}
+
+	gl::ScopedColor color(Color(1.0f, 1.0f, 1.0f));
+	for (auto &c : circles) {
+		gl::ScopedModelMatrix mat;
+		gl::translate(c.position);
+		gl::color(c.color);
+
+		gl::drawSolidCircle(vec2(0), c.radius);
+	}
+
+}
+
+void soso::renderCirclesWithGraph(entityx::EntityManager &entities)
 {
 	std::vector<ci::mat4> render_data;
 
