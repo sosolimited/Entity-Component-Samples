@@ -7,18 +7,51 @@ Entity Component Systems are excellent for describing worlds of independent elem
 
 Other things to read about entities:
 
-https://github.com/alecthomas/entityx  
-http://cowboyprogramming.com/2007/01/05/evolve-your-heirachy/   
-http://scottbilas.com/files/2002/gdc_san_jose/game_objects_slides.pdf   
-
+- https://github.com/alecthomas/entityx
+- http://cowboyprogramming.com/2007/01/05/evolve-your-heirachy/
+- http://scottbilas.com/files/2002/gdc_san_jose/game_objects_slides.pdf
 
 Building and Running
 --------------------
 
-Clone this repository into the `blocks/` directory of a recent version of the Cinder master branch.
+### Building Cinder
+
+Clone and build Cinder on your machine. Note that we clone recursively in order to get submodules initialized.
+
+I keep a directory with a handful of Cinder versions on my machine. That way I can sketch things out a bit more quickly and keep old sketches working if they were built against a specific version of Cinder.
 
 ```
-cd cinder/blocks/
+- Code
+	- cinder
+		- master
+		- v0.8.6
+		- v0.8.5
+```
+
+To get the master directory as above:
+
+```
+mkdir -p Code/cinder
+cd Code/cinder
+git clone --branch master git@github.com:sosolimited/Cinder.git master --recursive
+cd master/xcode
+./fullbuild.sh
+```
+
+To clone and build Cinder in a new directory ignoring folder structure, do the following:
+
+```
+git clone git@github.com:sosolimited/Cinder.git --recursive
+cd Cinder/xcode
+./fullbuild.sh
+```
+
+### Building these Samples
+
+Clone this repository into the `blocks/` directory of a recent version of the Cinder master branch. Note that we clone recursively in order to get submodules initialized.
+
+```
+cd Cinder/blocks/
 git clone git@github.com:sosolimited/Entity-Component-Sample.git --recursive
 ```
 
