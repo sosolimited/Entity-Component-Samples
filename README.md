@@ -139,15 +139,59 @@ e.destroy();
 
 One thing to watch out for is losing track of entities. Most of the time, this isn't an issue. However, if you have entities that aren’t visible on screen it might not be obvious when they exist after you intended to destroy them. Be careful when creating entities that don’t have an obvious presence at runtime. Although the EntityManager still knows about them, their memory is effectively leaked if they don’t have any components attached.
 
-### Grouping Entities Together
-
 ### Adding Custom Behavior to a Specific Entity
 
 Sometimes, you may want to give an entity a specific behavior that isn’t clearly modeled by any existing component or combination of components. Other times, you may want to provide an entity with a function that manipulates a handful of components at once (say, flipping out some content in a slideshow with a fancy animation).
 
-The BehaviorComponent is a place to store these kinds of one-off behaviors for an Entity. By extending the `BehaviorBase` class, you can build your own interfaces to special behaviors and run custom functions on update and other events. The Behavior will be registered with the entity, so it will be cleaned up when the entity is destroyed. If you store your own reference to a Behavior, you will need to be careful not to use it once its entity has been destroyed.
+We define a `BehaviorComponent` as a place to store these kinds of one-off behaviors for an Entity. By extending the `BehaviorBase` class, you can build your own interfaces to special behaviors and run custom functions on update and other events. The Behavior will be registered with the entity, so it will be cleaned up when the entity is destroyed. If you store your own reference to a Behavior, you will need to be careful not to use it once its entity has been destroyed.
 
 Before you start making everything a Behavior, consider whether the behavior could be better modeled using a Component and System (or by adding a new System that manipulates existing components). You can also evaluate whether a Behavior makes more sense as a Component+System once you have implemented it as a Behavior.
+
+### Grouping Entities Together
+
+In addition to describing individual entity attributes, we can use components to describe relationships between entities. That means we can build scene graphs using components when we need them.
+
+There are many things to consider when building up a hierarchy component. At its most basic, it should enable traversal of the hierarchy, providing ordered access to each entity along the way. In C++, we also care about object lifetime management, so we make the lifetime of branches dependent on their root. Here, we define a Hierarchy component template that provides the following:
+
+1) Access to parent, self, and child entities.
+2) Lifetime management. Since there is no garbage collection in standard c++, we make sure the leaves are cleaned up with the root of the hierarchy.
+3) A template type defining the properties that it makes sense to keep in a hierarchical tree (position, transparency).
+
+Using our Hierarchy component (and systems that care to traverse the hierarchy), we can make construction a group of items like the following straightforward:
+
+```
+Menu
+	- MenuItemA
+	- MenuItemB
+		- PromoAnimation
+		- ParticleEmitter
+	- MenuItemC
+```
+
+First, we need to create the entities that will be in the group. Imagine that we have functions that create their respective entities and return the created entity. Creating the underlying objects would look like the following:
+
+```c++
+auto menu = entities.create();
+auto menu_item_a = createMenuItem(entities, configuration);
+auto menu_item_b = createMenuItem(entities, configuration);
+auto menu_item_c = createMenuItem(entities, configuration);
+auto animation = createPromoAnimation(entities);
+auto particle_emitter = createParticleEmitter(entities);
+```
+
+Next, we need to group these entities hierarchically. We can do this with our makeHierarchy convenience function.
+
+```c++
+makeHierarchy(menu, menu_item_a, makeHierarchy(menu_item_b, animation, particle_emitter), menu_item_c);
+
+// With different indentation, notice how the above code mirrors our diagram from above.
+makeHierarchy(menu,
+	menu_item_a,
+	makeHierarchy(menu_item_b,
+		animation,
+		particle_emitter),
+	menu_item_c);
+```
 
 Samples
 -------
@@ -195,58 +239,3 @@ Satellites in layered orbit around central star.
 		- Cube, Sphere, Cone
 		- Instanced rendering
 	- Name
-
-
-Adding Special Functions to a Particular Aggregation
-----------------------------------------------------
-
-### Aggregating Entities (Tree, Graph, or Group)
-
-In addition to describing individual entity attributes, we can use components to describe relationships between entities.
-
-There are lots of things to consider when building up a hierarchy component. At its most basic, it should enable traversal of the hierarchy, providing ordered access to each entity along the way. In C++, we also care about object lifetime management, so we make the lifetime of branches dependent on their root. Our Hierarchy component template provides the following:
-
-1) Access to parent, self, and child entities.
-2) Lifetime management. Since there is no garbage collection in standard c++, we make sure the leaves are cleaned up with the root of the hierarchy.
-3) A template type defining the properties that it makes sense to keep in a hierarchical tree (position, transparency).
-
-The HierarchyComponent allows us to compose things in a graph, so we can meaningfully treat them as a group.
-
-For example, to create a menu with some special effects swirling around one of its entries, we might want something like the following:
-
-```
-Menu
-	- MenuItemA
-	- MenuItemB
-		- PromoAnimation
-		- ParticleEmitter
-	- MenuItemC
-```
-
-How do we get things into the group?
-
-First, we need to create the entities that will be in the group. Imagine that we have functions that create their respective entities and return the created entity.
-
-```c++
-auto menu = entities.create();
-auto menu_item_a = createMenuItem(entities, configuration);
-auto menu_item_b = createMenuItem(entities, configuration);
-auto menu_item_c = createMenuItem(entities, configuration);
-auto animation = createPromoAnimation(entities);
-auto particle_emitter = createParticleEmitter(entities);
-```
-
-Next, we need to group these entities hierarchically. We can do this with our makeHierarchy function.
-
-```c++
-makeHierarchy(menu, menu_item_a, makeHierarchy(menu_item_b, animation, particle_emitter), menu_item_c);
-
-// With different indentation, notice how the above code mirrors our diagram from above.
-// We simply prepend `makeHierarchy(` to each entity that has children under it.
-makeHierarchy(menu,
-	menu_item_a,
-	makeHierarchy(menu_item_b,
-		animation,
-		particle_emitter),
-	menu_item_c);
-```
