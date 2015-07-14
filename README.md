@@ -3,12 +3,7 @@ Entity-Component-Sample
 
 Didactic sample applications built using Entity Component Systems (ECS) on top of EntityX. Read more about ECS below, and open the samples in XCode to give them a whirl.
 
-Other places to read about entities:
-
-- https://github.com/alecthomas/entityx
-- http://cowboyprogramming.com/2007/01/05/evolve-your-heirachy/
-- http://scottbilas.com/files/2002/gdc_san_jose/game_objects_slides.pdf
-
+### Contents
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -21,6 +16,7 @@ Other places to read about entities:
   - [Where did this idea come from?](#where-did-this-idea-come-from)
   - [Why Entities?](#why-entities)
   - [Why Not Entities?](#why-not-entities)
+  - [Further Reading on Entity-Component-Systems:](#further-reading-on-entity-component-systems)
   - [Great Ideas from Entities](#great-ideas-from-entities)
     - [Act on similar things as a group.](#act-on-similar-things-as-a-group)
 - [How to use Entities](#how-to-use-entities)
@@ -128,41 +124,68 @@ At its most basic an ECS can be thought of as a table with every component as a 
 
 If you have a world of heterogeneous things, ECS can be a great choice.
 
-Entities are good for providing flexibility in the following:
-- Flexible type creation: easy to tweak behavior by adding new components and combining existing components differently.
+Entities provide interesting and useful characteristics:
+
+- Flexible type creation.
+	- tweak behavior by adding new components and combining existing components differently.
 - Clear separation of different functionality.
 	- This makes reasoning about and testing code simpler.
 - Memory layout can be more efficient.
 	- EntityX puts every component in a semi-contiguous array, which makes it cache efficient.
 	- Dynamic allocation (e.g. `make_shared`, `make_unique`, `new`), by contrast, doesn't necessarily group things together.
 
-If you have a moment to build some tools to support your project:
+If you have a moment to build some tools to support your project, ECS can become even more powerful.
+
 - Runtime object definition.
 - Easier to build tools that create game objects.
 - Adding scripting support is comparatively straightforward.
+- Data-driven objects. Very nearly everything can be laid out in a spreadsheet.
+
+Of the above, the clarity around when things happen in your program, and what sections are responsible for what, are the biggest benefits of using an ECS.
 
 ### Why Not Entities?
 
-You may not want to use entities for your project for a few reasons:
+You may not want or need to use entities for your project if the following is true:
 
 - Everything in the world is the same or very similar (maybe make a particle system).
-- There are only a few types of things in the world.
+- There are only a few types of behaviors those things engage in.
 
 Other downsides to using entities regardless of your project:
 
 - Your debugger becomes less useful. LLDB doesn’t have smarts when it comes to unpacking a set of components, so you may need to write your own debugging tools.
 
-### Great Ideas from Entities
+### Further Reading on Entity-Component-Systems:
 
-We can still use some of the approaches used in Entity Component Systems when we aren't breaking our objects into components. If you decide not to use an ECS, keep the following lessons in mind.
+- [EntityX, the ECS library we use](https://github.com/alecthomas/entityx).
+- [Evolve Your Hierarchy](http://cowboyprogramming.com/2007/01/05/evolve-your-heirachy/)
+- [A Data-Driven Game Object System](http://scottbilas.com/files/2002/gdc_san_jose/game_objects_slides.pdf)
+
+Great Ideas in ECS
+------------------
+
+If you decide not to use an Entity Component System in your project, you can still use many of the concepts underlying the architecture.
 
 Keep in mind that your project is likely to change while you are working on it. The flexibility provided by an ECS can make it easier to try out different ideas and change direction mid-development.
 
-#### Act on similar things as a group.
+### Keep Interfaces Small
 
-Instead of having every object manage its own drawing or update behavior, define that behavior in a function that acts of a collection of those objects. First, this makes it easy to swap out one behavior for another without changing the collection of objects. Also, it makes defining certain behaviors, like flocking, more natural. Finally, batching can enable efficiencies in many operations, like rendering.
+Keep the scope of what one object (or function) is responsible for small. If you have a scene graph describing how things are drawn, only use it to describe how things are drawn.
+
+You can always compose objects and functions to produce more complicated effects, with the benefit of each stage being easier to understand. Which brings us to:
+
+### Favor Composition over Inheritance
+
+This one is from the original Design Patterns book. To add functionality, don’t inherit from something that provides it. Instead, compose an instance of something that provides that functionality.
+
+### Act on similar things as a group.
+
+Instead of having every object manage its own drawing or update behavior, define that behavior in a function that acts of a collection of those objects. First, this makes it easy to swap out one behavior for another without changing the collection of objects. Also, it makes defining certain behaviors, like flocking, more natural. Finally, batching enables efficiencies in many operations, like rendering.
 
 If you have many similar objects, consider moving some of the logic about what you do with those objects outside of them. You can think of this like a particle system, where the system applies functions to a collection of particles.
+
+### Your Program is Just Data and Functions
+
+It can help to think of your program as a set of data and a set of functions that operate on that data. Try to write your functions so they are easy to use across a range of data types. If you can clearly model the data and see the flow of its state changes, it becomes much easier to write functions that do what you want with that data.
 
 How to use Entities
 -------------------
@@ -223,7 +246,7 @@ auto animation = createPromoAnimation(entities);
 auto particle_emitter = createParticleEmitter(entities);
 ```
 
-Next, we need to group these entities hierarchically. We can do this with our makeHierarchy convenience function.
+Next, we need to group these entities hierarchically. We can do this with our `makeHierarchy` convenience function. `makeHierarchy` constructs a hierarchy where the first parameter is the parent of every other parameter.
 
 ```c++
 makeHierarchy(menu, menu_item_a, makeHierarchy(menu_item_b, animation, particle_emitter), menu_item_c);
