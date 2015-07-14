@@ -142,7 +142,8 @@ void HierarchicalOrbitsApp::draw()
 	gl::setMatricesWindowPersp(getWindowSize());
 
 //	renderAllEntitiesAsCircles(entities);
-	renderCircles(entities);
+//	renderCircles(entities);
+	renderCirclesDepthSorted(entities);
 //	renderEntitiesWithGraph(entities);
 }
 

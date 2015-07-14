@@ -26,13 +26,14 @@ namespace soso {
 ///
 void renderAllEntitiesAsCircles(entityx::EntityManager &entities);
 void renderCircles(entityx::EntityManager &entities);
+void renderCirclesDepthSorted(entityx::EntityManager &entities);
 
 ///
 /// Often, you want to implicitly draw children in front, and children in order.
 /// Like buttons with a background and a text label.
 /// Scene graphs provide a natural way to model these issues and make sure drawn shapes stay together.
 ///
-void renderEntitiesWithGraph(entityx::EntityManager &entities);
+void renderCirclesWithGraph(entityx::EntityManager &entities);
 
 ///
 /// Sometimes scene graphs don't accurately model how you might want to draw something.
