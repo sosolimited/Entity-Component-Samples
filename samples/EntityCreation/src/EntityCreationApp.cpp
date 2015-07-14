@@ -7,189 +7,51 @@
 #include "cinder/Perlin.h"
 #include "cinder/Rand.h"
 
+#include "Components.h"
+#include "Systems.h"
+#include "Expires.h"
+#include "ExpiresSystem.h"
+#include "Behavior.h"
+#include "BehaviorSystem.h"
+#include "Behaviors.h"
+
 using namespace ci;
 using namespace ci::app;
 using namespace std;
+using namespace soso;
 
-struct Position {
-	Position() = default;
-	explicit Position(const ci::vec3 &position)
-	: position(position)
-	{}
-
-	ci::vec3 position;
-};
-
-struct Verlet {
-	Verlet() = default;
-	ci::vec3 previous_position;
-};
-
-struct Circle {
-	Circle() = default;
-	explicit Circle(float diameter)
-	: diameter(diameter)
-	{}
-
-	float radius() const { return diameter / 2.0f; }
-	float diameter = 0.0f;
-};
-
-struct Flow {
-	float influence = 1.0f;
-};
-
-struct Jitter {
-	ci::vec3 range = ci::vec3(1.0f);
-};
-
-struct Expires {
-	Expires() = default;
-	explicit Expires(float time)
-	: time(time)
-	{}
-
-	float										time = 1.0f;
-	std::function<void (entityx::Entity)>	lastWish;
-};
+// Wraps positions to stay within a rectangle.
+const auto borderWrap = createWrapFunction(Rectf(0, 0, 640, 480));
 
 ///
-/// Explicitly inherit from system and receiver if you want a system to receive events.
+/// EntityCreationApp demonstrates creation of entities and some of the uses of components and systems.
 ///
-class VerletSystem : public entityx::System<VerletSystem>, public entityx::Receiver<VerletSystem> {
-
-public:
-
-	void configure(entityx::EventManager &events) override {
-		events.subscribe<entityx::ComponentAddedEvent<Verlet>>(*this);
-	}
-
-	void receive(const entityx::ComponentAddedEvent<Verlet> &event) {
-		auto e = event.entity;
-		auto c = event.component;
-		auto p = e.has_component<Position>() ? e.component<Position>() : e.assign<Position>();
-		c->previous_position = p->position;
-	}
-
-	void update(entityx::EntityManager &entities, entityx::EventManager &events, double dt) override {
-		entityx::ComponentHandle<Verlet>		v;
-		entityx::ComponentHandle<Position>	p;
-
-		for (auto e : entities.entities_with_components(v, p)) {
-			auto vel = p->position - v->previous_position;
-			v->previous_position = p->position;
-			p->position += vel * 0.985f;
-		}
-	}
-
-private:
-
-};
-
-namespace {
-
-auto createFlowFunction(float scale) {
-	Perlin perlin;
-
-	return [perlin, scale] (entityx::EntityManager &entities, double dt) {
-		entityx::ComponentHandle<Position> ph;
-		entityx::ComponentHandle<Flow>		 fh;
-
-		for (auto e : entities.entities_with_components(ph, fh)) {
-			ph->position += perlin.dfBm(ph->position * scale) * fh->influence * vec3(1, 1, 0.1);
-		}
-	};
-}
-
-auto createWrapFunction(const ci::Rectf &bounds) {
-
-	return [bounds] (entityx::EntityManager &entities) {
-		for (auto e : entities.entities_with_components<Position>()) {
-			auto p = e.component<Position>();
-			auto &pos = p->position;
-			auto delta = vec3(0);
-
-			if (pos.x > bounds.x2) {
-				delta.x -= bounds.getWidth();
-			}
-			else if (pos.x < bounds.x1) {
-				delta.x += bounds.getWidth();
-			}
-
-			if (pos.y > bounds.y2) {
-				delta.y -= bounds.getHeight();
-			}
-			else if (pos.y < bounds.y1) {
-				delta.y += bounds.getHeight();
-			}
-
-			pos += delta;
-			if (length2(delta) > 0.0f && e.has_component<Verlet>()) {
-				e.component<Verlet>()->previous_position += delta;
-			}
-		}
-	};
-}
-
-void updateExpires(entityx::EntityManager &entities, double dt) {
-	entityx::ComponentHandle<Expires> h;
-	for (auto e : entities.entities_with_components(h)) {
-    h->time -= dt;
-		if (h->time < 0.0f) {
-			if (h->lastWish) {
-				h->lastWish(e);
-			}
-			e.destroy();
-		}
-	}
-}
-
-auto perlinFlow = createFlowFunction(0.1f);
-auto borderWrap = createWrapFunction(Rectf(0, 0, 640, 480));
-
-/// Assigns the value of one entity's component to another.
-/// Use when cloning an entity.
-template <typename Component>
-entityx::Entity cloneComponents(entityx::Entity from, entityx::Entity to) {
-	auto handle = from.component<Component>();
-	if (handle) {
-		to.assign_from_copy(*handle.get());
-	}
-
-	return to;
-}
-
-/// Producer function for cloning multiple components.
-/// cloneComponents<Position, Life, Verlet, Seek>(from, entities.create());
-template <typename Component1, typename Component2, typename ... Others>
-entityx::Entity cloneComponents(entityx::Entity from, entityx::Entity to) {
-	cloneComponents<Component1>(from, to);
-	cloneComponents<Component2, Others...>(from, to);
-
-	return to;
-}
-
-} // namespace
-
 class EntityCreationApp : public App {
 public:
 	EntityCreationApp();
 
 	void setup() override;
-	void mouseDown( MouseEvent event ) override;
+	void mouseDown(MouseEvent event) override;
+	void mouseDrag(MouseEvent event) override;
+	void mouseUp(MouseEvent event) override;
+	void keyDown(KeyEvent event) override;
 	void update() override;
 	void draw() override;
 
-	entityx::Entity createDot(const ci::vec3 &position, float diameter);
+	entityx::Entity createDot(const ci::vec2 &position, const ci::vec2 &direction, float diameter);
 
-	void createTestHierarchy();
 private:
 	entityx::EventManager	 events;
 	entityx::EntityManager entities;
 	entityx::SystemManager systems;
 	uint32_t							 num_dots = 0;
 	static const uint32_t	 max_dots = 1024;
+
+	ci::vec2							 mouse, mouse_prev;
+	bool									 do_clear = true;
 };
+
+// Initialize our EntityManager and SystemManager to know about events and each other.
 
 EntityCreationApp::EntityCreationApp()
 : entities(events),
@@ -198,97 +60,129 @@ EntityCreationApp::EntityCreationApp()
 
 void EntityCreationApp::setup()
 {
-	systems.add<VerletSystem>();
+	// Create our systems for controlling entity behavior.
+	// We also use free functions for entity behavior, which don't need to be instantiated.
+	systems.add<ExpiresSystem>();
+	systems.add<BehaviorSystem>(entities);
 	systems.configure();
 
-	createTestHierarchy();
-
-	auto dot = createDot(vec3(getWindowCenter(), 0.0f), 36.0f);
+	// Create an initial dot on screen
+	createDot(getWindowCenter(), vec2(1, 0), 36.0f);
 }
 
-void EntityCreationApp::createTestHierarchy()
+entityx::Entity EntityCreationApp::createDot(const ci::vec2 &position, const ci::vec2 &direction, float diameter)
 {
-	auto a = entities.create();
-	auto b = entities.create();
-	auto c = entities.create();
-	auto d = entities.create();
-	auto e = entities.create();
-
-	using namespace soso;
-
-	makeHierarchy(a, makeHierarchy(b, e), makeHierarchy(c, d));
-
-	auto expected_children = vector<Transform::Handle>{ b.component<Transform>(), c.component<Transform>() };
-	assert(a.component<Transform>()->children() == expected_children);
-
-	b.destroy();
-	assert(! e.valid());
-	a.destroy();
-	assert(! d.valid());
-}
-
-entityx::Entity EntityCreationApp::createDot(const ci::vec3 &position, float diameter)
-{
-	auto dot = entities.create();
-	dot.assign<Position>(position);
-	dot.assign<Verlet>();
-	dot.assign<Circle>(diameter);
-	dot.assign<Flow>();
-
+	// Keep track of the number of dots created so we don't have way too many.
+	if (num_dots > max_dots) {
+		return entityx::Entity(); // return an invalid entity
+	}
 	num_dots += 1;
 
+	// Create an entity, managed by `entities`.
+	auto dot = entities.create();
+	// Assign the components we care about
+	dot.assign<Position>(position);
+	dot.assign<Circle>(diameter);
+	dot.assign<Motion>(direction, 250.0f);
+	// Assign an Expires component and store a handle to it in `exp`
 	auto exp = dot.assign<Expires>(randFloat(4.0f, 6.0f));
 
-	exp->lastWish = [this, diameter] (entityx::Entity e) {
+	// Set a function to call when the Expires component runs out of time//
+	// Called last_wish, since it happens just before the entity is destroyed.
+	exp->last_wish = [this, diameter, direction] (entityx::Entity e) {
 		num_dots -= 1;
 
-		if (diameter > 3.0f && num_dots < max_dots) {
+		if (diameter > 8.0f) {
+			// If we weren't too small, create some smaller dots where we were destroyed.
 			auto pos = e.component<Position>()->position;
+			auto dir = glm::rotate<float>(direction, M_PI / 2);
 
-//			auto l = entities.create();
-//			cloneComponents<Position, Verlet, Circle>(e, l);
-			auto l = createDot(pos, diameter * 0.8f);
-			auto r = createDot(pos, diameter * 0.81f);
-
-			auto dir = randVec3();
-
-			l.component<Position>()->position -= dir * diameter * 0.5f;
-			r.component<Position>()->position += dir * diameter * 0.5f;
+			createDot(pos, dir, diameter * 0.66f);
+			createDot(pos, - dir, diameter * 0.66f);
 		}
 	};
 
 	return dot;
 }
 
-void EntityCreationApp::mouseDown( MouseEvent event )
+void EntityCreationApp::mouseDown(MouseEvent event)
 {
-	createDot(vec3(event.getPos(), 0), 49.0f);
+	// Create an entity that tracks the mouse.
+	auto mouse_entity = entities.create();
+	mouse_entity.assign<Position>(event.getPos());
+	mouse_entity.assign<Circle>(49.0f, Color::gray(0.5f));
+	// The DragTracker behavior will destroy its entity when the drag ends.
+	assignBehavior<DragTracker>(mouse_entity);
+}
+
+void EntityCreationApp::mouseDrag( MouseEvent event )
+{
+	// Keep track of the mouse position.
+	// This could be better done in a behavior or component (say, when DragTracker is destroyed)
+	// Dear reader: try modifying the DragTracker behavior so it calls a function on destruction.
+	// Use that function to create a dot where the tracker was last seen.
+	mouse_prev = mouse;
+	mouse = event.getPos();
+}
+
+void EntityCreationApp::mouseUp(MouseEvent event)
+{
+	mouse = event.getPos();
+	auto delta = mouse - mouse_prev;
+	auto len = length(delta);
+	if (length(delta) > std::numeric_limits<float>::epsilon()) {
+		delta /= len;
+	}
+	else {
+		delta = vec2(1, 0);
+	}
+	createDot(mouse, delta, 49.0f);
+}
+
+void EntityCreationApp::keyDown(KeyEvent event)
+{
+	if (event.getCode() == KeyEvent::KEY_c) {
+    do_clear = ! do_clear;
+	}
 }
 
 void EntityCreationApp::update()
 {
 	auto dt = 1.0 / 60.0;
 
-	perlinFlow(entities, dt);
-	systems.update<VerletSystem>(dt);
+	// Update all of our systems.
+	systems.update<ExpiresSystem>(dt);
+	systems.update<BehaviorSystem>(dt);
+
+	// Apply functions to the entities. See Systems.h for these function definitions.
+	slowDownWithAge(entities);
+	applyMotion(entities, dt);
 	borderWrap(entities);
-	updateExpires(entities, dt);
+
+	if (! do_clear) {
+    fadeWithAge(entities);
+	}
 }
 
 void EntityCreationApp::draw()
 {
-	gl::clear( Color( 0, 0, 0 ) );
+	if (do_clear) {
+		gl::clear( Color( 0, 0, 0 ) );
+	}
+	gl::disableDepthRead();
 	gl::setMatricesWindowPersp(getWindowSize());
+
+	// Why is this cooler than just calling draw on each item?
+	// We could do smart things based on what we know about our world and have a clear function call order.
 
 	entityx::ComponentHandle<Circle>		ch;
 	entityx::ComponentHandle<Position>	ph;
-	// Why is this cooler than just calling draw on each item?
-	// We can do smart things based on what we know about our world and have a clear function call order.
-	for (auto e : entities.entities_with_components(ch, ph)) {
-		gl::ScopedModelMatrix mat;
-		gl::translate(vec2(ph->position));
-		gl::drawSolidCircle(vec2(0), ch->radius());
+
+	gl::ScopedColor color(Color::white());
+	for (auto __unused e : entities.entities_with_components(ch, ph)) {
+		gl::color(ch->color);
+		gl::drawSolidCircle(ph->position, ch->radius());
 	}
 }
 
-CINDER_APP( EntityCreationApp, RendererGl )
+CINDER_APP( EntityCreationApp, RendererGl(RendererGl::Options().msaa(4)) )

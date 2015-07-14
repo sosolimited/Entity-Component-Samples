@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 44;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,22 +16,16 @@
 		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
 		00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995581B128DF400A5C623 /* IOKit.framework */; };
 		00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
+		24C09DE2DAEF4A25864BFF8B /* System.cc in Sources */ = {isa = PBXBuildFile; fileRef = A0A17387E3F1486DB064769B /* System.cc */; };
+		36A9B582C66F4477B275D17F /* Entity.cc in Sources */ = {isa = PBXBuildFile; fileRef = 01D0007641C9444FBC651D19 /* Entity.cc */; };
+		4665BFEAC038410AB827D62E /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 275F330D8A6445F8BD600858 /* CinderApp.icns */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		E580209F274E4BDD8F23FC57 /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = 4F9C747E8ABB4FC5A9452ABC /* Pool.cc */; };
-		24C09DE2DAEF4A25864BFF8B /* System.cc in Sources */ = {isa = PBXBuildFile; fileRef = A0A17387E3F1486DB064769B /* System.cc */; };
-		EC4EAF8CFF104619890E4437 /* Event.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5CC61B64B13F4EFC879D9295 /* Event.cc */; };
-		36A9B582C66F4477B275D17F /* Entity.cc in Sources */ = {isa = PBXBuildFile; fileRef = 01D0007641C9444FBC651D19 /* Entity.cc */; };
-		1735DFEDCC9747A397D680D6 /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D06C8778C6146A78F285D7A /* System.h */; };
-		236AF3E7A6584384B608FE12 /* quick.h in Headers */ = {isa = PBXBuildFile; fileRef = BD83D63066834CC8BF8783B5 /* quick.h */; };
-		28054711E6DF4BFBB038D15B /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = DE71CB1862414AF1AC844A41 /* Event.h */; };
-		DD62A5069E0B46C0B8DF24A6 /* entityx.h in Headers */ = {isa = PBXBuildFile; fileRef = 30470C0C576F47B5BF42DD03 /* entityx.h */; };
-		ABC31349231E4BD996F86A0A /* Entity.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B7BEE2D45904CDA81630CF3 /* Entity.h */; };
-		754A71DD45F742CF983E8303 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F4D7A98B1344F6C8D5A5A49 /* config.h */; };
-		FCACDA67A68D4A3897BBE252 /* EntityCreation_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 137FB484CD0D490194470599 /* EntityCreation_Prefix.pch */; };
-		4665BFEAC038410AB827D62E /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 275F330D8A6445F8BD600858 /* CinderApp.icns */; };
-		8A652988F1D5431DAD02BA3A /* Resources.h in Headers */ = {isa = PBXBuildFile; fileRef = C7BA1B1A6F45438BABB89568 /* Resources.h */; };
+		9C8DB5171B55AFD100DC9A53 /* ExpiresSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C8DB5151B55AFD100DC9A53 /* ExpiresSystem.cpp */; };
+		9C8DB51C1B55B89400DC9A53 /* BehaviorSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C8DB51A1B55B89400DC9A53 /* BehaviorSystem.cpp */; };
 		E20F42E36CC84F9D932407D6 /* EntityCreationApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23D57CC57FFD419C8F116DD3 /* EntityCreationApp.cpp */; };
+		E580209F274E4BDD8F23FC57 /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = 4F9C747E8ABB4FC5A9452ABC /* Pool.cc */; };
+		EC4EAF8CFF104619890E4437 /* Event.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5CC61B64B13F4EFC879D9295 /* Event.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,26 +38,35 @@
 		00B784B20FF439BC000DE1D7 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		00B995581B128DF400A5C623 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		00B995591B128DF400A5C623 /* IOSurface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOSurface.framework; path = System/Library/Frameworks/IOSurface.framework; sourceTree = SDKROOT; };
+		01D0007641C9444FBC651D19 /* Entity.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Entity.cc; path = ../../../src/entityx/entityx/Entity.cc; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		11338CCA5B84456DA68A4E39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		137FB484CD0D490194470599 /* EntityCreation_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = EntityCreation_Prefix.pch; sourceTree = "<group>"; };
+		23D57CC57FFD419C8F116DD3 /* EntityCreationApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = EntityCreationApp.cpp; path = ../src/EntityCreationApp.cpp; sourceTree = "<group>"; };
+		275F330D8A6445F8BD600858 /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CinderApp.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		2D06C8778C6146A78F285D7A /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = System.h; path = ../../../src/entityx/entityx/System.h; sourceTree = "<group>"; };
+		30470C0C576F47B5BF42DD03 /* entityx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = entityx.h; path = ../../../src/entityx/entityx/entityx.h; sourceTree = "<group>"; };
+		4F4D7A98B1344F6C8D5A5A49 /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../../../src/soso/entityx/config.h; sourceTree = "<group>"; };
+		4F9C747E8ABB4FC5A9452ABC /* Pool.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Pool.cc; path = ../../../src/entityx/entityx/help/Pool.cc; sourceTree = "<group>"; };
 		5323E6B10EAFCA74003A9687 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
+		5CC61B64B13F4EFC879D9295 /* Event.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Event.cc; path = ../../../src/entityx/entityx/Event.cc; sourceTree = "<group>"; };
+		6B7BEE2D45904CDA81630CF3 /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Entity.h; path = ../../../src/entityx/entityx/Entity.h; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* EntityCreation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EntityCreation.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		23D57CC57FFD419C8F116DD3 /* EntityCreationApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../src/EntityCreationApp.cpp; sourceTree = "<group>"; name = EntityCreationApp.cpp; };
-		C7BA1B1A6F45438BABB89568 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../include/Resources.h; sourceTree = "<group>"; name = Resources.h; };
-		275F330D8A6445F8BD600858 /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; name = CinderApp.icns; };
-		11338CCA5B84456DA68A4E39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; name = Info.plist; };
-		137FB484CD0D490194470599 /* EntityCreation_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = EntityCreation_Prefix.pch; sourceTree = "<group>"; name = EntityCreation_Prefix.pch; };
-		4F4D7A98B1344F6C8D5A5A49 /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/entityx/config.h; sourceTree = "<group>"; name = config.h; };
-		6B7BEE2D45904CDA81630CF3 /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/Entity.h; sourceTree = "<group>"; name = Entity.h; };
-		30470C0C576F47B5BF42DD03 /* entityx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/entityx.h; sourceTree = "<group>"; name = entityx.h; };
-		DE71CB1862414AF1AC844A41 /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/Event.h; sourceTree = "<group>"; name = Event.h; };
-		BD83D63066834CC8BF8783B5 /* quick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/quick.h; sourceTree = "<group>"; name = quick.h; };
-		2D06C8778C6146A78F285D7A /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/System.h; sourceTree = "<group>"; name = System.h; };
-		01D0007641C9444FBC651D19 /* Entity.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ../../../src/entityx/entityx/Entity.cc; sourceTree = "<group>"; name = Entity.cc; };
-		5CC61B64B13F4EFC879D9295 /* Event.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ../../../src/entityx/entityx/Event.cc; sourceTree = "<group>"; name = Event.cc; };
-		A0A17387E3F1486DB064769B /* System.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ../../../src/entityx/entityx/System.cc; sourceTree = "<group>"; name = System.cc; };
-		4F9C747E8ABB4FC5A9452ABC /* Pool.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ../../../src/entityx/entityx/help/Pool.cc; sourceTree = "<group>"; name = Pool.cc; };
+		9C8DB5131B55AF2200DC9A53 /* Components.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Components.h; path = ../src/Components.h; sourceTree = "<group>"; };
+		9C8DB5141B55AF5400DC9A53 /* Systems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Systems.h; path = ../src/Systems.h; sourceTree = "<group>"; };
+		9C8DB5151B55AFD100DC9A53 /* ExpiresSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ExpiresSystem.cpp; path = ../../../src/soso/ExpiresSystem.cpp; sourceTree = "<group>"; };
+		9C8DB5161B55AFD100DC9A53 /* ExpiresSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExpiresSystem.h; path = ../../../src/soso/ExpiresSystem.h; sourceTree = "<group>"; };
+		9C8DB5181B55AFDF00DC9A53 /* Expires.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Expires.h; path = ../../../src/soso/Expires.h; sourceTree = "<group>"; };
+		9C8DB5191B55B89400DC9A53 /* Behavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Behavior.h; path = ../../../src/soso/Behavior.h; sourceTree = "<group>"; };
+		9C8DB51A1B55B89400DC9A53 /* BehaviorSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BehaviorSystem.cpp; path = ../../../src/soso/BehaviorSystem.cpp; sourceTree = "<group>"; };
+		9C8DB51B1B55B89400DC9A53 /* BehaviorSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BehaviorSystem.h; path = ../../../src/soso/BehaviorSystem.h; sourceTree = "<group>"; };
+		9C8DB51D1B55BAEB00DC9A53 /* Behaviors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Behaviors.h; path = ../src/Behaviors.h; sourceTree = "<group>"; };
+		A0A17387E3F1486DB064769B /* System.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = System.cc; path = ../../../src/entityx/entityx/System.cc; sourceTree = "<group>"; };
+		BD83D63066834CC8BF8783B5 /* quick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = quick.h; path = ../../../src/entityx/entityx/quick.h; sourceTree = "<group>"; };
+		C7BA1B1A6F45438BABB89568 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
+		DE71CB1862414AF1AC844A41 /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Event.h; path = ../../../src/entityx/entityx/Event.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,10 +91,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01B97315FEAEA392516A2CEA /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				CD031070D58048EDBA45142F /* Entity Component System */,
+			);
+			name = Blocks;
+			sourceTree = "<group>";
+		};
 		080E96DDFE201D6D7F000001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				23D57CC57FFD419C8F116DD3 /* EntityCreationApp.cpp */,
+				9C8DB5131B55AF2200DC9A53 /* Components.h */,
+				9C8DB5141B55AF5400DC9A53 /* Systems.h */,
+				9C8DB51D1B55BAEB00DC9A53 /* Behaviors.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -144,79 +158,6 @@
 			name = EntityCreation;
 			sourceTree = "<group>";
 		};
-		AB86A0E122504C488C0BA0ED /* entityx */ = {
-			isa = PBXGroup;
-			children = (
-				4F4D7A98B1344F6C8D5A5A49 /* config.h */,
-			);
-			name = entityx;
-			sourceTree = "<group>";
-		};
-		B8A1AFE19E214DA3B1241056 /* soso */ = {
-			isa = PBXGroup;
-			children = (
-				AB86A0E122504C488C0BA0ED /* entityx */,
-			);
-			name = soso;
-			sourceTree = "<group>";
-		};
-		4E6F23B318114B39B2F7FD1D /* help */ = {
-			isa = PBXGroup;
-			children = (
-				4F9C747E8ABB4FC5A9452ABC /* Pool.cc */,
-			);
-			name = help;
-			sourceTree = "<group>";
-		};
-		DDAE8EB6D8F74C63922EBC82 /* entityx */ = {
-			isa = PBXGroup;
-			children = (
-				6B7BEE2D45904CDA81630CF3 /* Entity.h */,
-				30470C0C576F47B5BF42DD03 /* entityx.h */,
-				DE71CB1862414AF1AC844A41 /* Event.h */,
-				BD83D63066834CC8BF8783B5 /* quick.h */,
-				2D06C8778C6146A78F285D7A /* System.h */,
-				01D0007641C9444FBC651D19 /* Entity.cc */,
-				5CC61B64B13F4EFC879D9295 /* Event.cc */,
-				A0A17387E3F1486DB064769B /* System.cc */,
-				4E6F23B318114B39B2F7FD1D /* help */,
-			);
-			name = entityx;
-			sourceTree = "<group>";
-		};
-		62C1164AE18C45B099F08704 /* entityx */ = {
-			isa = PBXGroup;
-			children = (
-				DDAE8EB6D8F74C63922EBC82 /* entityx */,
-			);
-			name = entityx;
-			sourceTree = "<group>";
-		};
-		8AA53714CB7547E6906CCBD1 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				B8A1AFE19E214DA3B1241056 /* soso */,
-				62C1164AE18C45B099F08704 /* entityx */,
-			);
-			name = src;
-			sourceTree = "<group>";
-		};
-		CD031070D58048EDBA45142F /* Entity Component System */ = {
-			isa = PBXGroup;
-			children = (
-				8AA53714CB7547E6906CCBD1 /* src */,
-			);
-			name = "Entity Component System";
-			sourceTree = "<group>";
-		};
-		01B97315FEAEA392516A2CEA /* Blocks */ = {
-			isa = PBXGroup;
-			children = (
-				CD031070D58048EDBA45142F /* Entity Component System */,
-			);
-			name = Blocks;
-			sourceTree = "<group>";
-		};
 		29B97315FDCFA39411CA2CEA /* Headers */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +183,77 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4E6F23B318114B39B2F7FD1D /* help */ = {
+			isa = PBXGroup;
+			children = (
+				4F9C747E8ABB4FC5A9452ABC /* Pool.cc */,
+			);
+			name = help;
+			sourceTree = "<group>";
+		};
+		62C1164AE18C45B099F08704 /* entityx */ = {
+			isa = PBXGroup;
+			children = (
+				DDAE8EB6D8F74C63922EBC82 /* entityx */,
+			);
+			name = entityx;
+			sourceTree = "<group>";
+		};
+		8AA53714CB7547E6906CCBD1 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				B8A1AFE19E214DA3B1241056 /* soso */,
+				62C1164AE18C45B099F08704 /* entityx */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		AB86A0E122504C488C0BA0ED /* entityx */ = {
+			isa = PBXGroup;
+			children = (
+				4F4D7A98B1344F6C8D5A5A49 /* config.h */,
+			);
+			name = entityx;
+			sourceTree = "<group>";
+		};
+		B8A1AFE19E214DA3B1241056 /* soso */ = {
+			isa = PBXGroup;
+			children = (
+				9C8DB5191B55B89400DC9A53 /* Behavior.h */,
+				9C8DB51A1B55B89400DC9A53 /* BehaviorSystem.cpp */,
+				9C8DB51B1B55B89400DC9A53 /* BehaviorSystem.h */,
+				AB86A0E122504C488C0BA0ED /* entityx */,
+				9C8DB5151B55AFD100DC9A53 /* ExpiresSystem.cpp */,
+				9C8DB5161B55AFD100DC9A53 /* ExpiresSystem.h */,
+				9C8DB5181B55AFDF00DC9A53 /* Expires.h */,
+			);
+			name = soso;
+			sourceTree = "<group>";
+		};
+		CD031070D58048EDBA45142F /* Entity Component System */ = {
+			isa = PBXGroup;
+			children = (
+				8AA53714CB7547E6906CCBD1 /* src */,
+			);
+			name = "Entity Component System";
+			sourceTree = "<group>";
+		};
+		DDAE8EB6D8F74C63922EBC82 /* entityx */ = {
+			isa = PBXGroup;
+			children = (
+				6B7BEE2D45904CDA81630CF3 /* Entity.h */,
+				30470C0C576F47B5BF42DD03 /* entityx.h */,
+				DE71CB1862414AF1AC844A41 /* Event.h */,
+				BD83D63066834CC8BF8783B5 /* quick.h */,
+				2D06C8778C6146A78F285D7A /* System.h */,
+				01D0007641C9444FBC651D19 /* Entity.cc */,
+				5CC61B64B13F4EFC879D9295 /* Event.cc */,
+				A0A17387E3F1486DB064769B /* System.cc */,
+				4E6F23B318114B39B2F7FD1D /* help */,
+			);
+			name = entityx;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,6 +282,8 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "EntityCreation" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -308,8 +322,10 @@
 				E20F42E36CC84F9D932407D6 /* EntityCreationApp.cpp in Sources */,
 				36A9B582C66F4477B275D17F /* Entity.cc in Sources */,
 				EC4EAF8CFF104619890E4437 /* Event.cc in Sources */,
+				9C8DB51C1B55B89400DC9A53 /* BehaviorSystem.cpp in Sources */,
 				24C09DE2DAEF4A25864BFF8B /* System.cc in Sources */,
 				E580209F274E4BDD8F23FC57 /* Pool.cc in Sources */,
+				9C8DB5171B55AFD100DC9A53 /* ExpiresSystem.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,24 +336,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				DEAD_CODE_STRIPPING = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = EntityCreation_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = EntityCreation_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder_d.a\"";
 				PRODUCT_NAME = EntityCreation;
-				WRAPPER_EXTENSION = app;
 				SYMROOT = ./build;
+				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
@@ -351,62 +367,54 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = EntityCreation_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"NDEBUG=1",
 					"$(inherited)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = EntityCreation_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder.a\"";
 				PRODUCT_NAME = EntityCreation;
 				STRIP_INSTALLED_PRODUCT = YES;
-				WRAPPER_EXTENSION = app;
 				SYMROOT = ./build;
+				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
-				CLANG_CXX_LIBRARY = "libc++";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = x86_64;
-				CINDER_PATH = "../../../../..";
+				CINDER_PATH = ../../../../..;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = (
-					"\"$(CINDER_PATH)/include\" ../include",
-					../../../src/soso,
-					../../../src/entityx,
-				);
+				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../../../src/soso ../../../src/entityx";
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
-				CLANG_CXX_LIBRARY = "libc++";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = x86_64;
-				CINDER_PATH = "../../../../..";
+				CINDER_PATH = ../../../../..;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = (
-					"\"$(CINDER_PATH)/include\" ../include",
-					../../../src/soso,
-					../../../src/entityx,
-				);
+				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../../../src/soso ../../../src/entityx";
 			};
 			name = Release;
 		};
