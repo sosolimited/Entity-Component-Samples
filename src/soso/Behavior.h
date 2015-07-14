@@ -39,6 +39,7 @@ public:
 	virtual void update( entityx::TimeDelta dt ) {}
 
 	virtual void mouseMove( const ci::app::MouseEvent &event ) {}
+	virtual void mouseDrag( const ci::app::MouseEvent &event ) {}
 	virtual void mouseDown( const ci::app::MouseEvent &event ) {}
 	virtual void mouseUp( const ci::app::MouseEvent &event ) {}
 

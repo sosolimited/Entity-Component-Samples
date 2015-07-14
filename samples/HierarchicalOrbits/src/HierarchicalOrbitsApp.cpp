@@ -9,6 +9,8 @@
 #include "Behavior.h"
 #include "BehaviorSystem.h"
 #include "RenderFunctions.h"
+#include "Draggable.h"
+#include "DragSystem.h"
 
 #include "cinder/Rand.h"
 
@@ -45,6 +47,26 @@ private:
 	Transform::Handle _transform;
 };
 
+///
+/// New System/Component types can be prototyped as behaviors.
+/// This shows the basics of making an entity draggable.
+///
+class DragBehavior : public BehaviorBase
+{
+public:
+	using BehaviorBase::BehaviorBase;
+
+	void mouseDown(const app::MouseEvent &event) override {
+		auto xf = entity().component<Transform>();
+		xf->position = vec3(event.getPos(), 0.0f);
+	}
+	void mouseDrag(const app::MouseEvent &event) override {
+		auto xf = entity().component<Transform>();
+		xf->position = vec3(event.getPos(), 0.0f);
+	}
+private:
+};
+
 entityx::Entity createPlanetoid(entityx::EntityManager &entities)
 {
 	auto size = randFloat(20.0f, 40.0f);
@@ -53,16 +75,16 @@ entityx::Entity createPlanetoid(entityx::EntityManager &entities)
 	auto theta = randFloat(Tau);
 	auto planet_pos = vec3(cos(theta) * distance, sin(theta) * distance, 0.0f);
 	planet.assign<Transform>(planet, planet_pos, vec3(1.0f), - planet_pos);
-	planet.assign<Circle>( size, Color(CM_HSV, 0.65f, 0.8f, 0.9f));
-	assignBehavior<ContinuousRotation>(planet, randVec3(), 0.2f);
+	planet.assign<Circle>( size, Color(CM_HSV, 0.65f + randFloat(-0.01f, 0.01f), 0.8f, 0.9f + randFloat(-0.01f, 0.01f)));
+	assignBehavior<ContinuousRotation>(planet, randVec3(), randFloat(0.18f, 0.22f));
 
 	auto moon_pos = vec3(size, size, 0.0f) * randFloat(1.0f, 1.5f);
 	auto moon = entities.create();
 	moon.assign<Transform>(moon, moon_pos, vec3(1.0f), - moon_pos);
-	moon.assign<Circle>(size * 0.33f, Color(CM_HSV, 0.5f, 0.8f, 0.96f));
+	moon.assign<Circle>(size * 0.33f, Color(CM_HSV, 0.5f + randFloat(-0.01f, 0.01f), 0.8f, 0.96f + randFloat(0.02f)));
 	makeHierarchy(planet, moon);
 
-	assignBehavior<ContinuousRotation>(moon, randVec3(), 1.0f);
+	assignBehavior<ContinuousRotation>(moon, randVec3(), randFloat(0.8f, 0.9f));
 
 	return planet;
 }
@@ -72,17 +94,19 @@ public:
 	HierarchicalOrbitsApp();
 
 	void setup() override;
-	void mouseDown( MouseEvent event ) override;
+	void keyDown(KeyEvent event) override;
 	void update() override;
 	void draw() override;
 
-	void createSolarSystem();
+	void createSolarSystem(const ci::vec3 &center);
+	void shrinkPastSolarSystems();
 private:
 	entityx::EventManager	 events;
 	entityx::EntityManager entities;
 	entityx::SystemManager systems;
 
 	entityx::Entity sun;
+	std::vector<entityx::Entity>	suns;
 
 	ci::Timer frameTimer;
 };
@@ -94,33 +118,48 @@ HierarchicalOrbitsApp::HierarchicalOrbitsApp()
 
 void HierarchicalOrbitsApp::setup()
 {
-	systems.add<TransformSystem>();
 	systems.add<BehaviorSystem>(entities);
+	systems.add<DragSystem>(entities);
+	systems.add<TransformSystem>();
 	systems.configure();
 
-	createSolarSystem();
+	createSolarSystem(vec3(getWindowCenter(), 0.0f));
 }
 
-void HierarchicalOrbitsApp::mouseDown( MouseEvent event )
+void HierarchicalOrbitsApp::keyDown(KeyEvent event)
 {
-	if (sun) {
-    sun.destroy();
-	}
-	else {
-		createSolarSystem();
-	}
+	shrinkPastSolarSystems();
+
+	auto center = vec2(getWindowCenter());
+	auto offset = randVec2() * vec2(getWindowSize()) * 0.5f;
+	createSolarSystem(vec3(center + offset, 0.0f));
 }
 
-void HierarchicalOrbitsApp::createSolarSystem()
+void HierarchicalOrbitsApp::shrinkPastSolarSystems()
+{
+	for (auto &s : suns) {
+		auto xf = s.component<Transform>();
+		xf->scale *= 0.8f;
+		if (xf->scale.x < 0.2f) {
+			s.destroy();
+		}
+	}
+
+	suns.erase(std::remove_if(suns.begin(), suns.end(), [] (entityx::Entity e) { return ! e.valid(); }), suns.end());
+}
+
+void HierarchicalOrbitsApp::createSolarSystem(const ci::vec3 &center)
 {
 	sun = entities.create();
 	sun.assign<Circle>(50.0f, Color(CM_HSV, 0.1f, 0.4f, 1.0f));
-	auto xf = sun.assign<Transform>(sun);
-	xf->position = vec3(getWindowCenter(), 0.0f);
+	sun.assign<Transform>(sun, center);
+	sun.assign<Draggable>(vec2(1, 1));
 
 	for (auto i = 0; i < 20; i += 1) {
 		makeHierarchy(sun, createPlanetoid(entities));
 	}
+
+	suns.push_back(sun);
 }
 
 void HierarchicalOrbitsApp::update()
@@ -142,8 +181,8 @@ void HierarchicalOrbitsApp::draw()
 	gl::setMatricesWindowPersp(getWindowSize());
 
 //	renderAllEntitiesAsCircles(entities);
-//	renderCircles(entities);
-	renderCirclesDepthSorted(entities);
+	renderCircles(entities);
+//	renderCirclesDepthSorted(entities);
 //	renderEntitiesWithGraph(entities);
 }
 

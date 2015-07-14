@@ -21,11 +21,17 @@ namespace soso {
 ///
 /// When render order isn't important (as is the general case with opaque geometry),
 /// we can just go through and draw everything directly.
+/// We can use OpenGL's depth buffer to handle geometry occlusion, since nothing has transparency.
 ///
 /// Note that we could easily batch these draw circle calls without changing the underlying entities.
 ///
 void renderAllEntitiesAsCircles(entityx::EntityManager &entities);
+
+///
 void renderCircles(entityx::EntityManager &entities);
+
+/// For rendering 2d sprites, or anything with transparency, we can't rely on the depth buffer.
+/// Instead, we need to depth-sort our geometry so that the frontmost transparent thing is drawn last.
 void renderCirclesDepthSorted(entityx::EntityManager &entities);
 
 ///

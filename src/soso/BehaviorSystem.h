@@ -18,8 +18,9 @@ public:
 
 	void update( entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt ) override;
 
-	void mouseDown( const ci::app::MouseEvent &event );
 	void mouseMove( const ci::app::MouseEvent &event );
+	void mouseDown( const ci::app::MouseEvent &event );
+	void mouseDrag( const ci::app::MouseEvent &event );
 	void mouseUp( const ci::app::MouseEvent &event );
 
 private:

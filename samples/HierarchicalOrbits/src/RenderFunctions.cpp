@@ -18,6 +18,8 @@ using namespace cinder;
 
 void soso::renderAllEntitiesAsCircles(entityx::EntityManager &entities)
 {
+	gl::ScopedDepth depth(true, true);
+
 	entityx::ComponentHandle<Transform> transform;
 	for (auto __unused e : entities.entities_with_components(transform)) {
 		gl::ScopedModelMatrix mat;
@@ -28,16 +30,17 @@ void soso::renderAllEntitiesAsCircles(entityx::EntityManager &entities)
 
 void soso::renderCircles(entityx::EntityManager &entities)
 {
+	gl::ScopedDepth depth(true, true);
+
 	entityx::ComponentHandle<Transform> transform;
 	entityx::ComponentHandle<Circle>		circle;
 
 	gl::ScopedColor color(Color(1.0f, 1.0f, 1.0f));
 	for (auto __unused e : entities.entities_with_components(transform, circle)) {
 		gl::ScopedModelMatrix mat;
+		auto q = inverse(normalize(quat_cast(transform->worldTransform()))); // billboard the shapes; mostly works
+		gl::multModelMatrix(transform->worldTransform() * glm::mat4_cast(q));
 		gl::color(circle->color);
-		// Draw as billboards; only transform the centroid of the shape.
-		auto translation = vec3(transform->worldTransform() * vec4(0, 0, 0, 1));
-		gl::translate(translation);
 
 		gl::drawSolidCircle(vec2(0), circle->radius);
 	}
