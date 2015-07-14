@@ -27,8 +27,8 @@ Didactic sample applications built using Entity Component Systems (ECS) on top o
   - [Adding Custom Behavior to a Specific Entity](#adding-custom-behavior-to-a-specific-entity)
   - [Grouping Entities Together](#grouping-entities-together)
 - [Building and Running](#building-and-running)
-  - [Building Cinder](#building-cinder)
   - [Building these Samples](#building-these-samples)
+  - [Building Cinder](#building-cinder)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
