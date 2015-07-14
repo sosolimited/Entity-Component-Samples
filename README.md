@@ -35,7 +35,7 @@ Didactic sample applications built using Entity Component Systems (ECS) on top o
 Samples
 -------
 
-You can find the following samples in the `samples/` directory. All were tested using in XCode 6.4.
+You can find the following samples in the `samples/` directory.
 
 ### Entity Creation
 
@@ -266,6 +266,19 @@ makeHierarchy(menu,
 Building and Running
 --------------------
 
+### Building these Samples
+
+Clone this repository into the `blocks/` directory of a recent version of the Cinder master branch. Note that we clone recursively in order to get submodules initialized.
+
+```
+cd Cinder/blocks/
+git clone git@github.com:sosolimited/Entity-Component-Sample.git --recursive
+```
+
+Now open up the samples in XCode and you should be good to go.
+
+All samples were tested using in XCode 6.4. If you run into issues with an earlier version of XCode (like empty project files), please upgrade XCode.
+
 ### Building Cinder
 
 Clone and build Cinder on your machine. Note that we clone recursively in order to get submodules initialized.
@@ -297,14 +310,3 @@ git clone git@github.com:sosolimited/Cinder.git --recursive
 cd Cinder/xcode
 ./fullbuild.sh
 ```
-
-### Building these Samples
-
-Clone this repository into the `blocks/` directory of a recent version of the Cinder master branch. Note that we clone recursively in order to get submodules initialized.
-
-```
-cd Cinder/blocks/
-git clone git@github.com:sosolimited/Entity-Component-Sample.git --recursive
-```
-
-Open up the samples in XCode and you should be good to go.
