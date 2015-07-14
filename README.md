@@ -193,7 +193,7 @@ It can help to think of your program as a set of data and a set of functions tha
 How to use Entities
 -------------------
 
-Below we discuss some common tasks and how you might accomplish them using Entities and Components. We made some common Systems and Components that can be adapted for most projects.
+Below we discuss some common tasks and how you might accomplish them using Entities and Components. The common Systems and Components referred to below are used in the samples and can be adapted for most projects.
 
 ### The Lifecycle of an Entity
 
@@ -208,6 +208,55 @@ e.destroy();
 ```
 
 One thing to watch out for is losing track of entities. Most of the time, this isn't an issue. However, if you have entities that aren’t visible on screen it might not be obvious when they exist after you intended to destroy them. Be careful when creating entities that don’t have an obvious presence at runtime. Although the EntityManager still knows about them, their memory is effectively leaked if they don’t have any components attached.
+
+### Adding and Removing Components
+
+As mentioned above, entities are an aggregation of components. We build them up by assigning a number of components to the same entity.
+
+```c++
+auto e = entities.create();
+e.assign<Transform>();
+e.assign<Color>();
+…
+e.remove<Color>();
+```
+
+Construction parameters can be passed to components when they are assigned to give them initial values.
+
+```c++
+auto e = entities.create();
+e.assign<Transform>(vec3(10, 10, 0));
+e.assign<Color>(vec3(1.0, 0.5, 0.0));
+```
+
+Now, it is trivial to imagine how to model the above entity in e.g. JSON:
+
+```
+{
+  transform: {[10, 10, 0]},
+  color: {[1.0, 0.5, 0.0]}
+}
+```
+
+Given the above JSON, you might imagine how you can describe a whole project’s worth of entities, including possible new object types, in data files (which you will want a project-specific tool to generate).
+
+### Using a Set of Components
+
+Systems look for entities that have a specific combination of components and use those components to perform actions. For example, a circle drawing system might draw everything with a transform and circle component, and set the color if the entity has an optional style component.
+
+Notice below that inside the loop both the transform and circle handles are guaranteed to be valid. When we want to access another component from the entity they are associated with, we need to check whether that new component is valid before using it.
+
+```c++
+ComponentHandle<Transform>  xf;
+ComponentHandle<Circle>     cc;
+for (auto e : entities.entities_with_components(xf, cc)) {
+  auto sc = e.component<Style>();
+  if (sc) {
+    setColor(sc->color);
+  }
+  drawCircle(xf->position, cc->radius);
+}
+```
 
 ### Adding Custom Behavior to a Specific Entity
 
