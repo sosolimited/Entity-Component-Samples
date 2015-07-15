@@ -19,9 +19,9 @@ using namespace ci::app;
 using namespace std;
 using namespace soso;
 
-class SeekersApp : public App {
+class GravityWellsApp : public App {
 public:
-	SeekersApp();
+	GravityWellsApp();
 
 	void setup() override;
 	void mouseDown( MouseEvent event ) override;
@@ -35,12 +35,12 @@ private:
 	ci::Timer								frameTimer;
 };
 
-SeekersApp::SeekersApp()
+GravityWellsApp::GravityWellsApp()
 : entities( events ),
 	systems( entities, events )
 {}
 
-void SeekersApp::setup()
+void GravityWellsApp::setup()
 {
 	systems.add<VerletPhysicsSystem>();
 	systems.add<PhysicsAttractorSystem>();
@@ -63,7 +63,7 @@ void SeekersApp::setup()
 	assignBehavior<MouseFollow>( attractor, 2.4f );
 }
 
-void SeekersApp::mouseDown( MouseEvent event )
+void GravityWellsApp::mouseDown( MouseEvent event )
 {
 	// Put into a chain with the previous entity.
 	auto e = entities.create();
@@ -72,7 +72,7 @@ void SeekersApp::mouseDown( MouseEvent event )
 	body->drag = randFloat(0.04f, 0.08f);
 }
 
-void SeekersApp::update()
+void GravityWellsApp::update()
 {
 	auto dt = frameTimer.getSeconds();
 	frameTimer.start();
@@ -85,7 +85,7 @@ void SeekersApp::update()
 	systems.update<VerletPhysicsSystem>( dt );
 }
 
-void SeekersApp::draw()
+void GravityWellsApp::draw()
 {
 	gl::clear( Color( 0, 0, 0 ) );
 	gl::setMatricesWindowPersp( getWindowSize() );
@@ -108,4 +108,4 @@ void SeekersApp::draw()
 	}
 }
 
-CINDER_APP( SeekersApp, RendererGl )
+CINDER_APP( GravityWellsApp, RendererGl )
