@@ -1,19 +1,18 @@
 //
-//  PhysicsAttractorSystem.cpp
+//  Systems.cpp
 //
-//  Created by Soso Limited on 7/7/15.
+//  Created by Soso Limited on 7/15/15.
 //
 //
 
-#include "PhysicsAttractorSystem.h"
-#include "PhysicsAttraction.h"
-#include "PhysicsAttractor.h"
+#include "Systems.h"
+#include "Components.h"
 #include "VerletBody.h"
 
 using namespace soso;
 using namespace entityx;
 
-void PhysicsAttractorSystem::update( EntityManager &entities, EventManager &events, TimeDelta dt )
+void soso::applyPhysicsAttraction(EntityManager &entities)
 {
 	ComponentHandle<VerletBody>					body;
 	ComponentHandle<PhysicsAttraction>	attraction;
@@ -34,3 +33,4 @@ void PhysicsAttractorSystem::update( EntityManager &entities, EventManager &even
 		}
 	}
 }
+

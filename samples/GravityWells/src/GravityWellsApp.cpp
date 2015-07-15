@@ -5,12 +5,12 @@
 #include "entityx/Entity.h"
 #include "VerletPhysicsSystem.h"
 #include "VerletBody.h"
-#include "PhysicsAttractor.h"
-#include "PhysicsAttraction.h"
-#include "PhysicsAttractorSystem.h"
 #include "BehaviorSystem.h"
 #include "Behavior.h"
-#include "MouseFollow.h"
+
+#include "Behaviors.h"
+#include "Components.h"
+#include "Systems.h"
 
 #include "cinder/Rand.h"
 
@@ -32,7 +32,7 @@ private:
 	entityx::EntityManager entities;
 	entityx::SystemManager systems;
 
-	ci::Timer								frameTimer;
+	ci::Timer							 frameTimer;
 };
 
 GravityWellsApp::GravityWellsApp()
@@ -43,7 +43,6 @@ GravityWellsApp::GravityWellsApp()
 void GravityWellsApp::setup()
 {
 	systems.add<VerletPhysicsSystem>();
-	systems.add<PhysicsAttractorSystem>();
 	systems.add<BehaviorSystem>( entities );
 	systems.configure();
 
@@ -63,7 +62,7 @@ void GravityWellsApp::setup()
 	assignBehavior<MouseFollow>( attractor, 2.4f );
 }
 
-void GravityWellsApp::mouseDown( MouseEvent event )
+void GravityWellsApp::mouseDown(MouseEvent event)
 {
 	// Put into a chain with the previous entity.
 	auto e = entities.create();
@@ -80,31 +79,28 @@ void GravityWellsApp::update()
     dt = 1.0 / 60.0;
 	}
 
-	systems.update<BehaviorSystem>( dt );
-	systems.update<PhysicsAttractorSystem>( dt );
-	systems.update<VerletPhysicsSystem>( dt );
+	systems.update<BehaviorSystem>(dt);
+	applyPhysicsAttraction(entities);
+	systems.update<VerletPhysicsSystem>(dt);
 }
 
 void GravityWellsApp::draw()
 {
-	gl::clear( Color( 0, 0, 0 ) );
-	gl::setMatricesWindowPersp( getWindowSize() );
+	gl::clear(Color(0, 0, 0));
+	gl::setMatricesWindowPersp(getWindowSize());
 
 	entityx::ComponentHandle<VerletBody> body;
-	for( auto e : entities.entities_with_components( body ) )
+	for (auto e : entities.entities_with_components(body))
 	{
-//		gl::ScopedModelMatrix mat;
-//		gl::translate( body->position );
-//		gl::drawSolidCircle( vec2(0), 32.0f );
-		auto attr = e.component<PhysicsAttractor>();
-		auto size = attr ? 8.0f : 24.0f;
-		gl::drawSphere( body->position, size );
-		if( attr ) {
+		auto attractor = e.component<PhysicsAttractor>();
+		auto size = attractor ? 8.0f : 24.0f;
+		gl::drawSphere(body->position, size);
+		if (attractor)
+		{
 			gl::ScopedModelMatrix mat;
-			gl::translate( body->position );
-			gl::drawStrokedCircle( vec2( 0 ), attr->distance_falloff, 16 );
+			gl::translate(body->position);
+			gl::drawStrokedCircle(vec2(0), attractor->distance_falloff, 16);
 		}
-
 	}
 }
 
