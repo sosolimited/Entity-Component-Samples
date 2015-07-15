@@ -20,6 +20,16 @@
 
 namespace soso {
 
+/// Move attracted entities towards attractors.
 void applyPhysicsAttraction(entityx::EntityManager &entities);
+
+///
+void applyLinearForce(entityx::EntityManager &entities);
+
+///
+void applyWanderingForce(entityx::EntityManager &entities);
+
+/// Destroy any entities that have wandered outside of their own boundaries.
+void enforceBoundaries(entityx::EntityManager &entities);
 
 } // namespace soso

@@ -35,7 +35,8 @@ private:
 	entityx::EntityManager entities;
 	entityx::SystemManager systems;
 
-	ci::Timer							 frameTimer;
+	ci::Timer							 frame_timer;
+	const pair<vec3, vec3> world_bounds = std::make_pair(vec3(0, 0, -640), vec3(640, 480, 640));
 };
 
 GravityWellsApp::GravityWellsApp()
@@ -46,11 +47,13 @@ GravityWellsApp::GravityWellsApp()
 void GravityWellsApp::setup()
 {
 	systems.add<VerletPhysicsSystem>();
-	systems.add<BehaviorSystem>( entities );
+	systems.add<BehaviorSystem>(entities);
 	systems.configure();
 
 	auto e = entities.create();
 	e.assign<PhysicsAttraction>();
+	e.assign<Bounded>(world_bounds.first, world_bounds.second);
+	e.assign<LinearForce>(vec3(10.0f, 0.0f, 0.0f));
 	auto body = e.assign<VerletBody>(vec3(getWindowCenter(), 0.0f));
 	body->drag = 0.05f;
 	body->nudge(vec3(500.0f, 0.0f, -500.0f));
@@ -71,11 +74,13 @@ void GravityWellsApp::createGravityWells()
 
 entityx::Entity GravityWellsApp::createGravityWell(const ci::vec3 &position, float distance_falloff)
 {
-	auto attractor = entities.create();
-	attractor.assign<VerletBody>(position);
-	attractor.assign<PhysicsAttractor>()->distance_falloff = distance_falloff;
+	auto e = entities.create();
+	e.assign<VerletBody>(position);
+	auto attractor = e.assign<PhysicsAttractor>();
+	attractor->distance_falloff = distance_falloff;
+	attractor->strength = 0.66f;
 
-	return attractor;
+	return e;
 }
 
 void GravityWellsApp::mouseDown(MouseEvent event)
@@ -83,21 +88,26 @@ void GravityWellsApp::mouseDown(MouseEvent event)
 	// Put into a chain with the previous entity.
 	auto e = entities.create();
 	e.assign<PhysicsAttraction>( 0.5f );
-	auto body = e.assign<VerletBody>( vec3( event.getPos(), 0.0f ) );
+	e.assign<Bounded>(world_bounds.second, world_bounds.first);
+	e.assign<WanderingForce>(vec3(20.0f, 10.0f, 1.0f));
+	auto body = e.assign<VerletBody>(vec3(event.getPos(), 0.0f));
 	body->drag = randFloat(0.04f, 0.08f);
 }
 
 void GravityWellsApp::update()
 {
-	auto dt = frameTimer.getSeconds();
-	frameTimer.start();
+	auto dt = frame_timer.getSeconds();
+	frame_timer.start();
 	if ((dt < 1.0 / 120.0) || (dt > 1.0 / 10.0)) {
     dt = 1.0 / 60.0;
 	}
 
 	systems.update<BehaviorSystem>(dt);
 	applyPhysicsAttraction(entities);
+	applyLinearForce(entities);
+	applyWanderingForce(entities);
 	systems.update<VerletPhysicsSystem>(dt);
+	enforceBoundaries(entities);
 }
 
 void GravityWellsApp::draw()

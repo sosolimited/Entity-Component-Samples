@@ -12,8 +12,8 @@ using namespace soso;
 using namespace cinder;
 
 MouseFollow::MouseFollow(entityx::Entity entity, float strength)
-: BehaviorBase( entity ),
-	_strength( strength )
+: BehaviorBase(entity),
+	_strength(strength)
 {
 	_body = entity.has_component<VerletBody>() ? entity.component<VerletBody>() : entity.assign<VerletBody>();
 }
