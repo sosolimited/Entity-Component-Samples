@@ -19,6 +19,10 @@ namespace soso {
 struct PhysicsAttractor
 {
 	PhysicsAttractor() = default;
+	PhysicsAttractor(float strength, float distance_falloff)
+	: strength(strength),
+		distance_falloff(distance_falloff)
+	{}
 
 	float strength = 1.0f;
 	float distance_falloff = 300.0f;
