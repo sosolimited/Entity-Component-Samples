@@ -16,6 +16,12 @@
 
 namespace soso {
 
+///
+/// Describes how strongly this entity attracts or repels other entities.
+/// Distance falloff is used to limit the attraction's range.
+///
+/// Used by the applyPhysicsAttraction function.
+///
 struct PhysicsAttractor
 {
 	PhysicsAttractor() = default;
@@ -28,6 +34,14 @@ struct PhysicsAttractor
 	float distance_falloff = 300.0f;
 };
 
+///
+/// Describe how strongly this entity is attracted to attractors.
+/// move away < 0
+/// no attraction = 0,
+/// move toward > 0
+///
+/// Used by the applyPhysicsAttraction function.
+///
 struct PhysicsAttraction
 {
 	explicit PhysicsAttraction(float strength = 1.0f)
@@ -37,6 +51,12 @@ struct PhysicsAttraction
 	float strength = 1.0f;
 };
 
+///
+/// WanderingForce describes a force that may be applied to an entity to cause
+/// it to move in a straight line.
+///
+/// Used by the applyLinearForce function.
+///
 struct LinearForce
 {
 	explicit LinearForce(const ci::vec3 &force)
@@ -46,6 +66,12 @@ struct LinearForce
 	ci::vec3 force;
 };
 
+///
+/// WanderingForce describes a force that may be applied to an entity to cause
+/// it to appear to wander in random directions.
+///
+/// Used by the applyWanderingForce function.
+///
 struct WanderingForce
 {
 	explicit WanderingForce(const ci::vec3 &impulses = ci::vec3(1.0f), float fov_radians = M_PI)
@@ -57,6 +83,11 @@ struct WanderingForce
 	float fov_radians;
 };
 
+///
+/// Bounded describes a 3d box where an entity is bounded.
+///
+/// Used by the enforceBoundaries function.
+///
 struct Bounded
 {
 	Bounded(const ci::vec3 &minima, const ci::vec3 &maxima)

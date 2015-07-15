@@ -24,7 +24,8 @@ using namespace soso;
 const auto borderWrap = createWrapFunction(Rectf(0, 0, 640, 480));
 
 ///
-/// EntityCreationApp demonstrates creation of entities and some of the uses of components and systems.
+/// @file EntityCreationApp demonstrates creation of entities and some of the uses of components and systems.
+/// This application, as a teaching tool, is much more heavily commented than a production codebase.
 ///
 class EntityCreationApp : public App {
 public:

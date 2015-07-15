@@ -23,10 +23,10 @@ namespace soso {
 /// Move attracted entities towards attractors.
 void applyPhysicsAttraction(entityx::EntityManager &entities);
 
-///
+/// Apply LinearForce to VerletBody for anything that has both.
 void applyLinearForce(entityx::EntityManager &entities);
 
-///
+/// Apply WanderingForce to VerletBody for anything that has both.
 void applyWanderingForce(entityx::EntityManager &entities);
 
 /// Destroy any entities that have wandered outside of their own boundaries.
