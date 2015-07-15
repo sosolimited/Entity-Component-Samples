@@ -24,7 +24,8 @@ using namespace soso;
 const auto borderWrap = createWrapFunction(Rectf(0, 0, 640, 480));
 
 ///
-/// EntityCreationApp demonstrates creation of entities and some of the uses of components and systems.
+/// @file EntityCreationApp demonstrates creation of entities and some of the uses of components and systems.
+/// This application, as a teaching tool, is much more heavily commented than a production codebase.
 ///
 class EntityCreationApp : public App {
 public:
@@ -172,9 +173,9 @@ void EntityCreationApp::draw()
 	gl::disableDepthRead();
 	gl::setMatricesWindowPersp(getWindowSize());
 
-	// Why is this cooler than just calling draw on each item?
-	// We could do smart things based on what we know about our world and have a clear function call order.
-
+	// Below, we loop through and draw every entity that has both a position and a circle component.
+	// This is a bit more interesting than having a custom draw function for every entity,
+	// because it allows us to do smart things based on what we know about our world.
 	entityx::ComponentHandle<Circle>		ch;
 	entityx::ComponentHandle<Position>	ph;
 
