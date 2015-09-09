@@ -39,6 +39,19 @@ entityx::Entity createPlanetoid(entityx::EntityManager &entities)
 	return planet;
 }
 
+entityx::Entity createSolarSystem(entityx::EntityManager &entities, const ci::vec3 &center)
+{
+	auto sun = entities.create();
+	sun.assign<Circle>(50.0f, Color(CM_HSV, 0.1f, 0.4f, 1.0f));
+	sun.assign<Transform>(sun, center);
+	sun.assign<Draggable>(vec2(1, 1));
+	sun.assign<Sun>();
+
+	for (auto i = 0; i < 20; i += 1) {
+		makeHierarchy(sun, createPlanetoid(entities));
+	}
+}
+
 class StarClustersApp : public App {
 public:
 	StarClustersApp();
@@ -48,8 +61,7 @@ public:
 	void update() override;
 	void draw() override;
 
-	void createSolarSystem(const ci::vec3 &center, int id);
-	void shrinkPastSolarSystems();
+	void shrinkSolarSystems();
 private:
 	entityx::EventManager	 events;
 	entityx::EntityManager entities;
@@ -70,22 +82,22 @@ void StarClustersApp::setup()
 	systems.add<TransformSystem>();
 	systems.configure();
 
-	createSolarSystem(vec3(getWindowCenter(), 0.0f), 0);
+	createSolarSystem(entities, vec3(getWindowCenter(), 0.0f));
 }
 
 void StarClustersApp::keyDown(KeyEvent event)
 {
 	if (event.getCode() == KeyEvent::KEY_c)
 	{
-		shrinkPastSolarSystems();
+		shrinkSolarSystems();
 
 		auto center = vec2(getWindowCenter());
 		auto offset = randVec2() * vec2(getWindowSize()) * 0.5f;
-		createSolarSystem(vec3(center + offset, 0.0f), 1);
+		createSolarSystem(entities, vec3(center + offset, 0.0f));
 	}
 }
 
-void StarClustersApp::shrinkPastSolarSystems()
+void StarClustersApp::shrinkSolarSystems()
 {
 	entityx::ComponentHandle<Transform> xf;
 	entityx::ComponentHandle<Sun> sun;
@@ -96,19 +108,6 @@ void StarClustersApp::shrinkPastSolarSystems()
 		{
 			e.destroy();
 		}
-	}
-}
-
-void StarClustersApp::createSolarSystem(const ci::vec3 &center, int id)
-{
-	auto sun = entities.create();
-	sun.assign<Circle>(50.0f, Color(CM_HSV, 0.1f, 0.4f, 1.0f));
-	sun.assign<Transform>(sun, center);
-	sun.assign<Draggable>(vec2(1, 1));
-	sun.assign<Sun>(id);
-
-	for (auto i = 0; i < 20; i += 1) {
-		makeHierarchy(sun, createPlanetoid(entities));
 	}
 }
 

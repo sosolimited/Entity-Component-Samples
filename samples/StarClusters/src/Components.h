@@ -23,9 +23,6 @@ namespace soso {
 struct Sun
 {
 	Sun() = default;
-	Sun(int id): _id(id) {}
-
-	int _id = 0;
 };
 
 } // namespace soso
