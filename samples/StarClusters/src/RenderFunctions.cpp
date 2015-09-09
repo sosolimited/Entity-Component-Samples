@@ -83,37 +83,46 @@ void soso::renderCirclesDepthSorted(entityx::EntityManager &entities)
 
 }
 
-void soso::renderCirclesWithGraph(entityx::EntityManager &entities)
+void soso::renderCirclesHierarchically(entityx::EntityManager &entities)
 {
-	std::vector<ci::mat4> render_data;
-
 	entityx::ComponentHandle<Transform> transform;
-	for (auto __unused e : entities.entities_with_components(transform)) {
-		// gather trees for rendering
-    if (transform->isRoot()) {
-			render_data.push_back(transform->worldTransform());
-			transform->descend([&render_data] (const Transform &parent, const Transform &child) {
-				render_data.push_back(child.worldTransform());
-			});
-		}
-	}
+	entityx::ComponentHandle<Circle>		circle;
+	auto xf = mat4(1);
 
-	gl::ScopedModelMatrix mat;
-	for (auto &m : render_data) {
-		gl::setModelMatrix(m);
-		gl::drawSolidCircle(vec2(0), 12.0f);
+	const auto billboard_xf = [] (const Transform &transform) {
+		auto q = inverse(normalize(quat_cast(transform.localTransform())));
+		return transform.localTransform() * glm::mat4_cast(q);
+	};
+
+	using function = std::function<void (Transform::Handle)>;
+	function draw_recursively = [&billboard_xf, &draw_recursively] (Transform::Handle transform) {
+			gl::ScopedModelMatrix mat;
+			gl::multModelMatrix(billboard_xf(*transform.get()));
+
+			auto circle = transform->entity().component<Circle>();
+			if (circle)
+			{
+				gl::color(circle->color);
+				gl::drawSolidCircle(vec2(0), circle->radius);
+			}
+
+			for (auto &child: transform->children())
+			{
+				draw_recursively(child);
+			}
+	};
+
+	gl::ScopedColor				color(Color::white());
+	gl::ScopedDepth				depth(false);
+	for (auto __unused e : entities.entities_with_components(transform, circle)) {
+    if (transform->isRoot())
+		{
+			draw_recursively(transform);
+		}
 	}
 }
 
-///
-/// Sometimes scene graphs don't accurately model how you might want to draw something.
-/// Two entities might have background and foreground representations, and both backgrounds should be behind both foregrounds.
-/// Other times you might want to render a child behind its parent. Like a background that moves with a shape.
-/// Or you may want something to jump to the foreground without reparenting things.
-/// Layers are a natural way to express render order that doesn't descend from a parent.
-/// Here, we preserve hierarchy within each layer, so child order still matters to render order.
-///
-void soso::renderEntitiesWithLayers(entityx::EntityManager &entities)
+void soso::renderCirclesByLayer(entityx::EntityManager &entities)
 {
 	using RenderData = std::vector<ci::mat4>;
 	using RenderDataRef = std::unique_ptr<RenderData>;

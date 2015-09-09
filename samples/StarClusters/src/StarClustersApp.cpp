@@ -138,8 +138,8 @@ void StarClustersApp::keyDown(KeyEvent event)
 			_render_function = &renderCirclesDepthSorted;
 		break;
 		case KeyEvent::KEY_3:
-			CI_LOG_I("Rendering circles through scene graph. (Not yet implemented).");
-			_render_function = &renderCirclesWithGraph;
+			CI_LOG_I("Rendering circles through scene graph.");
+			_render_function = &renderCirclesHierarchically;
 		break;
 		case KeyEvent::KEY_0:
 			CI_LOG_I("Rendering everything as a circle.");
