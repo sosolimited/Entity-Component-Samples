@@ -63,26 +63,26 @@ public:
 
 	void shrinkSolarSystems();
 private:
-	entityx::EventManager	 events;
-	entityx::EntityManager entities;
-	entityx::SystemManager systems;
+	entityx::EventManager	 _events;
+	entityx::EntityManager _entities;
+	entityx::SystemManager _systems;
 
-	ci::Timer frameTimer;
+	ci::Timer							 _frame_timer;
 };
 
 StarClustersApp::StarClustersApp()
-: entities( events ),
-	systems( entities, events )
+: _entities(_events),
+	_systems(_entities, _events)
 {}
 
 void StarClustersApp::setup()
 {
-	systems.add<BehaviorSystem>(entities);
-	systems.add<DragSystem>(entities);
-	systems.add<TransformSystem>();
-	systems.configure();
+	_systems.add<BehaviorSystem>(_entities);
+	_systems.add<DragSystem>(_entities);
+	_systems.add<TransformSystem>();
+	_systems.configure();
 
-	createSolarSystem(entities, vec3(getWindowCenter(), 0.0f));
+	createSolarSystem(_entities, vec3(getWindowCenter(), 0.0f));
 }
 
 void StarClustersApp::keyDown(KeyEvent event)
@@ -93,7 +93,7 @@ void StarClustersApp::keyDown(KeyEvent event)
 
 		auto center = vec2(getWindowCenter());
 		auto offset = randVec2() * vec2(getWindowSize()) * 0.5f;
-		createSolarSystem(entities, vec3(center + offset, 0.0f));
+		createSolarSystem(_entities, vec3(center + offset, 0.0f));
 	}
 }
 
@@ -101,7 +101,7 @@ void StarClustersApp::shrinkSolarSystems()
 {
 	entityx::ComponentHandle<Transform> xf;
 	entityx::ComponentHandle<Sun> sun;
-	for (auto e : entities.entities_with_components(xf, sun))
+	for (auto e : _entities.entities_with_components(xf, sun))
 	{
     xf->scale *= 0.8f;
 		if (xf->scale.x < 0.33f)
@@ -113,13 +113,13 @@ void StarClustersApp::shrinkSolarSystems()
 
 void StarClustersApp::update()
 {
-	auto dt = frameTimer.getSeconds();
-	frameTimer.start();
+	auto dt = _frame_timer.getSeconds();
+	_frame_timer.start();
 	if (dt > 0.5f || dt < 0.001f) {
     dt = 1.0 / 60.0;
 	}
-	systems.update<BehaviorSystem>(dt);
-	systems.update<TransformSystem>(dt);
+	_systems.update<BehaviorSystem>(dt);
+	_systems.update<TransformSystem>(dt);
 }
 
 void StarClustersApp::draw()
@@ -129,10 +129,10 @@ void StarClustersApp::draw()
 	gl::color(ColorA(1.0f, 1.0f, 0.0f, 0.8f));
 	gl::setMatricesWindowPersp(getWindowSize());
 
-//	renderAllEntitiesAsCircles(entities);
-	renderCircles(entities);
-//	renderCirclesDepthSorted(entities);
-//	renderEntitiesWithGraph(entities);
+//	renderAllEntitiesAsCircles(_entities);
+	renderCircles(_entities);
+//	renderCirclesDepthSorted(_entities);
+//	renderEntitiesWithGraph(_entities);
 }
 
 inline void prepareSettings(app::App::Settings *settings) {
