@@ -1,6 +1,7 @@
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
+#include "cinder/Log.h"
 
 #include "entityx/quick.h"
 #include "Transform.h"
@@ -17,6 +18,10 @@ using namespace ci::app;
 using namespace std;
 using namespace soso;
 
+///
+/// Creates a planet and a smaller orbitting satellite.
+/// Returns the planet entity.
+///
 entityx::Entity createPlanetoid(entityx::EntityManager &entities)
 {
 	auto size = randFloat(20.0f, 40.0f);
@@ -39,6 +44,10 @@ entityx::Entity createPlanetoid(entityx::EntityManager &entities)
 	return planet;
 }
 
+///
+/// Creates a solar system: a sun surrounded by orbitting planets.
+/// Returns the sun entity.
+///
 entityx::Entity createSolarSystem(entityx::EntityManager &entities, const ci::vec3 &center)
 {
 	auto sun = entities.create();
@@ -71,6 +80,7 @@ public:
 	void update() override;
 	void draw() override;
 
+	/// Make every sun smaller.
 	void shrinkSolarSystems();
 private:
 	entityx::EventManager		_events;
@@ -78,8 +88,8 @@ private:
 	entityx::SystemManager	_systems;
 
 	ci::Timer								_frame_timer;
-	// Specify the render function as a free function.
-	// This lets us swap out rendering approaches at runtime.
+	/// We specify the render function as a free function.
+	/// This lets us swap out rendering approaches at runtime.
 	using RenderFunction = std::function<void (entityx::EntityManager &)>;
 	RenderFunction					_render_function = &renderCircles;
 };
@@ -105,6 +115,9 @@ void StarClustersApp::setup()
 
 void StarClustersApp::keyDown(KeyEvent event)
 {
+	// 'c' creates a new solar system
+	// Numbers change rendering modes.
+
 	switch (event.getCode())
 	{
 		case KeyEvent::KEY_c:
@@ -112,20 +125,24 @@ void StarClustersApp::keyDown(KeyEvent event)
 			shrinkSolarSystems();
 
 			auto center = vec2(getWindowCenter());
-			auto offset = randVec2() * vec2(getWindowSize()) * 0.5f;
+			auto offset = randVec2() * vec2(getWindowSize()) * randFloat(0.1f, 0.5f);
 			createSolarSystem(_entities, vec3(center + offset, 0.0f));
 		}
 		break;
 		case KeyEvent::KEY_1:
+			CI_LOG_I("Rendering circles with depth testing");
 			_render_function = &renderCircles;
 		break;
 		case KeyEvent::KEY_2:
+			CI_LOG_I("Rendering circles depth-sorted (back-to-front)");
 			_render_function = &renderCirclesDepthSorted;
 		break;
 		case KeyEvent::KEY_3:
+			CI_LOG_I("Rendering circles through scene graph. (Not yet implemented).");
 			_render_function = &renderCirclesWithGraph;
 		break;
 		case KeyEvent::KEY_0:
+			CI_LOG_I("Rendering everything as a circle.");
 			_render_function = &renderAllEntitiesAsCircles;
 		break;
 		default:
@@ -165,9 +182,9 @@ void StarClustersApp::draw()
 	gl::color(ColorA(1.0f, 1.0f, 0.0f, 0.8f));
 	gl::setMatricesWindowPersp(getWindowSize());
 
-	// Render all the entities.
-	// Note that the render function is separate from the entities, so it is easy
-	// to swap out one rendering approach for another (even at runtime).
+	// Render all the entities with our chosen render function.
+	// By separating the rendering code from the entities themselves, it becomes
+	// easy to swap out one rendering approach for another (as we do on keypress in this application).
 	_render_function(_entities);
 }
 

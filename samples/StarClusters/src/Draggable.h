@@ -9,6 +9,10 @@
 
 namespace soso {
 
+///
+/// A Draggable component indicates the entity is draggable.
+/// Controlled by the DragSystem.
+///
 struct Draggable
 {
 	Draggable() = default;
