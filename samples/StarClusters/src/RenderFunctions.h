@@ -52,7 +52,11 @@ void renderCirclesDepthSorted(entityx::EntityManager &entities);
 void renderCirclesHierarchically(entityx::EntityManager &entities);
 
 ///
-/// Sometimes scene graphs don't accurately model how you might want to draw something.
+/// Traverses each scene graph root and draws its children in order.
+/// Additionally, groups draw calls by layer, so higher layers are drawn later regardless of parenting.
+/// Children inherit layering from their parents.
+///
+/// Sometimes scene graphs don't fully or accurately model how you might want to draw something.
 /// Two entities might have background and foreground representations, and both backgrounds should be behind both foregrounds.
 /// Other times you might want to render a child behind its parent. Like a background that moves with a shape.
 /// Or you may want something to jump to the foreground without reparenting things.

@@ -10,6 +10,7 @@
 #include "Behaviors.h"
 #include "Components.h"
 #include "Systems.h"
+#include "RenderLayer.h"
 
 #include "RenderFunctions.h"
 
@@ -55,9 +56,14 @@ entityx::Entity createSolarSystem(entityx::EntityManager &entities, const ci::ve
 	sun.assign<Transform>(sun, center);
 	sun.assign<Draggable>(vec2(1, 1));
 	sun.assign<Sun>();
+	sun.assign<RenderLayer>(2);
+
+	auto child_holder = entities.create();
+	child_holder.assign<RenderLayer>(0);
+	makeHierarchy(sun, child_holder);
 
 	for (auto i = 0; i < 20; i += 1) {
-		makeHierarchy(sun, createPlanetoid(entities));
+		makeHierarchy(child_holder, createPlanetoid(entities));
 	}
 
 	return sun;

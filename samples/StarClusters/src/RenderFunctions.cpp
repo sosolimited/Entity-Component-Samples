@@ -131,6 +131,7 @@ void soso::renderCirclesHierarchically(entityx::EntityManager &entities)
 
 void soso::renderCirclesByLayer(entityx::EntityManager &entities)
 {
+	// Data types for collecting render information into layers.
 	struct DataPoint
 	{
 		mat4	transform;
@@ -148,7 +149,10 @@ void soso::renderCirclesByLayer(entityx::EntityManager &entities)
 		RenderDataRef render_data = std::make_unique<RenderData>();
 	};
 
+	// Our layers for rendering
 	std::vector<RenderDataLayer> layers;
+
+	// Returns the requested render layer, creating it if necessary.
 	auto get_layer = [&layers] (int layer) -> RenderData& {
 		for (auto &l : layers) {
 			if (l.layer == layer) {
@@ -159,6 +163,7 @@ void soso::renderCirclesByLayer(entityx::EntityManager &entities)
 		return *layers.back().render_data;
 	};
 
+	// Billboards a transform matrix.
 	auto billboard_xf = [] (Transform::Handle transform) {
 		auto q = inverse(normalize(quat_cast(transform->worldTransform())));
 		return transform->worldTransform() * glm::mat4_cast(q);
@@ -175,7 +180,14 @@ void soso::renderCirclesByLayer(entityx::EntityManager &entities)
 
 		if (rlc)
 		{
-			layer += rlc->layer_adjustment;
+			if (rlc->relative())
+			{
+				layer += rlc->layer();
+			}
+			else
+			{
+				layer = rlc->layer();
+			}
 		}
 
 		if (circle)
@@ -199,14 +211,14 @@ void soso::renderCirclesByLayer(entityx::EntityManager &entities)
 		}
 	}
 
-	// In case we encountered layers out of order
+	// In case we encountered layers out of order, put them into order.
 	std::sort(layers.begin(), layers.end(), [] (const RenderDataLayer &lhs, const RenderDataLayer &rhs) {
 		return lhs.layer < rhs.layer;
 	});
 
+	// Draw everything we gathered, by layer.
 	gl::ScopedModelMatrix mat;
 	gl::ScopedColor color(Color::white());
-
 	for (auto &layer : layers)
 	{
 		for (auto &data : *layer.render_data)
