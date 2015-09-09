@@ -53,7 +53,6 @@ private:
 };
 
 // Initialize our EntityManager and SystemManager to know about events and each other.
-
 EntityCreationApp::EntityCreationApp()
 : entities(events),
 	systems(entities, events)

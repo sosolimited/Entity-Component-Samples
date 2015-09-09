@@ -58,7 +58,9 @@ entityx::Entity createSolarSystem(entityx::EntityManager &entities, const ci::ve
 /// @file StarClustersApp demonstrates the creation of a hierarchy of entities.
 /// This application, as a teaching tool, is much more heavily commented than a production codebase.
 ///
-/// Drag suns to reposition them. Press 'c' to create a new solar system.
+/// Drag suns to reposition them.
+/// Press 'c' to create a new solar system.
+/// Number keys cycle through render functions.
 ///
 class StarClustersApp : public App {
 public:
@@ -82,6 +84,7 @@ private:
 	RenderFunction					_render_function = &renderCircles;
 };
 
+// Initialize our EntityManager and SystemManager to know about events and each other.
 StarClustersApp::StarClustersApp()
 : _entities(_events),
 	_systems(_entities, _events)
@@ -96,6 +99,7 @@ void StarClustersApp::setup()
 	_systems.add<TransformSystem>();
 	_systems.configure();
 
+	// Create an initial solar system on screen.
 	createSolarSystem(_entities, vec3(getWindowCenter(), 0.0f));
 }
 
