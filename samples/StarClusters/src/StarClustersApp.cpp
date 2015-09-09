@@ -89,9 +89,9 @@ entityx::Entity createPlanetoid(entityx::EntityManager &entities)
 	return planet;
 }
 
-class HierarchicalOrbitsApp : public App {
+class StarClustersApp : public App {
 public:
-	HierarchicalOrbitsApp();
+	StarClustersApp();
 
 	void setup() override;
 	void keyDown(KeyEvent event) override;
@@ -111,12 +111,12 @@ private:
 	ci::Timer frameTimer;
 };
 
-HierarchicalOrbitsApp::HierarchicalOrbitsApp()
+StarClustersApp::StarClustersApp()
 : entities( events ),
 	systems( entities, events )
 {}
 
-void HierarchicalOrbitsApp::setup()
+void StarClustersApp::setup()
 {
 	systems.add<BehaviorSystem>(entities);
 	systems.add<DragSystem>(entities);
@@ -126,7 +126,7 @@ void HierarchicalOrbitsApp::setup()
 	createSolarSystem(vec3(getWindowCenter(), 0.0f));
 }
 
-void HierarchicalOrbitsApp::keyDown(KeyEvent event)
+void StarClustersApp::keyDown(KeyEvent event)
 {
 	if (event.getCode() == KeyEvent::KEY_c)
 	{
@@ -138,7 +138,7 @@ void HierarchicalOrbitsApp::keyDown(KeyEvent event)
 	}
 }
 
-void HierarchicalOrbitsApp::shrinkPastSolarSystems()
+void StarClustersApp::shrinkPastSolarSystems()
 {
 	for (auto &s : suns) {
 		auto xf = s.component<Transform>();
@@ -151,7 +151,7 @@ void HierarchicalOrbitsApp::shrinkPastSolarSystems()
 	suns.erase(std::remove_if(suns.begin(), suns.end(), [] (entityx::Entity e) { return ! e.valid(); }), suns.end());
 }
 
-void HierarchicalOrbitsApp::createSolarSystem(const ci::vec3 &center)
+void StarClustersApp::createSolarSystem(const ci::vec3 &center)
 {
 	sun = entities.create();
 	sun.assign<Circle>(50.0f, Color(CM_HSV, 0.1f, 0.4f, 1.0f));
@@ -165,7 +165,7 @@ void HierarchicalOrbitsApp::createSolarSystem(const ci::vec3 &center)
 	suns.push_back(sun);
 }
 
-void HierarchicalOrbitsApp::update()
+void StarClustersApp::update()
 {
 	auto dt = frameTimer.getSeconds();
 	frameTimer.start();
@@ -176,7 +176,7 @@ void HierarchicalOrbitsApp::update()
 	systems.update<TransformSystem>(dt);
 }
 
-void HierarchicalOrbitsApp::draw()
+void StarClustersApp::draw()
 {
 	gl::clear( Color( 0, 0, 0 ) );
 	gl::enableAlphaBlending();
@@ -193,4 +193,4 @@ inline void prepareSettings(app::App::Settings *settings) {
 	settings->setWindowSize(1024, 768);
 }
 
-CINDER_APP( HierarchicalOrbitsApp, RendererGl, prepareSettings )
+CINDER_APP( StarClustersApp, RendererGl, prepareSettings )
