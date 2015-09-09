@@ -4,16 +4,13 @@
 
 #include "entityx/quick.h"
 #include "Transform.h"
-#include "TransformSystem.h"
-#include "Circle.h"
-#include "soso/BehaviorSystem.h"
-#include "RenderFunctions.h"
-#include "Draggable.h"
-#include "DragSystem.h"
 
 #include "cinder/Rand.h"
-
 #include "Behaviors.h"
+#include "Components.h"
+#include "Systems.h"
+
+#include "RenderFunctions.h"
 
 using namespace ci;
 using namespace ci::app;

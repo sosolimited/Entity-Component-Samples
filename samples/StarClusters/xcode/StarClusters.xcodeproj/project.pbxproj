@@ -73,7 +73,7 @@
 		9C907D9B1BA081180021075E /* Components.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Components.h; path = ../src/Components.h; sourceTree = "<group>"; };
 		9C907D9D1BA081220021075E /* Systems.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Systems.cpp; path = ../src/Systems.cpp; sourceTree = "<group>"; };
 		9C907D9E1BA081220021075E /* Systems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Systems.h; path = ../src/Systems.h; sourceTree = "<group>"; };
-		9C9774A31B546D7B0017EAF7 /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Circle.h; path = ../src/Circle.h; sourceTree = "<group>"; };
+		9C907DA01BA084710021075E /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Circle.h; path = ../src/Circle.h; sourceTree = "<group>"; };
 		A429DB469662401A99BABE82 /* StarClusters_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StarClusters_Prefix.pch; sourceTree = "<group>"; };
 		A86402EB37E94E528446A846 /* Behavior.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Behavior.h; path = ../../../src/soso/Behavior.h; sourceTree = "<group>"; };
 		B10F1606A7B64F72BF47EE5B /* quick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = quick.h; path = ../../../src/entityx/entityx/quick.h; sourceTree = "<group>"; };
@@ -118,7 +118,6 @@
 		080E96DDFE201D6D7F000001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				9C9774A31B546D7B0017EAF7 /* Circle.h */,
 				F0C142BF80B94E6DB41963D7 /* StarClustersApp.cpp */,
 				9C76892F1B545C580089C2C4 /* RenderFunctions.cpp */,
 				9C7689301B545C580089C2C4 /* RenderFunctions.h */,
@@ -131,6 +130,7 @@
 				9C907D9B1BA081180021075E /* Components.h */,
 				9C907D9D1BA081220021075E /* Systems.cpp */,
 				9C907D9E1BA081220021075E /* Systems.h */,
+				9C907DA01BA084710021075E /* Circle.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";

@@ -7,8 +7,6 @@
 
 #pragma once
 
-#include "entityx/Entity.h"
-
 namespace soso {
 
 struct Draggable

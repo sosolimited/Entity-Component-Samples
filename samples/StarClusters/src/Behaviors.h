@@ -8,6 +8,7 @@
 #pragma once
 
 #include "soso/Behavior.h"
+#include "soso/BehaviorSystem.h"
 #include "soso/Transform.h"
 
 namespace soso {

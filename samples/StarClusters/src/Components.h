@@ -7,6 +7,14 @@
 
 #pragma once
 
+#include "Draggable.h"
+#include "Circle.h"
+
+///
+/// @file Includes all Components used by this application.
+/// Can also define Components here as a placeholder.
+///
+
 namespace soso {
 
 } // namespace soso
