@@ -124,7 +124,14 @@ void soso::renderCirclesHierarchically(entityx::EntityManager &entities)
 
 void soso::renderCirclesByLayer(entityx::EntityManager &entities)
 {
-	using RenderData = std::vector<ci::mat4>;
+	struct DataPoint
+	{
+		mat4	transform;
+		Color	color;
+		float	radius;
+	};
+
+	using RenderData = std::vector<DataPoint>;
 	using RenderDataRef = std::unique_ptr<RenderData>;
 	struct RenderDataLayer {
 		RenderDataLayer(int layer)
@@ -149,16 +156,20 @@ void soso::renderCirclesByLayer(entityx::EntityManager &entities)
 	using function = std::function<void (Transform::Handle, int)>;
 	function gather_recursively = [&gather_recursively, &get_layer] (Transform::Handle transform, int layer) {
 
-		entityx::ComponentHandle<soso::RenderLayer> rlc;
+		auto rlc = entityx::ComponentHandle<soso::RenderLayer>();
+		auto circle = entityx::ComponentHandle<Circle>();
 		auto e = transform->entity();
-		e.unpack(rlc);
+		e.unpack(rlc, circle);
 
 		if (rlc)
 		{
 			layer += rlc->layer_adjustment;
 		}
 
-		get_layer(layer).push_back(transform->worldTransform());
+		if (circle)
+		{
+			get_layer(layer).push_back({ transform->worldTransform(), circle->color, circle->radius });
+		}
 
 		for (auto &c : transform->children())
 		{
@@ -182,10 +193,15 @@ void soso::renderCirclesByLayer(entityx::EntityManager &entities)
 	});
 
 	gl::ScopedModelMatrix mat;
-	for (auto &layer : layers) {
-		for (auto &m : *layer.render_data) {
-			gl::setModelMatrix(m);
-			gl::drawSolidCircle(vec2(0), 12.0f);
+	gl::ScopedColor color(Color::white());
+
+	for (auto &layer : layers)
+	{
+		for (auto &data : *layer.render_data)
+		{
+			gl::setModelMatrix(data.transform);
+			gl::color(data.color);
+			gl::drawSolidCircle(vec2(0), data.radius);
 		}
 	}
 }
