@@ -141,6 +141,10 @@ void StarClustersApp::keyDown(KeyEvent event)
 			CI_LOG_I("Rendering circles through scene graph.");
 			_render_function = &renderCirclesHierarchically;
 		break;
+		case KeyEvent::KEY_4:
+			CI_LOG_I("Rendering circles by layer.");
+			_render_function = &renderCirclesByLayer;
+		break;
 		case KeyEvent::KEY_0:
 			CI_LOG_I("Rendering everything as a circle.");
 			_render_function = &renderAllEntitiesAsCircles;

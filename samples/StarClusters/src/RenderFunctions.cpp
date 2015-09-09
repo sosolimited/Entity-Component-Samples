@@ -131,7 +131,7 @@ void soso::renderCirclesByLayer(entityx::EntityManager &entities)
 		: layer(layer)
 		{}
 		int						layer = 0;
-		RenderDataRef render_data;
+		RenderDataRef render_data = std::make_unique<RenderData>();
 	};
 
 	std::vector<RenderDataLayer> layers;
@@ -146,31 +146,37 @@ void soso::renderCirclesByLayer(entityx::EntityManager &entities)
 	};
 
 	// Recursive function to properly capture render layer changes.
-	std::function<void (Transform::Handle, int)> gather_recursively = [&gather_recursively, &get_layer] (Transform::Handle transform, int layer) {
+	using function = std::function<void (Transform::Handle, int)>;
+	function gather_recursively = [&gather_recursively, &get_layer] (Transform::Handle transform, int layer) {
 
 		entityx::ComponentHandle<soso::RenderLayer> rlc;
 		auto e = transform->entity();
 		e.unpack(rlc);
 
-		if (rlc) {
+		if (rlc)
+		{
 			layer += rlc->layer_adjustment;
 		}
 
 		get_layer(layer).push_back(transform->worldTransform());
 
-		for (auto &c : transform->children()) {
+		for (auto &c : transform->children())
+		{
 			gather_recursively(c, layer);
 		}
 	};
 
 	entityx::ComponentHandle<Transform> transform;
-	for (auto __unused e : entities.entities_with_components(transform)) {
+	for (auto __unused e : entities.entities_with_components(transform))
+	{
 		// gather trees for rendering
-    if (transform->isRoot()) {
+    if (transform->isRoot())
+		{
 			gather_recursively(transform, 0);
 		}
 	}
 
+	// In case we encountered layers out of order
 	std::sort(layers.begin(), layers.end(), [] (const RenderDataLayer &lhs, const RenderDataLayer &rhs) {
 		return lhs.layer < rhs.layer;
 	});
