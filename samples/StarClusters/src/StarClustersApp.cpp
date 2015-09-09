@@ -50,8 +50,16 @@ entityx::Entity createSolarSystem(entityx::EntityManager &entities, const ci::ve
 	for (auto i = 0; i < 20; i += 1) {
 		makeHierarchy(sun, createPlanetoid(entities));
 	}
+
+	return sun;
 }
 
+///
+/// @file StarClustersApp demonstrates the creation of a hierarchy of entities.
+/// This application, as a teaching tool, is much more heavily commented than a production codebase.
+///
+/// Drag suns to reposition them. Press 'c' to create a new solar system.
+///
 class StarClustersApp : public App {
 public:
 	StarClustersApp();
@@ -63,11 +71,15 @@ public:
 
 	void shrinkSolarSystems();
 private:
-	entityx::EventManager	 _events;
-	entityx::EntityManager _entities;
-	entityx::SystemManager _systems;
+	entityx::EventManager		_events;
+	entityx::EntityManager	_entities;
+	entityx::SystemManager	_systems;
 
-	ci::Timer							 _frame_timer;
+	ci::Timer								_frame_timer;
+	// Specify the render function as a free function.
+	// This lets us swap out rendering approaches at runtime.
+	using RenderFunction = std::function<void (entityx::EntityManager &)>;
+	RenderFunction					_render_function = &renderCircles;
 };
 
 StarClustersApp::StarClustersApp()
@@ -77,6 +89,8 @@ StarClustersApp::StarClustersApp()
 
 void StarClustersApp::setup()
 {
+	// Create our systems for controlling entity behavior.
+	// We also use free functions for entity behavior, which don't need to be instantiated.
 	_systems.add<BehaviorSystem>(_entities);
 	_systems.add<DragSystem>(_entities);
 	_systems.add<TransformSystem>();
@@ -87,13 +101,31 @@ void StarClustersApp::setup()
 
 void StarClustersApp::keyDown(KeyEvent event)
 {
-	if (event.getCode() == KeyEvent::KEY_c)
+	switch (event.getCode())
 	{
-		shrinkSolarSystems();
+		case KeyEvent::KEY_c:
+		{
+			shrinkSolarSystems();
 
-		auto center = vec2(getWindowCenter());
-		auto offset = randVec2() * vec2(getWindowSize()) * 0.5f;
-		createSolarSystem(_entities, vec3(center + offset, 0.0f));
+			auto center = vec2(getWindowCenter());
+			auto offset = randVec2() * vec2(getWindowSize()) * 0.5f;
+			createSolarSystem(_entities, vec3(center + offset, 0.0f));
+		}
+		break;
+		case KeyEvent::KEY_1:
+			_render_function = &renderCircles;
+		break;
+		case KeyEvent::KEY_2:
+			_render_function = &renderCirclesDepthSorted;
+		break;
+		case KeyEvent::KEY_3:
+			_render_function = &renderCirclesWithGraph;
+		break;
+		case KeyEvent::KEY_0:
+			_render_function = &renderAllEntitiesAsCircles;
+		break;
+		default:
+		break;
 	}
 }
 
@@ -129,10 +161,10 @@ void StarClustersApp::draw()
 	gl::color(ColorA(1.0f, 1.0f, 0.0f, 0.8f));
 	gl::setMatricesWindowPersp(getWindowSize());
 
-//	renderAllEntitiesAsCircles(_entities);
-	renderCircles(_entities);
-//	renderCirclesDepthSorted(_entities);
-//	renderEntitiesWithGraph(_entities);
+	// Render all the entities.
+	// Note that the render function is separate from the entities, so it is easy
+	// to swap out one rendering approach for another (even at runtime).
+	_render_function(_entities);
 }
 
 inline void prepareSettings(app::App::Settings *settings) {
