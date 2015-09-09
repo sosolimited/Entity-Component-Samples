@@ -21,7 +21,7 @@ using namespace std;
 using namespace soso;
 
 // Wraps positions to stay within a rectangle.
-const auto borderWrap = createWrapFunction(Rectf(0, 0, 640, 480));
+const auto borderWrap = createWrapFunction(Rectf(0, 0, 660, 500));
 
 ///
 /// @file EntityCreationApp demonstrates creation of entities and some of the uses of components and systems.
