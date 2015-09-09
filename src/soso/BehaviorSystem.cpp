@@ -82,7 +82,7 @@ void BehaviorSystem::update( EntityManager &entities, EventManager &events, Time
 
 	ComponentHandle<BehaviorComponent> behavior;
 
-	for( auto e : entities.entities_with_components( behavior ) )
+	for( auto __unused e : entities.entities_with_components( behavior ) )
 	{
 		auto &behaviors = behavior->behaviors;
 		for( auto &b : behaviors ) {

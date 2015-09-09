@@ -2,7 +2,7 @@
 <cinder>
 <block
 	name		= "Entity Component System"
-	id			= "com.sosolimited.entities"
+	id			= "com.sosolimited.entityx"
 	author	= "sosolimited"
 	summary = "Sample implementation of scene graph and graphics using EntityX"
 	license	= "MIT"
@@ -10,11 +10,12 @@
 	git			= "git@github.com:sosolimited/Entity-Component-Sample.git"
 	>
 	<supports os="macosx" />
-	<!-- Sample Systems and Components -->
-	<includePath>src/soso</includePath>
-	<headerPattern>src/soso/entityx/config.h</headerPattern>
+	<!-- Generic Systems and Components -->
+	<includePath>src</includePath>
 	<headerPattern>src/soso/*.h</headerPattern>
 	<sourcePattern>src/soso/*.cpp</sourcePattern>
+	<!-- EntityX config header -->
+	<includePath>src/soso/config</includePath>
 
 	<!-- EntityX -->
 	<includePath>src/entityx</includePath>
@@ -25,4 +26,5 @@
 	<sourcePattern>src/entityx/entityx/System.cc</sourcePattern>
 	<sourcePattern>src/entityx/entityx/help/Pool.cc</sourcePattern>
 </block>
+<template>templates/Basic EntityX/template.xml</template>
 </cinder>
