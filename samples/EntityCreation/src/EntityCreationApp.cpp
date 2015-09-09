@@ -3,16 +3,16 @@
 #include "cinder/gl/gl.h"
 
 #include "entityx/System.h"
-#include "Transform.h"
+#include "soso/Transform.h"
 #include "cinder/Perlin.h"
 #include "cinder/Rand.h"
 
 #include "Components.h"
 #include "Systems.h"
-#include "Expires.h"
-#include "ExpiresSystem.h"
-#include "Behavior.h"
-#include "BehaviorSystem.h"
+#include "soso/Expires.h"
+#include "soso/ExpiresSystem.h"
+#include "soso/Behavior.h"
+#include "soso/BehaviorSystem.h"
 #include "Behaviors.h"
 
 using namespace ci;
@@ -21,7 +21,7 @@ using namespace std;
 using namespace soso;
 
 // Wraps positions to stay within a rectangle.
-const auto borderWrap = createWrapFunction(Rectf(0, 0, 640, 480));
+const auto borderWrap = createWrapFunction(Rectf(0, 0, 660, 500));
 
 ///
 /// @file EntityCreationApp demonstrates creation of entities and some of the uses of components and systems.
