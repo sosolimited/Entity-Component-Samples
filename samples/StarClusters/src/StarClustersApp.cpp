@@ -48,15 +48,12 @@ public:
 	void update() override;
 	void draw() override;
 
-	void createSolarSystem(const ci::vec3 &center);
+	void createSolarSystem(const ci::vec3 &center, int id);
 	void shrinkPastSolarSystems();
 private:
 	entityx::EventManager	 events;
 	entityx::EntityManager entities;
 	entityx::SystemManager systems;
-
-	entityx::Entity sun;
-	std::vector<entityx::Entity>	suns;
 
 	ci::Timer frameTimer;
 };
@@ -73,7 +70,7 @@ void StarClustersApp::setup()
 	systems.add<TransformSystem>();
 	systems.configure();
 
-	createSolarSystem(vec3(getWindowCenter(), 0.0f));
+	createSolarSystem(vec3(getWindowCenter(), 0.0f), 0);
 }
 
 void StarClustersApp::keyDown(KeyEvent event)
@@ -84,35 +81,35 @@ void StarClustersApp::keyDown(KeyEvent event)
 
 		auto center = vec2(getWindowCenter());
 		auto offset = randVec2() * vec2(getWindowSize()) * 0.5f;
-		createSolarSystem(vec3(center + offset, 0.0f));
+		createSolarSystem(vec3(center + offset, 0.0f), 1);
 	}
 }
 
 void StarClustersApp::shrinkPastSolarSystems()
 {
-	for (auto &s : suns) {
-		auto xf = s.component<Transform>();
-		xf->scale *= 0.8f;
-		if (xf->scale.x < 0.2f) {
-			s.destroy();
+	entityx::ComponentHandle<Transform> xf;
+	entityx::ComponentHandle<Sun> sun;
+	for (auto e : entities.entities_with_components(xf, sun))
+	{
+    xf->scale *= 0.8f;
+		if (xf->scale.x < 0.33f)
+		{
+			e.destroy();
 		}
 	}
-
-	suns.erase(std::remove_if(suns.begin(), suns.end(), [] (entityx::Entity e) { return ! e.valid(); }), suns.end());
 }
 
-void StarClustersApp::createSolarSystem(const ci::vec3 &center)
+void StarClustersApp::createSolarSystem(const ci::vec3 &center, int id)
 {
-	sun = entities.create();
+	auto sun = entities.create();
 	sun.assign<Circle>(50.0f, Color(CM_HSV, 0.1f, 0.4f, 1.0f));
 	sun.assign<Transform>(sun, center);
 	sun.assign<Draggable>(vec2(1, 1));
+	sun.assign<Sun>(id);
 
 	for (auto i = 0; i < 20; i += 1) {
 		makeHierarchy(sun, createPlanetoid(entities));
 	}
-
-	suns.push_back(sun);
 }
 
 void StarClustersApp::update()
