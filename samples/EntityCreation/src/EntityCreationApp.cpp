@@ -3,16 +3,16 @@
 #include "cinder/gl/gl.h"
 
 #include "entityx/System.h"
-#include "Transform.h"
+#include "soso/Transform.h"
 #include "cinder/Perlin.h"
 #include "cinder/Rand.h"
 
 #include "Components.h"
 #include "Systems.h"
-#include "Expires.h"
-#include "ExpiresSystem.h"
-#include "Behavior.h"
-#include "BehaviorSystem.h"
+#include "soso/Expires.h"
+#include "soso/ExpiresSystem.h"
+#include "soso/Behavior.h"
+#include "soso/BehaviorSystem.h"
 #include "Behaviors.h"
 
 using namespace ci;
