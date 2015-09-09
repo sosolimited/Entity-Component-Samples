@@ -35,11 +35,15 @@ void soso::renderCircles(entityx::EntityManager &entities)
 	entityx::ComponentHandle<Transform> transform;
 	entityx::ComponentHandle<Circle>		circle;
 
+	auto billboard_xf = [] (Transform::Handle transform) {
+		auto q = inverse(normalize(quat_cast(transform->worldTransform())));
+		return transform->worldTransform() * glm::mat4_cast(q);
+	};
+
 	gl::ScopedColor color(Color(1.0f, 1.0f, 1.0f));
 	for (auto __unused e : entities.entities_with_components(transform, circle)) {
 		gl::ScopedModelMatrix mat;
-		auto q = inverse(normalize(quat_cast(transform->worldTransform()))); // billboard the shapes; mostly works
-		gl::multModelMatrix(transform->worldTransform() * glm::mat4_cast(q));
+		gl::multModelMatrix(billboard_xf(transform));
 		gl::color(circle->color);
 
 		gl::drawSolidCircle(vec2(0), circle->radius);
@@ -97,11 +101,14 @@ void soso::renderCirclesHierarchically(entityx::EntityManager &entities)
 	using function = std::function<void (Transform::Handle)>;
 	function draw_recursively = [&billboard_xf, &draw_recursively] (Transform::Handle transform) {
 			gl::ScopedModelMatrix mat;
-			gl::multModelMatrix(billboard_xf(*transform.get()));
+			gl::multModelMatrix(transform->localTransform());
 
 			auto circle = transform->entity().component<Circle>();
 			if (circle)
 			{
+				// billboard the circles (mostly works)
+				gl::ScopedModelMatrix mat;
+				gl::multModelMatrix(glm::mat4_cast(inverse(normalize(quat_cast(transform->worldTransform())))));
 				gl::color(circle->color);
 				gl::drawSolidCircle(vec2(0), circle->radius);
 			}
@@ -152,9 +159,14 @@ void soso::renderCirclesByLayer(entityx::EntityManager &entities)
 		return *layers.back().render_data;
 	};
 
+	auto billboard_xf = [] (Transform::Handle transform) {
+		auto q = inverse(normalize(quat_cast(transform->worldTransform())));
+		return transform->worldTransform() * glm::mat4_cast(q);
+	};
+
 	// Recursive function to properly capture render layer changes.
 	using function = std::function<void (Transform::Handle, int)>;
-	function gather_recursively = [&gather_recursively, &get_layer] (Transform::Handle transform, int layer) {
+	function gather_recursively = [&gather_recursively, &get_layer, &billboard_xf] (Transform::Handle transform, int layer) {
 
 		auto rlc = entityx::ComponentHandle<soso::RenderLayer>();
 		auto circle = entityx::ComponentHandle<Circle>();
@@ -168,7 +180,7 @@ void soso::renderCirclesByLayer(entityx::EntityManager &entities)
 
 		if (circle)
 		{
-			get_layer(layer).push_back({ transform->worldTransform(), circle->color, circle->radius });
+			get_layer(layer).push_back({ billboard_xf(transform), circle->color, circle->radius });
 		}
 
 		for (auto &c : transform->children())
