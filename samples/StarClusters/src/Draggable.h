@@ -7,18 +7,20 @@
 
 #pragma once
 
-#include "entityx/Entity.h"
-
 namespace soso {
 
+///
+/// A Draggable component indicates the entity is draggable.
+/// Controlled by the DragSystem.
+///
 struct Draggable
 {
 	Draggable() = default;
 	explicit Draggable(const ci::vec2 &axes)
-	: axes(axes)
+	: _axes(axes)
 	{}
 
-	ci::vec2 axes = ci::vec2(1.0f);
+	ci::vec2 _axes = ci::vec2(1.0f);
 };
 
 } // namespace soso

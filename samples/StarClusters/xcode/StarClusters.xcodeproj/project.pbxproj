@@ -16,7 +16,7 @@
 		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
 		00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995581B128DF400A5C623 /* IOKit.framework */; };
 		00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
-		04CD891AF4444D9DB8DF96FD /* HierarchicalOrbitsApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0C142BF80B94E6DB41963D7 /* HierarchicalOrbitsApp.cpp */; };
+		04CD891AF4444D9DB8DF96FD /* StarClustersApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0C142BF80B94E6DB41963D7 /* StarClustersApp.cpp */; };
 		177F839582284B5EA36776A9 /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0F49EAC0F04F43C98D6ADDE0 /* Pool.cc */; };
 		4314E5AF4ECD4703812C534E /* TransformSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ACDDD19C7CD4E36B8DED953 /* TransformSystem.cpp */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
@@ -27,6 +27,9 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		9C4AFD061B55557200473F18 /* DragSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C4AFD041B55557200473F18 /* DragSystem.cpp */; };
 		9C7689311B545C580089C2C4 /* RenderFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C76892F1B545C580089C2C4 /* RenderFunctions.cpp */; };
+		9C907D991BA0810D0021075E /* Behaviors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C907D971BA0810D0021075E /* Behaviors.cpp */; };
+		9C907D9C1BA081180021075E /* Components.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C907D9A1BA081180021075E /* Components.cpp */; };
+		9C907D9F1BA081220021075E /* Systems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C907D9D1BA081220021075E /* Systems.cpp */; };
 		AB6BCEC283E345B69881DC68 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5B404EFEEB5E4B26A8780AC9 /* CinderApp.icns */; };
 /* End PBXBuildFile section */
 
@@ -64,7 +67,13 @@
 		9C76892E1B545B0E0089C2C4 /* RenderLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderLayer.h; path = ../../../src/soso/RenderLayer.h; sourceTree = "<group>"; };
 		9C76892F1B545C580089C2C4 /* RenderFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderFunctions.cpp; path = ../src/RenderFunctions.cpp; sourceTree = "<group>"; };
 		9C7689301B545C580089C2C4 /* RenderFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderFunctions.h; path = ../src/RenderFunctions.h; sourceTree = "<group>"; };
-		9C9774A31B546D7B0017EAF7 /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Circle.h; path = ../src/Circle.h; sourceTree = "<group>"; };
+		9C907D971BA0810D0021075E /* Behaviors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Behaviors.cpp; path = ../src/Behaviors.cpp; sourceTree = "<group>"; };
+		9C907D981BA0810D0021075E /* Behaviors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Behaviors.h; path = ../src/Behaviors.h; sourceTree = "<group>"; };
+		9C907D9A1BA081180021075E /* Components.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Components.cpp; path = ../src/Components.cpp; sourceTree = "<group>"; };
+		9C907D9B1BA081180021075E /* Components.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Components.h; path = ../src/Components.h; sourceTree = "<group>"; };
+		9C907D9D1BA081220021075E /* Systems.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Systems.cpp; path = ../src/Systems.cpp; sourceTree = "<group>"; };
+		9C907D9E1BA081220021075E /* Systems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Systems.h; path = ../src/Systems.h; sourceTree = "<group>"; };
+		9C907DA01BA084710021075E /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Circle.h; path = ../src/Circle.h; sourceTree = "<group>"; };
 		A429DB469662401A99BABE82 /* StarClusters_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StarClusters_Prefix.pch; sourceTree = "<group>"; };
 		A86402EB37E94E528446A846 /* Behavior.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Behavior.h; path = ../../../src/soso/Behavior.h; sourceTree = "<group>"; };
 		B10F1606A7B64F72BF47EE5B /* quick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = quick.h; path = ../../../src/entityx/entityx/quick.h; sourceTree = "<group>"; };
@@ -73,7 +82,7 @@
 		BC801B6656BE423E95984F07 /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Entity.h; path = ../../../src/entityx/entityx/Entity.h; sourceTree = "<group>"; };
 		D4B60A37706342F6BA1E6C1C /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Event.h; path = ../../../src/entityx/entityx/Event.h; sourceTree = "<group>"; };
 		ED2FCFE4392347329A16115E /* BehaviorSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BehaviorSystem.h; path = ../../../src/soso/BehaviorSystem.h; sourceTree = "<group>"; };
-		F0C142BF80B94E6DB41963D7 /* HierarchicalOrbitsApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = HierarchicalOrbitsApp.cpp; path = ../src/HierarchicalOrbitsApp.cpp; sourceTree = "<group>"; };
+		F0C142BF80B94E6DB41963D7 /* StarClustersApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = StarClustersApp.cpp; path = ../src/StarClustersApp.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,13 +118,19 @@
 		080E96DDFE201D6D7F000001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				9C9774A31B546D7B0017EAF7 /* Circle.h */,
-				F0C142BF80B94E6DB41963D7 /* HierarchicalOrbitsApp.cpp */,
+				F0C142BF80B94E6DB41963D7 /* StarClustersApp.cpp */,
 				9C76892F1B545C580089C2C4 /* RenderFunctions.cpp */,
 				9C7689301B545C580089C2C4 /* RenderFunctions.h */,
 				9C4AFD031B55552500473F18 /* Draggable.h */,
 				9C4AFD041B55557200473F18 /* DragSystem.cpp */,
 				9C4AFD051B55557200473F18 /* DragSystem.h */,
+				9C907D971BA0810D0021075E /* Behaviors.cpp */,
+				9C907D981BA0810D0021075E /* Behaviors.h */,
+				9C907D9A1BA081180021075E /* Components.cpp */,
+				9C907D9B1BA081180021075E /* Components.h */,
+				9C907D9D1BA081220021075E /* Systems.cpp */,
+				9C907D9E1BA081220021075E /* Systems.h */,
+				9C907DA01BA084710021075E /* Circle.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -331,12 +346,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04CD891AF4444D9DB8DF96FD /* HierarchicalOrbitsApp.cpp in Sources */,
+				9C907D9C1BA081180021075E /* Components.cpp in Sources */,
+				04CD891AF4444D9DB8DF96FD /* StarClustersApp.cpp in Sources */,
 				5B54DD11E9CA48C4B22B7921 /* BehaviorSystem.cpp in Sources */,
 				4314E5AF4ECD4703812C534E /* TransformSystem.cpp in Sources */,
 				74B210B7029F4043944699D9 /* Entity.cc in Sources */,
 				9C4AFD061B55557200473F18 /* DragSystem.cpp in Sources */,
+				9C907D991BA0810D0021075E /* Behaviors.cpp in Sources */,
 				8C120E26D8934020BCF202DF /* Event.cc in Sources */,
+				9C907D9F1BA081220021075E /* Systems.cpp in Sources */,
 				9C7689311B545C580089C2C4 /* RenderFunctions.cpp in Sources */,
 				7858F3B330D34A749BF58961 /* System.cc in Sources */,
 				177F839582284B5EA36776A9 /* Pool.cc in Sources */,

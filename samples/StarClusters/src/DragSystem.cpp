@@ -50,6 +50,6 @@ void DragSystem::mouseDrag(ci::app::MouseEvent &event)
 		ComponentHandle<Transform> xf;
 		_dragging_entity.unpack(drag, xf);
 
-		xf->position = _entity_start + (vec3(event.getPos(), 0.0f) - _drag_start) * vec3(drag->axes, 1.0f);
+		xf->position = _entity_start + (vec3(event.getPos(), 0.0f) - _drag_start) * vec3(drag->_axes, 1.0f);
 	}
 }

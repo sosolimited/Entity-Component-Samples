@@ -35,11 +35,15 @@ void soso::renderCircles(entityx::EntityManager &entities)
 	entityx::ComponentHandle<Transform> transform;
 	entityx::ComponentHandle<Circle>		circle;
 
+	auto billboard_xf = [] (Transform::Handle transform) {
+		auto q = inverse(normalize(quat_cast(transform->worldTransform())));
+		return transform->worldTransform() * glm::mat4_cast(q);
+	};
+
 	gl::ScopedColor color(Color(1.0f, 1.0f, 1.0f));
 	for (auto __unused e : entities.entities_with_components(transform, circle)) {
 		gl::ScopedModelMatrix mat;
-		auto q = inverse(normalize(quat_cast(transform->worldTransform()))); // billboard the shapes; mostly works
-		gl::multModelMatrix(transform->worldTransform() * glm::mat4_cast(q));
+		gl::multModelMatrix(billboard_xf(transform));
 		gl::color(circle->color);
 
 		gl::drawSolidCircle(vec2(0), circle->radius);
@@ -83,49 +87,72 @@ void soso::renderCirclesDepthSorted(entityx::EntityManager &entities)
 
 }
 
-void soso::renderCirclesWithGraph(entityx::EntityManager &entities)
+void soso::renderCirclesHierarchically(entityx::EntityManager &entities)
 {
-	std::vector<ci::mat4> render_data;
-
 	entityx::ComponentHandle<Transform> transform;
-	for (auto __unused e : entities.entities_with_components(transform)) {
-		// gather trees for rendering
-    if (transform->isRoot()) {
-			render_data.push_back(transform->worldTransform());
-			transform->descend([&render_data] (const Transform &parent, const Transform &child) {
-				render_data.push_back(child.worldTransform());
-			});
-		}
-	}
+	entityx::ComponentHandle<Circle>		circle;
+	auto xf = mat4(1);
 
-	gl::ScopedModelMatrix mat;
-	for (auto &m : render_data) {
-		gl::setModelMatrix(m);
-		gl::drawSolidCircle(vec2(0), 12.0f);
+	const auto billboard_xf = [] (const Transform &transform) {
+		auto q = inverse(normalize(quat_cast(transform.localTransform())));
+		return transform.localTransform() * glm::mat4_cast(q);
+	};
+
+	using function = std::function<void (Transform::Handle)>;
+	function draw_recursively = [&billboard_xf, &draw_recursively] (Transform::Handle transform) {
+			gl::ScopedModelMatrix mat;
+			gl::multModelMatrix(transform->localTransform());
+
+			auto circle = transform->entity().component<Circle>();
+			if (circle)
+			{
+				// billboard the circles (mostly works)
+				gl::ScopedModelMatrix mat;
+				gl::multModelMatrix(glm::mat4_cast(inverse(normalize(quat_cast(transform->worldTransform())))));
+				gl::color(circle->color);
+				gl::drawSolidCircle(vec2(0), circle->radius);
+			}
+
+			for (auto &child: transform->children())
+			{
+				draw_recursively(child);
+			}
+	};
+
+	gl::ScopedColor				color(Color::white());
+	gl::ScopedDepth				depth(false);
+	for (auto __unused e : entities.entities_with_components(transform, circle)) {
+    if (transform->isRoot())
+		{
+			draw_recursively(transform);
+		}
 	}
 }
 
-///
-/// Sometimes scene graphs don't accurately model how you might want to draw something.
-/// Two entities might have background and foreground representations, and both backgrounds should be behind both foregrounds.
-/// Other times you might want to render a child behind its parent. Like a background that moves with a shape.
-/// Or you may want something to jump to the foreground without reparenting things.
-/// Layers are a natural way to express render order that doesn't descend from a parent.
-/// Here, we preserve hierarchy within each layer, so child order still matters to render order.
-///
-void soso::renderEntitiesWithLayers(entityx::EntityManager &entities)
+void soso::renderCirclesByLayer(entityx::EntityManager &entities)
 {
-	using RenderData = std::vector<ci::mat4>;
+	// Data types for collecting render information into layers.
+	struct DataPoint
+	{
+		mat4	transform;
+		Color	color;
+		float	radius;
+	};
+
+	using RenderData = std::vector<DataPoint>;
 	using RenderDataRef = std::unique_ptr<RenderData>;
 	struct RenderDataLayer {
 		RenderDataLayer(int layer)
 		: layer(layer)
 		{}
 		int						layer = 0;
-		RenderDataRef render_data;
+		RenderDataRef render_data = std::make_unique<RenderData>();
 	};
 
+	// Our layers for rendering
 	std::vector<RenderDataLayer> layers;
+
+	// Returns the requested render layer, creating it if necessary.
 	auto get_layer = [&layers] (int layer) -> RenderData& {
 		for (auto &l : layers) {
 			if (l.layer == layer) {
@@ -136,41 +163,69 @@ void soso::renderEntitiesWithLayers(entityx::EntityManager &entities)
 		return *layers.back().render_data;
 	};
 
+	// Billboards a transform matrix.
+	auto billboard_xf = [] (Transform::Handle transform) {
+		auto q = inverse(normalize(quat_cast(transform->worldTransform())));
+		return transform->worldTransform() * glm::mat4_cast(q);
+	};
+
 	// Recursive function to properly capture render layer changes.
-	std::function<void (Transform::Handle, int)> gather_recursively = [&gather_recursively, &get_layer] (Transform::Handle transform, int layer) {
+	using function = std::function<void (Transform::Handle, int)>;
+	function gather_recursively = [&gather_recursively, &get_layer, &billboard_xf] (Transform::Handle transform, int layer) {
 
-		entityx::ComponentHandle<soso::RenderLayer> rlc;
+		auto rlc = entityx::ComponentHandle<soso::RenderLayer>();
+		auto circle = entityx::ComponentHandle<Circle>();
 		auto e = transform->entity();
-		e.unpack(rlc);
+		e.unpack(rlc, circle);
 
-		if (rlc) {
-			layer += rlc->layer_adjustment;
+		if (rlc)
+		{
+			if (rlc->relative())
+			{
+				layer += rlc->layer();
+			}
+			else
+			{
+				layer = rlc->layer();
+			}
 		}
 
-		get_layer(layer).push_back(transform->worldTransform());
+		if (circle)
+		{
+			get_layer(layer).push_back({ billboard_xf(transform), circle->color, circle->radius });
+		}
 
-		for (auto &c : transform->children()) {
+		for (auto &c : transform->children())
+		{
 			gather_recursively(c, layer);
 		}
 	};
 
 	entityx::ComponentHandle<Transform> transform;
-	for (auto __unused e : entities.entities_with_components(transform)) {
+	for (auto __unused e : entities.entities_with_components(transform))
+	{
 		// gather trees for rendering
-    if (transform->isRoot()) {
+    if (transform->isRoot())
+		{
 			gather_recursively(transform, 0);
 		}
 	}
 
+	// In case we encountered layers out of order, put them into order.
 	std::sort(layers.begin(), layers.end(), [] (const RenderDataLayer &lhs, const RenderDataLayer &rhs) {
 		return lhs.layer < rhs.layer;
 	});
 
+	// Draw everything we gathered, by layer.
 	gl::ScopedModelMatrix mat;
-	for (auto &layer : layers) {
-		for (auto &m : *layer.render_data) {
-			gl::setModelMatrix(m);
-			gl::drawSolidCircle(vec2(0), 12.0f);
+	gl::ScopedColor color(Color::white());
+	for (auto &layer : layers)
+	{
+		for (auto &data : *layer.render_data)
+		{
+			gl::setModelMatrix(data.transform);
+			gl::color(data.color);
+			gl::drawSolidCircle(vec2(0), data.radius);
 		}
 	}
 }
