@@ -61,9 +61,10 @@ public:
 	/// Returns a handle to this branch's parent.
 	Handle parent() const { return _parent; }
 	/// Returns a reference to this branch's _children.
-	const std::vector<Handle>& children() { return _children; }
+	const std::vector<Handle>& children() const { return _children; }
 	/// Returns the number of direct _children in this hierarchy.
 	size_t numChildren() const { return _children.size(); }
+	size_t numDescendants() const;
 	void destroyChildren();
 
 	/// Visit all of this components' descendents depth-first. TODO: separate visitor patterns from data.
@@ -86,6 +87,7 @@ private:
 
 	/// Returns a pointer to this as derived type.
 	Derived* self() { return static_cast<Derived*>(this); }
+	const Derived* self() const { return static_cast<const Derived*>(this); }
 	/// Returns a handle to this component.
 	Handle handle() { return _entity.component<Derived>(); }
 
@@ -133,6 +135,23 @@ void HierarchyComponentT<T>::removeChild(entityx::ComponentHandle<T> handle)
 		auto begin = std::remove_if(_children.begin(), _children.end(), [&](const Handle &e) { return e == handle; });
 		_children.erase(begin, _children.end());
 	}
+}
+
+template <typename T>
+size_t HierarchyComponentT<T>::numDescendants() const
+{
+	// recursively count children
+	using function = std::function<size_t (const T&, size_t)>;
+	function recur = [&recur] (const T& handle, size_t count) {
+		count += handle.numChildren();
+		for (auto &child: handle.children())
+		{
+			count = recur(*child.get(), count);
+		}
+		return count;
+	};
+
+	return recur(*self(), 0);
 }
 
 template <typename T>
