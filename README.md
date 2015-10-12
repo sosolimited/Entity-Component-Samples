@@ -84,7 +84,9 @@ Satellites in layered orbit around central star.
 What is an Entity?
 ------------------
 
-Entity Component Systems are excellent for describing worlds of independent elements with varied behaviors. Within an ECS, objects in the world, `entities`, are just an aggregation of attributes, `components`, that happen to be associated with each other.
+Entity Component Systems (ECS) are excellent for describing worlds of independent elements with varied behaviors. Within an ECS, objects in the world, `entities`, are just an aggregation of attributes, `components`, that happen to be associated with each other.
+
+In order to make things happen based on the ECS, all the `entities` are passed as a parameter to functions that use one or more of the `components` to do their work. These functions are called `systems`. When `systems` need to store state (such as a collection of 3d meshes, movies, or audio files), they can be specified as an instance of a class or as a lambda closure.
 
 ### Where did this idea come from?
 
@@ -113,13 +115,13 @@ class FlockingVideo : public FlockingThing {
 
 Because of the consistent interface, objects in the inheritance tree are easy to compose into a scene graph. While at first this feels great, it can quickly take on many layers of responsibility. Challenges arise in determining where particular functionality should go, and avoiding duplicate behavior. More challenging is untangling the tree of function calls when debugging or trying to eke out more performance from an application (should the blur be a child of the flocking element, or did we only use the graph for placement of those objects?).
 
-So, while simple hierarchies of GameObject-like structures can be wonderful, they can also become unwieldy pretty quickly.
+So, while simple hierarchies of GameObject-like structures can feel great (e.g. Flash sprites), they can also become unwieldy pretty quickly.
 
 [DIAGRAM: Scene graph tree]
 
 In an Entity Component System, objects in the world, `entities`, are just an aggregation of attributes, `components`, that happen to be associated with each other. Each Component stores the set of attributes needed to perform a single behavior, and components are manipulated by Systems to change the state of the world.
 
-At its most basic an ECS can be thought of as a table with every component as a column and every entity as a row. Instead of traversing the objects in a graph, we usually step through the table and use each component we are interested in.
+At its most basic an ECS can be thought of as a table with every component as a column and every entity as a row. Where a graph needs to start at some root and branches out from there, we can step linearly through each row of the entity table and use the components we are interested in.
 
 [DIAGRAM: Components and Entities as a table]
 
@@ -157,7 +159,13 @@ You may not want or need to use entities for your project if the following is tr
 
 Other downsides to using entities regardless of your project:
 
-- Your debugger becomes less useful. LLDB doesn’t have smarts when it comes to unpacking a set of components, so you may need to write your own debugging tools.
+- Your debugger doesn't always capture the information you want. Since entities are just an id in a table, LLDB has a hard time converting them into their component values when debugging.
+- You should be able to dereference component handles in the console (e.g. `expr xf.get()`), but it doesn't always work. If you need the debug info, dereference the handle in the body of the function so the debugger unpacks the info for you.
+
+```c++
+auto handle = entity.component<C>();
+auto &c = handle.get(); // c will show up nicely in the debugger.
+```
 
 ### Further Reading on Entity-Component-Systems:
 
@@ -181,6 +189,8 @@ You can always compose objects and functions to produce more complicated effects
 ### Favor Composition over Inheritance
 
 This one is from the original Design Patterns book. To add functionality, don’t inherit from something that provides it. Instead, compose an instance of something that provides that functionality.
+
+With Entities, sophisticated composition is straightforward. We just add a component to our entity that has the new functionality we want. Then whatever functions or systems act
 
 ### Act on similar things as a group.
 
@@ -334,7 +344,7 @@ All samples were tested using in XCode 6.4. If you run into issues with an earli
 
 ### Building Cinder
 
-Clone and build Cinder on your machine. Note that we clone recursively in order to get submodules initialized.
+If you don't already have Cinder installed, clone and build Cinder on your machine. Note that we clone recursively in order to get submodules initialized.
 
 I keep a directory with a handful of Cinder versions on my machine. That way I can sketch things out a bit more quickly and keep old sketches working if they were built against a specific version of Cinder.
 
