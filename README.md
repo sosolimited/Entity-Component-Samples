@@ -1,7 +1,7 @@
 Entity Component Systems
 ========================
 
-This repository contains didactic sample applications built using an Entity Component System (ECS) architecture. They use the [Cinder](https://libcinder.org/) and [EntityX](https://github.com/alecthomas/entityx) libraries. You can read more about ECS below, and open the samples in XCode to give them a whirl.
+This repository contains didactic sample applications built using an Entity Component System (ECS) architecture. They use the [Cinder](https://libcinder.org/) and [EntityX](https://github.com/alecthomas/entityx) libraries. In addition to the samples, you can read more about ECS below.
 
 For everthing to work out of the box, clone this repository as a Cinder block.
 
@@ -65,24 +65,27 @@ In order to make things happen in an ECS, all the entities are passed to functio
 
 #### Visualizing Entity Component Systems
 
-At its most basic an ECS can be thought of as a table with every component as a column and every entity as a row. To operate on a single component, we can just move down the column and grab each row that is filled. To operate on an entity, we can pick a row and see what components are filled in.
+An Entity Component System can be visualized as a table with columns of components and rows of entities. To operate on a single component, we select its column and look at each cell. To operate on an entity, we selects its row and look at each cell.
 
-Because of the simplicity of the structure, it is easy to traverse the table and act on the components we care about in our systems.
+![entity-component-table](https://cloud.githubusercontent.com/assets/81553/10465153/5ef5e228-71bb-11e5-92af-261da2752cca.png)
 
-[DIAGRAM: Components and Entities as a table]
+Because of the simplicity of the structure, it is easy to traverse the table and act on the components we care about in our systems. For example, a spatialized audio system might traverse the position and sound components and play audio for all the entities where both exist.
 
-[DIAGRAM: System traversing the table]
+![entity-component-audio](https://cloud.githubusercontent.com/assets/81553/10465305/31c7f75e-71bc-11e5-9aad-dfa7ed1da6a8.png)
+
+A rendering system can traverse all the position and shape components to decide what to draw on screen.
+![entity-component-rendering](https://cloud.githubusercontent.com/assets/81553/10465399/aa869efc-71bc-11e5-9fb9-0985d1812c98.png)
 
 
 ### Considerations when choosing an ECS architecture
 
-If your project is small enough, you probably don’t need to worry about architecting it all that carefully. In that case, you can likely fit everything in a single file and have it work out well. When things grow larger, however, you will almost certainly want a more general abstraction of your virtual world.
+If your project is small enough, you probably don’t need to worry about architecting it all that carefully. In that case, you can likely fit everything in a single file and have it work fine. As projects grow larger, however, you will almost certainly want a more general abstraction of your virtual world.
 
 Entity Component Systems provide a way to describe that world naturally and flexibly and to find things in the world easily. While things aren’t all roses with entities, they are generally better than the alternative class hierarchy.
 
 #### Why entities?
 
-ECS naturally model heterogeneous objects. They provide a single place where you can store many kinds of objects (2^components; more if one component is a script) and easily access the components you want later.
+Entities naturally model heterogeneous objects. They provide a single type that can describe many kinds of objects and easily access the attributes you want later.
 
 Entities provide interesting and useful characteristics:
 
@@ -177,7 +180,7 @@ auto e = entities.create();
 e.destroy();
 ```
 
-One thing to watch out for is losing track of entities. Most of the time, this isn't an issue. However, if you have entities that aren’t visible on screen it might not be obvious when they exist after you intended to destroy them. Be careful when creating entities that don’t have an obvious presence at runtime. Although the EntityManager still knows about them, their memory is effectively leaked if they don’t have any components attached.
+One thing to watch out for is losing track of entities. Most of the time, this isn't an issue. However, if you have entities that aren’t visible on screen it might not be obvious when they exist after you intended to destroy them. Be careful when creating entities that don’t have an obvious presence at runtime. Although the EntityManager still knows about them, their memory is effectively leaked if they don’t have any components attached and you don’t clean them up.
 
 ### Adding and Removing Components
 
@@ -187,11 +190,16 @@ As mentioned above, entities are an aggregation of components. We build them up 
 auto e = entities.create();
 e.assign<Transform>();
 e.assign<Color>();
-…
-e.remove<Color>();
+e.assign<Wobble>();
 ```
 
-Construction parameters can be passed to components when they are assigned to give them initial values.
+If you no longer want an entity to have an attribute, simply remove the relevant component.
+
+```c++
+e.remove<Wobble>();
+```
+
+Constructor parameters can be passed to components when they are assigned to give them initial values.
 
 ```c++
 auto e = entities.create();
@@ -199,24 +207,14 @@ e.assign<Transform>(vec3(10, 10, 0));
 e.assign<Color>(vec3(1.0, 0.5, 0.0));
 ```
 
-Now, it is trivial to imagine how to model the above entity in e.g. JSON:
-
-```
-{
-  transform: {[10, 10, 0]},
-  color: {[1.0, 0.5, 0.0]}
-}
-```
-
-Given the above JSON, you might imagine how you can describe a whole project’s worth of entities, including possible new object types, in data files (which you will want a project-specific tool to generate).
-
-### Using multiple components
+### Using components in systems
 
 Systems look for entities that have a specific combination of components and use those components to perform actions. For example, a circle drawing system might draw every entity that has a transform and circle component, and set the color if the entity also has an optional style component.
 
 ```c++
 ComponentHandle<Transform>  xf;
 ComponentHandle<Circle>     cc;
+
 for (auto e : entities.entities_with_components(xf, cc)) {
   auto sc = e.component<Style>();
   if (sc) {
@@ -232,9 +230,19 @@ Inside the loop above, both the transform and circle handles are guaranteed to b
 
 Sometimes, you may want to give an entity a specific behavior that isn’t clearly modeled by any existing component or combination of components. Other times, you may want to provide an entity with a function that manipulates a handful of components at once (say, flipping out some content in a slideshow with a fancy animation).
 
-We define a `BehaviorComponent` as a place to store these kinds of one-off behaviors for an Entity. By extending the `BehaviorBase` class, you can build your own interfaces to special behaviors and run custom functions on update and other events. The Behavior will be registered with the entity, so it will be cleaned up when the entity is destroyed. If you store your own reference to a Behavior, you will need to be careful not to use it once its entity has been destroyed.
+We define the `BehaviorComponent` as a place to store these kinds of one-off behaviors for an Entity. By extending the `BehaviorBase` class, you can build your own interfaces to special behaviors and run custom functions on update and other events. The behavior will be registered with the entity, so it will be cleaned up when the entity is destroyed. If you store your own reference to a behavior, you will need to be careful not to use it once its entity has been destroyed.
 
-Before you start making everything a Behavior, consider whether the behavior could be better modeled using a Component and System (or by adding a new System that manipulates existing components). You can also evaluate whether a Behavior makes more sense as a Component+System once you have implemented it as a Behavior.
+Behaviors are assigned to an entity through a free function that handles wiring up the behavior’s lifetime. Update-only behaviors can be specified as a lambda.
+
+```c++
+auto e = _entities.create();
+auto behavior = assignBehavior<BehaviorType>(e);
+assignBehavior(e, [] (Entity entity, double dt) {
+  …
+});
+```
+
+Before you start making everything a behavior, consider whether the behavior could be better modeled using a component and system (or by adding a new system that manipulates existing components). You can also evaluate whether a behavior makes more sense as a component+system once you have implemented it as a behavior.
 
 ### Grouping entities together
 
@@ -315,10 +323,9 @@ cd Cinder/blocks/
 git clone git@github.com:sosolimited/Entity-Component-Sample.git --recursive
 ```
 
-Now open up the samples (in the `samples/` directory) in XCode and you should be good to go.
+Open up one of the samples (in the `samples/` directory) in XCode and you should be good to go.
 
 All samples were tested using in XCode 6.4. If you run into issues with an earlier version of XCode (like empty project files), please upgrade XCode.
-
 
 - Entity Creation
     - Demonstrates the basics of Entity creation, Component definition, and control through Systems.
@@ -330,4 +337,4 @@ All samples were tested using in XCode 6.4. If you run into issues with an earli
 
 ### Project template
 
-We have provided a cinderblock project template. If you create a new project from the template using TinderBox, you will have a simple working ECS application.
+This repository includes a cinderblock project template. If you create a new project from the template using TinderBox, you will have a simple working ECS application.
