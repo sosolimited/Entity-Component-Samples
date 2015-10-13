@@ -109,17 +109,17 @@ void EntityCreationApp::mouseDown(MouseEvent event)
 	mouse_entity.assign<Position>(event.getPos());
 	mouse_entity.assign<Circle>(49.0f, Color::gray(0.5f));
 
+	// Assign a drag behavior component.
 	auto tracker = assignBehavior<DragTracker>(mouse_entity);
+
+	// When drag ends, run our lambda to create a new dot.
 	tracker->setMouseUpCallback([this, mouse_entity] (const vec2 &position, const vec2 &previous) mutable {
-		auto delta = position - previous;
-		auto len = length(delta);
-		if (length(delta) > std::numeric_limits<float>::epsilon()) {
-			delta /= len;
+		auto dir = normalize(position - previous);
+		if (! isfinite(length(dir))) {
+			dir = randVec2();
 		}
-		else {
-			delta = vec2(1, 0);
-		}
-		createDot(position, delta, 49.0f);
+
+		createDot(position, dir, 49.0f);
 		mouse_entity.destroy();
 	});
 }

@@ -20,7 +20,9 @@ public:
 
 	DragTracker(entityx::Entity e)
 	: BehaviorBase(e),
-		_position(e.component<Position>())
+		_position(e.component<Position>()),
+		_mouse(_position->position),
+		_mouse_previous(_mouse)
 	{}
 
 	void mouseDrag(const ci::app::MouseEvent &event) override {
@@ -43,8 +45,8 @@ public:
 
 private:
 	Callback _mouse_up_callback;
-	ci::vec2 _mouse, _mouse_previous;
 	entityx::ComponentHandle<Position> _position;
+	ci::vec2 _mouse, _mouse_previous;
 };
 
 } // namespace soso
