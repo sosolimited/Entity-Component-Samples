@@ -1,19 +1,21 @@
 Entity-Component-Sample
 =======================
 
-Didactic sample applications built using Entity Component Systems (ECS) on top of [EntityX](https://github.com/alecthomas/entityx). Read more about ECS below, and open the samples in XCode to give them a whirl.
+This repository contains didactic sample applications built using an Entity Component Systems (ECS) architecture. They use the [Cinder](https://libcinder.org/) and [EntityX](https://github.com/alecthomas/entityx) libraries. Read more about ECS below, and open the samples in XCode to give them a whirl.
+
+For everthing to work out of the box, clone this repository as a Cinder block.
 
 ### Contents
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
-- [Samples](#samples)
-  - [Entity Creation](#entity-creation)
-  - [Star Clusters](#star-clusters)
-  - [Gravity Wells](#gravity-wells)
-- [What is an Entity?](#what-is-an-entity)
-  - [Where did this idea come from?](#where-did-this-idea-come-from)
+- [Understanding Entity Component Systems](#understanding-entity-component-systems)
+  - [Components](#components)
+  - [Entities](#entities)
+  - [Systems](#systems)
+  - [Visualizing Entity Component Systems](#visualizing-entity-component-systems)
+  - [What We’re replacing: Classical Inheritance](#what-we%E2%80%99re-replacing-classical-inheritance)
   - [Why Entities?](#why-entities)
   - [Why Not Entities?](#why-not-entities)
   - [Further Reading on Entity-Component-Systems:](#further-reading-on-entity-component-systems)
@@ -28,44 +30,50 @@ Didactic sample applications built using Entity Component Systems (ECS) on top o
   - [Using a Set of Components](#using-a-set-of-components)
   - [Adding Custom Behavior to a Specific Entity](#adding-custom-behavior-to-a-specific-entity)
   - [Grouping Entities Together](#grouping-entities-together)
+- [Samples](#samples)
+  - [Entity Creation](#entity-creation)
+  - [Star Clusters](#star-clusters)
+  - [Gravity Wells](#gravity-wells)
 - [Building and Running](#building-and-running)
   - [Building these Samples](#building-these-samples)
   - [Building Cinder](#building-cinder)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-Samples
--------
+Understanding Entity Component Systems
+--------------------------------------
 
-You can find the following samples in the `samples/` directory.
+Entity component systems are a design pattern originating from the game industry. They are used to define game objects in a way that is simpler and more flexible than class-based inheritance. Instead of inheritance, they provide a straightforward way to compose behaviors to generate interesting objects in a game world.
 
-### Entity Creation
+Entity component systems consist of three main parts: `entities`, `components`, and `systems`. A `component` contains a bit of data. An `entity` is a collection of components. A `system` is a function that accepts entities as a parameter and does something based on their components.
 
-Demonstrates the basics of Entity creation, Component definition, and control through Systems.
+### Components
 
-Click and drag to create new entities.
+A `component` stores the minimal amount of data relevant to some task. It could be the position of an object in space, its bounding volume, a name, a flag for special treatment, or a list of other entities. In general, we try to store one attribute per component.
 
-### Star Clusters
+### Entities
 
-Satellites in orbit around central star. Demonstrates creation of a scene graph and various approaches to traversing the graph for rendering.
+An `entity` is a collection of components. It relates the components to each other, so you can say that some entity has both the name component "ginger" and the color component "red" and the point of interest component.
 
-### Gravity Wells
+### Systems
 
-Objects fly through the world and are pulled toward attractors.
+A `system` is a function that uses the data in components.
 
+In order to make things happen in an ECS, all the entities are passed to functions that use one or more of the components to do their work. These functions are called systems. When systems need to store state (such as a collection of 3d meshes, movies, or audio files), they can be specified as an instance of a class or as a lambda closure.
 
-What is an Entity?
-------------------
+### Visualizing Entity Component Systems
 
-Entity Component Systems (ECS) are excellent for describing worlds of independent elements with varied behaviors. Within an ECS, objects in the world, `entities`, are just an aggregation of attributes, `components`, that happen to be associated with each other.
+At its most basic an ECS can be thought of as a table with every component as a column and every entity as a row. To operate on a single component, we can just move down the column and grab each row that is filled. To operate on an entity, we can pick a row and see what components are filled in.
 
-In order to make things happen based on the ECS, all the `entities` are passed as a parameter to functions that use one or more of the `components` to do their work. These functions are called `systems`. When `systems` need to store state (such as a collection of 3d meshes, movies, or audio files), they can be specified as an instance of a class or as a lambda closure.
+Because of the simplicity of the structure, it is easy to traverse the table and act on the components we care about in our systems.
 
-### Where did this idea come from?
+[DIAGRAM: Components and Entities as a table]
 
-Entity component systems as a design pattern come from the game industry. There, they are used to define game objects in a way that is more flexible than the previous pattern of a game object inheritance tree.
+[DIAGRAM: System traversing the table]
 
-In an inheritance tree, a GameObject base class defines every common attribute and behavior. Subclasses specialize those behaviors through virtual method overrides and add other functionality as needed. At its most basic, the inheritance tree might look like the following:
+### What We’re replacing: Classical Inheritance
+
+In a classical inheritance tree, a GameObject base class defines every common attribute and behavior. Subclasses specialize those behaviors through virtual method overrides and add other functionality as needed. At its most basic, the inheritance tree might look like the following:
 
 ```
 class GameObject {
@@ -86,19 +94,15 @@ class FlockingVideo : public FlockingThing {
 }
 ```
 
-Because of the consistent interface, objects in the inheritance tree are easy to compose into a scene graph. While at first this feels great, it can quickly take on many layers of responsibility. Challenges arise in determining where particular functionality should go, and avoiding duplicate behavior. More challenging is untangling the tree of function calls when debugging or trying to eke out more performance from an application (should the blur be a child of the flocking element, or did we only use the graph for placement of those objects?).
+Because of the consistent interface, objects in the inheritance tree are easy to bundle into a scene graph. While at first this feels great, it can quickly take on many layers of responsibility.
 
-So, while simple hierarchies of GameObject-like structures can feel great (e.g. Flash sprites), they can also become unwieldy pretty quickly.
+This is complicated, because we are really dealing with two trees that are interleaved: a scene graph, and an inheritance graph.
 
-[DIAGRAM: Scene graph tree]
+Challenges arise in determining where particular functionality should go, and avoiding duplicate behavior. More challenging is untangling the tree of function calls when debugging or trying to eke out more performance from an application (should the blur be a child of the flocking element, or did we only use the graph for placement of those objects?).
 
-In an Entity Component System, objects in the world, `entities`, are just an aggregation of attributes, `components`, that happen to be associated with each other. Each Component stores the set of attributes needed to perform a single behavior, and components are manipulated by Systems to change the state of the world.
+So, while class-based hierarchies of GameObject-like structures can feel great (e.g. Flash sprites), they become unwieldy pretty quickly. Additionally, by hiding many kinds of complex behavior behind a simple-looking interface, they are difficult to reason about.
 
-At its most basic an ECS can be thought of as a table with every component as a column and every entity as a row. Where a graph needs to start at some root and branches out from there, we can step linearly through each row of the entity table and use the components we are interested in.
-
-[DIAGRAM: Components and Entities as a table]
-
-[DIAGRAM: System traversing the table]
+[DIAGRAM: Object inheritance tree]
 
 ### Why Entities?
 
@@ -298,6 +302,25 @@ makeHierarchy(menu,
 		particle_emitter),
 	menu_item_c);
 ```
+
+Samples
+-------
+
+You can find the following samples in the `samples/` directory.
+
+### Entity Creation
+
+Demonstrates the basics of Entity creation, Component definition, and control through Systems.
+
+Click and drag to create new entities.
+
+### Star Clusters
+
+Satellites in orbit around central star. Demonstrates creation of a scene graph and various approaches to traversing the graph for rendering.
+
+### Gravity Wells
+
+Objects fly through the world and are pulled toward attractors.
 
 Building and Running
 --------------------
