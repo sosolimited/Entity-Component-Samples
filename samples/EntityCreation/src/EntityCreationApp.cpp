@@ -33,8 +33,6 @@ public:
 
 	void setup() override;
 	void mouseDown(MouseEvent event) override;
-	void mouseDrag(MouseEvent event) override;
-	void mouseUp(MouseEvent event) override;
 	void keyDown(KeyEvent event) override;
 	void update() override;
 	void draw() override;
@@ -48,7 +46,6 @@ private:
 	uint32_t							 num_dots = 0;
 	static const uint32_t	 max_dots = 1024;
 
-	ci::vec2							 mouse, mouse_prev;
 	bool									 do_clear = true;
 };
 
@@ -111,32 +108,20 @@ void EntityCreationApp::mouseDown(MouseEvent event)
 	auto mouse_entity = entities.create();
 	mouse_entity.assign<Position>(event.getPos());
 	mouse_entity.assign<Circle>(49.0f, Color::gray(0.5f));
-	// The DragTracker behavior will destroy its entity when the drag ends.
-	assignBehavior<DragTracker>(mouse_entity);
-}
 
-void EntityCreationApp::mouseDrag( MouseEvent event )
-{
-	// Keep track of the mouse position.
-	// This could be better done in a behavior or component (say, when DragTracker is destroyed)
-	// Dear reader: try modifying the DragTracker behavior so it calls a function on destruction.
-	// Use that function to create a dot where the tracker was last seen.
-	mouse_prev = mouse;
-	mouse = event.getPos();
-}
-
-void EntityCreationApp::mouseUp(MouseEvent event)
-{
-	mouse = event.getPos();
-	auto delta = mouse - mouse_prev;
-	auto len = length(delta);
-	if (length(delta) > std::numeric_limits<float>::epsilon()) {
-		delta /= len;
-	}
-	else {
-		delta = vec2(1, 0);
-	}
-	createDot(mouse, delta, 49.0f);
+	auto tracker = assignBehavior<DragTracker>(mouse_entity);
+	tracker->setMouseUpCallback([this, mouse_entity] (const vec2 &position, const vec2 &previous) mutable {
+		auto delta = position - previous;
+		auto len = length(delta);
+		if (length(delta) > std::numeric_limits<float>::epsilon()) {
+			delta /= len;
+		}
+		else {
+			delta = vec2(1, 0);
+		}
+		createDot(position, delta, 49.0f);
+		mouse_entity.destroy();
+	});
 }
 
 void EntityCreationApp::keyDown(KeyEvent event)
