@@ -11,57 +11,58 @@ For everthing to work out of the box, clone this repository as a Cinder block.
 
 
 - [Understanding Entity Component Systems](#understanding-entity-component-systems)
-  - [Components](#components)
-  - [Entities](#entities)
-  - [Systems](#systems)
-  - [Visualizing Entity Component Systems](#visualizing-entity-component-systems)
-  - [What We’re replacing: Classical Inheritance](#what-we%E2%80%99re-replacing-classical-inheritance)
-  - [Why Entities?](#why-entities)
-  - [Why Not Entities?](#why-not-entities)
+  - [The Basics](#the-basics)
+    - [Components](#components)
+    - [Entities](#entities)
+    - [Systems](#systems)
+    - [Visualizing Entity Component Systems](#visualizing-entity-component-systems)
+  - [Considerations when choosing an ECS architecture](#considerations-when-choosing-an-ecs-architecture)
+    - [Why Entities?](#why-entities)
+    - [Why Not Entities?](#why-not-entities)
+    - [What we are replacing](#what-we-are-replacing)
+  - [Great Ideas in ECS](#great-ideas-in-ecs)
+    - [Favor Composition over Inheritance](#favor-composition-over-inheritance)
+    - [Keep interfaces small](#keep-interfaces-small)
+    - [Act on similar things as a group.](#act-on-similar-things-as-a-group)
+    - [A Program is Data and Functions](#a-program-is-data-and-functions)
   - [Further Reading on Entity-Component-Systems:](#further-reading-on-entity-component-systems)
-- [Great Ideas in ECS](#great-ideas-in-ecs)
-  - [Keep Interfaces Small](#keep-interfaces-small)
-  - [Favor Composition over Inheritance](#favor-composition-over-inheritance)
-  - [Act on similar things as a group.](#act-on-similar-things-as-a-group)
-  - [Your Program is Just Data and Functions](#your-program-is-just-data-and-functions)
-- [How to use Entities](#how-to-use-entities)
+- [Entities in Practice](#entities-in-practice)
   - [The Lifecycle of an Entity](#the-lifecycle-of-an-entity)
   - [Adding and Removing Components](#adding-and-removing-components)
-  - [Using a Set of Components](#using-a-set-of-components)
+  - [Using multiple components](#using-multiple-components)
   - [Adding Custom Behavior to a Specific Entity](#adding-custom-behavior-to-a-specific-entity)
   - [Grouping Entities Together](#grouping-entities-together)
-- [Samples](#samples)
-  - [Entity Creation](#entity-creation)
-  - [Star Clusters](#star-clusters)
-  - [Gravity Wells](#gravity-wells)
-- [Building and Running](#building-and-running)
-  - [Building these Samples](#building-these-samples)
-  - [Building Cinder](#building-cinder)
+  - [Things to watch out for](#things-to-watch-out-for)
+- [Building This Project](#building-this-project)
+  - [Samples](#samples)
+  - [Cinder](#cinder)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 Understanding Entity Component Systems
 --------------------------------------
 
+### The Basics
+
 Entity component systems are a design pattern originating from the game industry. They are used to define game objects in a way that is simpler and more flexible than class-based inheritance. Instead of inheritance, they provide a straightforward way to compose behaviors to generate interesting objects in a game world.
 
 Entity component systems consist of three main parts: `entities`, `components`, and `systems`. A `component` contains a bit of data. An `entity` is a collection of components. A `system` is a function that accepts entities as a parameter and does something based on their components.
 
-### Components
+#### Components
 
 A `component` stores the minimal amount of data relevant to some task. It could be the position of an object in space, its bounding volume, a name, a flag for special treatment, or a list of other entities. In general, we try to store one attribute per component.
 
-### Entities
+#### Entities
 
 An `entity` is a collection of components. It relates the components to each other, so you can say that some entity has both the name component "ginger" and the color component "red" and the point of interest component.
 
-### Systems
+#### Systems
 
 A `system` is a function that uses the data in components.
 
 In order to make things happen in an ECS, all the entities are passed to functions that use one or more of the components to do their work. These functions are called systems. When systems need to store state (such as a collection of 3d meshes, movies, or audio files), they can be specified as an instance of a class or as a lambda closure.
 
-### Visualizing Entity Component Systems
+#### Visualizing Entity Component Systems
 
 At its most basic an ECS can be thought of as a table with every component as a column and every entity as a row. To operate on a single component, we can just move down the column and grab each row that is filled. To operate on an entity, we can pick a row and see what components are filled in.
 
@@ -71,78 +72,83 @@ Because of the simplicity of the structure, it is easy to traverse the table and
 
 [DIAGRAM: System traversing the table]
 
-### What We’re replacing: Classical Inheritance
 
-In a classical inheritance tree, a GameObject base class defines every common attribute and behavior. Subclasses specialize those behaviors through virtual method overrides and add other functionality as needed. At its most basic, the inheritance tree might look like the following:
+### Considerations when choosing an ECS architecture
 
-```
-class GameObject {
-	virtual void update() {}
-	// stores position, render data, whatnot
-};
+If your project is small enough, you probably don’t need to worry about architecting it all that carefully. In that case, you can likely fit everything in a single file and have it work out well. When things grow larger, however, you will almost certainly want a more general abstraction of your virtual world.
 
-class FlockingThing : public GameObject {
-	void update() override {} // does the flocking
-};
+Entity Component Systems provide a way to describe that world naturally and flexibly and to find things in the world easily. While things aren’t all roses with entities, they are generally better than the alternative class hierarchy.
 
-class VideoPlayer : public GameObject  {
-	void update() override {} // plays a video
-};
+#### Why Entities?
 
-class FlockingVideo : public FlockingThing {
-	void update() override {} // duplicates behavior from video...
-}
-```
-
-Because of the consistent interface, objects in the inheritance tree are easy to bundle into a scene graph. While at first this feels great, it can quickly take on many layers of responsibility.
-
-This is complicated, because we are really dealing with two trees that are interleaved: a scene graph, and an inheritance graph.
-
-Challenges arise in determining where particular functionality should go, and avoiding duplicate behavior. More challenging is untangling the tree of function calls when debugging or trying to eke out more performance from an application (should the blur be a child of the flocking element, or did we only use the graph for placement of those objects?).
-
-So, while class-based hierarchies of GameObject-like structures can feel great (e.g. Flash sprites), they become unwieldy pretty quickly. Additionally, by hiding many kinds of complex behavior behind a simple-looking interface, they are difficult to reason about.
-
-[DIAGRAM: Object inheritance tree]
-
-### Why Entities?
-
-If you have a world of heterogeneous things, ECS can be a great choice.
+ECS naturally model heterogeneous objects. They provide a single place where you can store many kinds of objects (2^components; more if one component is a script) and easily access the components you want later.
 
 Entities provide interesting and useful characteristics:
 
 - Flexible type creation.
 	- tweak behavior by adding new components and combining existing components differently.
+- Runtime object definition.
+	- Add and remove components at runtime to change how an object behaves.
 - Clear separation of different functionality.
 	- This makes reasoning about and testing code simpler.
 - Memory layout can be more efficient.
 	- EntityX puts every component in a semi-contiguous array, which makes it cache efficient.
 	- Dynamic allocation (e.g. `make_shared`, `make_unique`, `new`), by contrast, doesn't necessarily group things together.
+- Easier tool building since world is just data.
 
-If you have a moment to build some tools to support your project, ECS can become even more powerful.
+The main reason we choose entity component systems is that they encourage composition. This makes the division of responsibility within a program clearer and makes it easier to change out one behavior for another.
 
-- Runtime object definition.
-- Easier to build tools that create game objects.
-- Adding scripting support is comparatively straightforward.
-- Data-driven objects. Very nearly everything can be laid out in a spreadsheet.
-
-Of the above, the clarity around when things happen in your program, and what sections are responsible for what, are the biggest benefits of using an ECS.
-
-### Why Not Entities?
+#### Why Not Entities?
 
 You may not want or need to use entities for your project if the following is true:
 
 - Everything in the world is the same or very similar (maybe make a particle system).
 - There are only a few types of behaviors those things engage in.
+- Your programming language provides other powerful object composition techniques.
 
-Other downsides to using entities regardless of your project:
+#### What we are replacing
 
-- Your debugger doesn't always capture the information you want. Since entities are just an id in a table, LLDB has a hard time converting them into their component values when debugging.
-- You should be able to dereference component handles in the console (e.g. `expr xf.get()`), but it doesn't always work. If you need the debug info, dereference the handle in the body of the function so the debugger unpacks the info for you.
+An alternative solution is to have a classical inheritance hierarchy. We strongly discourage this alternative.
 
-```c++
-auto handle = entity.component<C>();
-auto &c = handle.get(); // c will show up nicely in the debugger.
-```
+In a classical inheritance tree, a GameObject base class defines every common attribute and behavior. Subclasses specialize those behaviors through virtual method overrides and add other functionality as needed.
+
+Because of the consistent interface, objects in the inheritance tree are easy to store a single container to pass around. While at first this abstraction feels good, it can quickly become confusing as function overriding obscures what is happening at each step and the order of operations.
+
+Additionally, an inheritance hierarchy introduces new questions about where functionality should go and makes it challenging to avoid duplicate behavior or extraneous behavior.
+
+So, while class-based hierarchies of GameObject-like structures can feel good (e.g. Flash sprites), they become unwieldy pretty quickly. Additionally, by hiding many kinds of complex behavior behind a simple-looking interface, they become difficult to reason about.
+
+If your world only consists of a single or very few types of things, a shallow GameObject hierarchy might be a good fit. However, if you want to change out behavior on the fly or have more organized control over how your objects are managed, having functionality dispersed across many subclasses and their parent class can be confusing.
+
+### Great Ideas in ECS
+
+If you decide not to use an Entity Component System in your project, you can still use many of the concepts underlying the architecture.
+
+#### Favor Composition over Inheritance
+
+This is the big idea underlying Entity Component Systems, and it is a concept discussed in the original [Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) book.
+
+To add functionality to an object, don’t inherit from something that provides it. Instead, compose something that provides that functionality. This allows for easy switching of behavior and the combination of many behaviors.
+
+Entities provide a straightforward way to have sophisticated composition. Each component is something that can be composed into an entity. We add components to our entity that have functionality we want. When we no longer want our entity to have a particular behavior, we can remove the relevant component from the entity.
+
+#### Keep interfaces small
+
+Keep the scope of what one object (or function) is responsible for small. If you have a scene graph describing how things are laid out in space, only use it to describe how things are laid out in space.
+
+You can always compose objects and functions to produce more complicated effects, with the benefit of each stage being easier to understand.
+
+By breaking things down into components and systems, ECS encourages us to think about only the pieces of data we really need inside our systems. This reduces the number of things we need to consider at any point in the code.
+
+#### Act on similar things as a group.
+
+Instead of having every object manage its own drawing or update behavior, define that behavior in a function that acts of a collection of those objects. First, this makes it easy to swap out one behavior for another without changing the collection of objects. Also, it makes defining certain behaviors, like flocking, more natural. Finally, batching enables efficiencies in many operations, like rendering.
+
+If you have many similar objects, consider moving some of the logic about what you do with those objects outside of them. You can think of this like a particle system, where the system applies functions to a collection of particles.
+
+#### A Program is Data and Functions
+
+It can help to think of your program as a set of data and a set of functions that operate on that data. Try to write your functions so they are easy to use across a range of data types. If you can clearly model the data and see the flow of its state changes, it becomes much easier to write functions that do what you want with that data.
 
 ### Further Reading on Entity-Component-Systems:
 
@@ -150,37 +156,9 @@ auto &c = handle.get(); // c will show up nicely in the debugger.
 - [Evolve Your Hierarchy](http://cowboyprogramming.com/2007/01/05/evolve-your-heirachy/)
 - [A Data-Driven Game Object System](http://scottbilas.com/files/2002/gdc_san_jose/game_objects_slides.pdf)
 
-Great Ideas in ECS
-------------------
 
-If you decide not to use an Entity Component System in your project, you can still use many of the concepts underlying the architecture.
-
-Keep in mind that your project is likely to change while you are working on it. The flexibility provided by an ECS can make it easier to try out different ideas and change direction mid-development.
-
-### Keep Interfaces Small
-
-Keep the scope of what one object (or function) is responsible for small. If you have a scene graph describing how things are drawn, only use it to describe how things are drawn.
-
-You can always compose objects and functions to produce more complicated effects, with the benefit of each stage being easier to understand. Which brings us to:
-
-### Favor Composition over Inheritance
-
-This one is from the original Design Patterns book. To add functionality, don’t inherit from something that provides it. Instead, compose an instance of something that provides that functionality.
-
-With Entities, sophisticated composition is straightforward. We just add a component to our entity that has the new functionality we want. Then whatever functions or systems act
-
-### Act on similar things as a group.
-
-Instead of having every object manage its own drawing or update behavior, define that behavior in a function that acts of a collection of those objects. First, this makes it easy to swap out one behavior for another without changing the collection of objects. Also, it makes defining certain behaviors, like flocking, more natural. Finally, batching enables efficiencies in many operations, like rendering.
-
-If you have many similar objects, consider moving some of the logic about what you do with those objects outside of them. You can think of this like a particle system, where the system applies functions to a collection of particles.
-
-### Your Program is Just Data and Functions
-
-It can help to think of your program as a set of data and a set of functions that operate on that data. Try to write your functions so they are easy to use across a range of data types. If you can clearly model the data and see the flow of its state changes, it becomes much easier to write functions that do what you want with that data.
-
-How to use Entities
--------------------
+Entities in Practice
+--------------------
 
 Below we discuss some common tasks and how you might accomplish them using Entities and Components. The common Systems and Components referred to below are used in the samples and can be adapted for most projects.
 
@@ -231,7 +209,7 @@ Now, it is trivial to imagine how to model the above entity in e.g. JSON:
 
 Given the above JSON, you might imagine how you can describe a whole project’s worth of entities, including possible new object types, in data files (which you will want a project-specific tool to generate).
 
-### Using a Set of Components
+### Using multiple components
 
 Systems look for entities that have a specific combination of components and use those components to perform actions. For example, a circle drawing system might draw every entity that has a transform and circle component, and set the color if the entity also has an optional style component.
 
@@ -303,29 +281,21 @@ makeHierarchy(menu,
 	menu_item_c);
 ```
 
-Samples
--------
+### Things to watch out for
 
-You can find the following samples in the `samples/` directory.
+Your debugger doesn't always capture the information you want. Since entities are just an id in a table, LLDB has a hard time converting them into their component values when debugging.
 
-### Entity Creation
+You should be able to dereference component handles in the console (e.g. `expr xf.get()`), but it doesn't always work. If you need the debug info, dereference the handle in the body of the function so the debugger unpacks the info for you.
 
-Demonstrates the basics of Entity creation, Component definition, and control through Systems.
+```c++
+auto handle = entity.component<C>();
+auto &c = handle.get(); // c will show up nicely in the debugger.
+```
 
-Click and drag to create new entities.
+Building This Project
+---------------------
 
-### Star Clusters
-
-Satellites in orbit around central star. Demonstrates creation of a scene graph and various approaches to traversing the graph for rendering.
-
-### Gravity Wells
-
-Objects fly through the world and are pulled toward attractors.
-
-Building and Running
---------------------
-
-### Building these Samples
+### Samples
 
 Clone this repository into the `blocks/` directory of a recent version of the Cinder master branch. Note that we clone recursively in order to get submodules initialized.
 
@@ -334,11 +304,19 @@ cd Cinder/blocks/
 git clone git@github.com:sosolimited/Entity-Component-Sample.git --recursive
 ```
 
-Now open up the samples in XCode and you should be good to go.
+Now open up the samples (in the `samples/` directory) in XCode and you should be good to go.
 
 All samples were tested using in XCode 6.4. If you run into issues with an earlier version of XCode (like empty project files), please upgrade XCode.
 
-### Building Cinder
+- Entity Creation
+  - Demonstrates the basics of Entity creation, Component definition, and control through Systems.
+  - Click and drag to create new entities.
+- Star Clusters
+  - Satellites in orbit around central star. Demonstrates creation of a scene graph and various approaches to traversing the graph for rendering.
+- Gravity Wells
+  - Objects fly through the world and are pulled toward attractors.
+
+### Cinder
 
 If you don't already have Cinder installed, clone and build Cinder on your machine. Note that we clone recursively in order to get submodules initialized.
 
