@@ -37,7 +37,7 @@ public:
 	void update() override;
 	void draw() override;
 
-	entityx::Entity createDot(const ci::vec2 &position, const ci::vec2 &direction, float diameter);
+	entityx::Entity createDot(const ci::vec2 &position, const ci::vec2 &velocity, float diameter);
 
 private:
 	entityx::EventManager	 events;
@@ -67,7 +67,7 @@ void EntityCreationApp::setup()
 	createDot(getWindowCenter(), vec2(1, 0), 36.0f);
 }
 
-entityx::Entity EntityCreationApp::createDot(const ci::vec2 &position, const ci::vec2 &direction, float diameter)
+entityx::Entity EntityCreationApp::createDot(const ci::vec2 &position, const ci::vec2 &velocity, float diameter)
 {
 	// Keep track of the number of dots created so we don't have way too many.
 	if (num_dots > max_dots) {
@@ -75,27 +75,35 @@ entityx::Entity EntityCreationApp::createDot(const ci::vec2 &position, const ci:
 	}
 	num_dots += 1;
 
+	const auto dir = ([] (const vec2 &vel) {
+		auto n = glm::normalize(vel);
+		if (glm::any(glm::isnan(n))) {
+			return randVec2();
+		}
+		return n;
+	}(velocity));
+
 	// Create an entity, managed by `entities`.
 	auto dot = entities.create();
 	// Assign the components we care about
 	dot.assign<Position>(position);
 	dot.assign<Circle>(diameter);
-	dot.assign<Motion>(direction, 250.0f);
+	dot.assign<Motion>(dir, glm::clamp(length(velocity) * 40.0f, 1.0f, 600.0f));
 	// Assign an Expires component and store a handle to it in `exp`
 	auto exp = dot.assign<Expires>(randFloat(4.0f, 6.0f));
 
 	// Set a function to call when the Expires component runs out of time//
 	// Called last_wish, since it happens just before the entity is destroyed.
-	exp->last_wish = [this, diameter, direction] (entityx::Entity e) {
+	exp->last_wish = [this, diameter, velocity] (entityx::Entity e) {
 		num_dots -= 1;
 
 		if (diameter > 8.0f) {
 			// If we weren't too small, create some smaller dots where we were destroyed.
 			auto pos = e.component<Position>()->position;
-			auto dir = glm::rotate<float>(direction, M_PI / 2);
+			auto vel = glm::rotate<float>(velocity, M_PI / 2);
 
-			createDot(pos, dir, diameter * 0.66f);
-			createDot(pos, - dir, diameter * 0.66f);
+			createDot(pos, vel, diameter * 0.66f);
+			createDot(pos, - vel, diameter * 0.66f);
 		}
 	};
 
@@ -114,10 +122,7 @@ void EntityCreationApp::mouseDown(MouseEvent event)
 
 	// When drag ends, run our lambda to create a new dot.
 	tracker->setMouseUpCallback([this, mouse_entity] (const vec2 &position, const vec2 &previous) mutable {
-		auto dir = normalize(position - previous);
-		if (! isfinite(length(dir))) {
-			dir = randVec2();
-		}
+		auto dir = position - previous;
 
 		createDot(position, dir, 49.0f);
 		mouse_entity.destroy();
