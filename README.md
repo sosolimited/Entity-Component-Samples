@@ -10,8 +10,8 @@ Didactic sample applications built using Entity Component Systems (ECS) on top o
 
 - [Samples](#samples)
   - [Entity Creation](#entity-creation)
-  - [Gravity Wells](#gravity-wells)
   - [Star Clusters](#star-clusters)
+  - [Gravity Wells](#gravity-wells)
 - [What is an Entity?](#what-is-an-entity)
   - [Where did this idea come from?](#where-did-this-idea-come-from)
   - [Why Entities?](#why-entities)
@@ -43,43 +43,16 @@ You can find the following samples in the `samples/` directory.
 
 Demonstrates the basics of Entity creation, Component definition, and control through Systems.
 
+Click and drag to create new entities.
+
+### Star Clusters
+
+Satellites in orbit around central star. Demonstrates creation of a scene graph and various approaches to traversing the graph for rendering.
+
 ### Gravity Wells
 
 Objects fly through the world and are pulled toward attractors.
 
-Scene defined in JSON.
-
-- Components:
-	- VerletBody
-		- position
-		- previous position
-		- friction
-		- acceleration
-	- Attractor (pulls things toward it)
-		- strength
-	- Attraction (is attracted to attractors)
-		- strength
-	- VerletConstraint
-		- VerletBody a, b
-		- fixed distance
-	- RenderMesh
-		- gl::BatchRef from svg
-	- Name
-		- name
-
-### Star Clusters
-
-Satellites in layered orbit around central star.
-
-- Components:
-	- HierarchicalPosition version of VerletBody
-		- orientation
-		- pivot
-		- scale
-	- Shape
-		- Cube, Sphere, Cone
-		- Instanced rendering
-	- Name
 
 What is an Entity?
 ------------------
