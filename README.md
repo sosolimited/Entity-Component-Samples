@@ -87,14 +87,14 @@ ECS naturally model heterogeneous objects. They provide a single place where you
 Entities provide interesting and useful characteristics:
 
 - Flexible type creation.
-	- tweak behavior by adding new components and combining existing components differently.
+  - tweak behavior by adding new components and combining existing components differently.
 - Runtime object definition.
-	- Add and remove components at runtime to change how an object behaves.
+  - Add and remove components at runtime to change how an object behaves.
 - Clear separation of different functionality.
-	- This makes reasoning about and testing code simpler.
+  - This makes reasoning about and testing code simpler.
 - Memory layout can be more efficient.
-	- EntityX puts every component in a semi-contiguous array, which makes it cache efficient.
-	- Dynamic allocation (e.g. `make_shared`, `make_unique`, `new`), by contrast, doesn't necessarily group things together.
+  - EntityX puts every component in a semi-contiguous array, which makes it cache efficient.
+  - Dynamic allocation (e.g. `make_shared`, `make_unique`, `new`), by contrast, doesn't necessarily group things together.
 - Easier tool building since world is just data.
 
 The main reason we choose entity component systems is that they encourage composition. This makes the division of responsibility within a program clearer and makes it easier to change out one behavior for another.
@@ -250,11 +250,11 @@ Using our Hierarchy component (and systems that care to traverse the hierarchy),
 
 ```
 Menu
-	- MenuItemA
-	- MenuItemB
-		- PromoAnimation
-		- ParticleEmitter
-	- MenuItemC
+  - MenuItemA
+  - MenuItemB
+    - PromoAnimation
+    - ParticleEmitter
+  - MenuItemC
 ```
 
 First, we need to create the entities that will be in the group. Imagine that we have functions that create their respective entities and return the created entity. Creating the underlying objects would look like the following:
@@ -275,11 +275,11 @@ makeHierarchy(menu, menu_item_a, makeHierarchy(menu_item_b, animation, particle_
 
 // With different indentation, notice how the above code mirrors our diagram from above.
 makeHierarchy(menu,
-	menu_item_a,
-	makeHierarchy(menu_item_b,
-		animation,
-		particle_emitter),
-	menu_item_c);
+  menu_item_a,
+  makeHierarchy(menu_item_b,
+    animation,
+    particle_emitter),
+  menu_item_c);
 ```
 
 ### Things to watch out for
@@ -319,13 +319,14 @@ Now open up the samples (in the `samples/` directory) in XCode and you should be
 
 All samples were tested using in XCode 6.4. If you run into issues with an earlier version of XCode (like empty project files), please upgrade XCode.
 
+
 - Entity Creation
-  - Demonstrates the basics of Entity creation, Component definition, and control through Systems.
-  - Click and drag to create new entities.
+    - Demonstrates the basics of Entity creation, Component definition, and control through Systems.
+    - Click and drag to create new entities.
 - Star Clusters
-  - Satellites in orbit around central star. Demonstrates creation of a scene graph and various approaches to traversing the graph for rendering.
+    - Satellites in orbit around central star. Demonstrates creation of a scene graph and various approaches to traversing the graph for rendering.
 - Gravity Wells
-  - Objects fly through the world and are pulled toward attractors.
+    - Objects fly through the world and are pulled toward attractors.
 
 ### Project template
 
