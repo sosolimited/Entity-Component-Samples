@@ -44,6 +44,11 @@ public:
 	virtual void mouseUp( const ci::app::MouseEvent &event ) {}
 
 	entityx::Entity& entity() { return _entity; }
+	const entityx::Entity& entity() const { return _entity; }
+
+	/// Remove this behavior from its entity.
+	void remove();
+	bool valid() const { return entity().valid(); }
 
 private:
 	entityx::Entity	_entity;
@@ -118,6 +123,24 @@ inline void removeBehavior( entityx::Entity entity, const BehaviorRef &behavior 
 		auto &b = component->behaviors;
 		b.erase( std::remove( b.begin(), b.end(), behavior ), b.end() );
 	}
+}
+
+/// Remove a specific behavior from an entity.
+inline void removeBehavior( entityx::Entity entity, BehaviorBase *behavior )
+{
+	auto component = entity.component<BehaviorComponent>();
+	if (component) {
+		auto &b = component->behaviors;
+		b.erase( std::remove_if( b.begin(), b.end(), [behavior] (const BehaviorRef &element) {
+			return element.get() == behavior;
+		} ), b.end() );
+	}
+}
+
+void BehaviorBase::remove()
+{
+	removeBehavior(entity(), this);
+	_entity.invalidate();
 }
 
 } // namespace soso
