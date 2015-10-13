@@ -1,7 +1,7 @@
-Entity-Component-Sample
-=======================
+Entity Component Systems
+========================
 
-This repository contains didactic sample applications built using an Entity Component Systems (ECS) architecture. They use the [Cinder](https://libcinder.org/) and [EntityX](https://github.com/alecthomas/entityx) libraries. Read more about ECS below, and open the samples in XCode to give them a whirl.
+This repository contains didactic sample applications built using an Entity Component System (ECS) architecture. They use the [Cinder](https://libcinder.org/) and [EntityX](https://github.com/alecthomas/entityx) libraries. You can read more about ECS below, and open the samples in XCode to give them a whirl.
 
 For everthing to work out of the box, clone this repository as a Cinder block.
 
@@ -17,25 +17,26 @@ For everthing to work out of the box, clone this repository as a Cinder block.
     - [Systems](#systems)
     - [Visualizing Entity Component Systems](#visualizing-entity-component-systems)
   - [Considerations when choosing an ECS architecture](#considerations-when-choosing-an-ecs-architecture)
-    - [Why Entities?](#why-entities)
-    - [Why Not Entities?](#why-not-entities)
+    - [Why entities?](#why-entities)
+    - [Why not entities?](#why-not-entities)
     - [What we are replacing](#what-we-are-replacing)
-  - [Great Ideas in ECS](#great-ideas-in-ecs)
-    - [Favor Composition over Inheritance](#favor-composition-over-inheritance)
+  - [Great ideas in ECS](#great-ideas-in-ecs)
+    - [Favor composition over inheritance](#favor-composition-over-inheritance)
     - [Keep interfaces small](#keep-interfaces-small)
-    - [Act on similar things as a group.](#act-on-similar-things-as-a-group)
-    - [A Program is Data and Functions](#a-program-is-data-and-functions)
-  - [Further Reading on Entity-Component-Systems:](#further-reading-on-entity-component-systems)
+    - [Act on similar things as a group](#act-on-similar-things-as-a-group)
+    - [A program consists of data and functions](#a-program-consists-of-data-and-functions)
+  - [Further reading](#further-reading)
 - [Entities in Practice](#entities-in-practice)
-  - [The Lifecycle of an Entity](#the-lifecycle-of-an-entity)
+  - [The lifecycle of an entity](#the-lifecycle-of-an-entity)
   - [Adding and Removing Components](#adding-and-removing-components)
   - [Using multiple components](#using-multiple-components)
-  - [Adding Custom Behavior to a Specific Entity](#adding-custom-behavior-to-a-specific-entity)
-  - [Grouping Entities Together](#grouping-entities-together)
+  - [Adding custom behavior to a single entity](#adding-custom-behavior-to-a-single-entity)
+  - [Grouping entities together](#grouping-entities-together)
   - [Things to watch out for](#things-to-watch-out-for)
-- [Building This Project](#building-this-project)
-  - [Samples](#samples)
+- [Building this project](#building-this-project)
   - [Cinder](#cinder)
+  - [Samples](#samples)
+  - [Project template](#project-template)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -79,7 +80,7 @@ If your project is small enough, you probably don’t need to worry about archit
 
 Entity Component Systems provide a way to describe that world naturally and flexibly and to find things in the world easily. While things aren’t all roses with entities, they are generally better than the alternative class hierarchy.
 
-#### Why Entities?
+#### Why entities?
 
 ECS naturally model heterogeneous objects. They provide a single place where you can store many kinds of objects (2^components; more if one component is a script) and easily access the components you want later.
 
@@ -98,7 +99,7 @@ Entities provide interesting and useful characteristics:
 
 The main reason we choose entity component systems is that they encourage composition. This makes the division of responsibility within a program clearer and makes it easier to change out one behavior for another.
 
-#### Why Not Entities?
+#### Why not entities?
 
 You may not want or need to use entities for your project if the following is true:
 
@@ -120,11 +121,11 @@ So, while class-based hierarchies of GameObject-like structures can feel good (e
 
 If your world only consists of a single or very few types of things, a shallow GameObject hierarchy might be a good fit. However, if you want to change out behavior on the fly or have more organized control over how your objects are managed, having functionality dispersed across many subclasses and their parent class can be confusing.
 
-### Great Ideas in ECS
+### Great ideas in ECS
 
 If you decide not to use an Entity Component System in your project, you can still use many of the concepts underlying the architecture.
 
-#### Favor Composition over Inheritance
+#### Favor composition over inheritance
 
 This is the big idea underlying Entity Component Systems, and it is a concept discussed in the original [Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) book.
 
@@ -140,17 +141,17 @@ You can always compose objects and functions to produce more complicated effects
 
 By breaking things down into components and systems, ECS encourages us to think about only the pieces of data we really need inside our systems. This reduces the number of things we need to consider at any point in the code.
 
-#### Act on similar things as a group.
+#### Act on similar things as a group
 
 Instead of having every object manage its own drawing or update behavior, define that behavior in a function that acts of a collection of those objects. First, this makes it easy to swap out one behavior for another without changing the collection of objects. Also, it makes defining certain behaviors, like flocking, more natural. Finally, batching enables efficiencies in many operations, like rendering.
 
 If you have many similar objects, consider moving some of the logic about what you do with those objects outside of them. You can think of this like a particle system, where the system applies functions to a collection of particles.
 
-#### A Program is Data and Functions
+#### A program consists of data and functions
 
 It can help to think of your program as a set of data and a set of functions that operate on that data. Try to write your functions so they are easy to use across a range of data types. If you can clearly model the data and see the flow of its state changes, it becomes much easier to write functions that do what you want with that data.
 
-### Further Reading on Entity-Component-Systems:
+### Further reading
 
 - [EntityX, the ECS library we use](https://github.com/alecthomas/entityx).
 - [Evolve Your Hierarchy](http://cowboyprogramming.com/2007/01/05/evolve-your-heirachy/)
@@ -164,7 +165,7 @@ Below we discuss some common tasks and how you might accomplish them using Entit
 
 The syntax below is based on the EntityX library and C++11. You may use a different library or language, and the same concepts will apply.
 
-### The Lifecycle of an Entity
+### The lifecycle of an entity
 
 Entities are created and destroyed through an EntityManager. The manager keeps track of all the created entities. Assuming we don’t explicitly destroy an entity ourselves, it will be destroyed when the manager falls out of scope. Usually, this coincides with our program closing.
 
@@ -227,7 +228,7 @@ for (auto e : entities.entities_with_components(xf, cc)) {
 
 Inside the loop above, both the transform and circle handles are guaranteed to be valid. This guarantee is provided by the `entities_with_components` function, which skips any entity that doesn’t have all the components we specify in the function call. When we want to access a different component of the entity the requested components are associated with, we need to check whether that new component is valid before using it.
 
-### Adding Custom Behavior to a Specific Entity
+### Adding custom behavior to a single entity
 
 Sometimes, you may want to give an entity a specific behavior that isn’t clearly modeled by any existing component or combination of components. Other times, you may want to provide an entity with a function that manipulates a handful of components at once (say, flipping out some content in a slideshow with a fancy animation).
 
@@ -235,7 +236,7 @@ We define a `BehaviorComponent` as a place to store these kinds of one-off behav
 
 Before you start making everything a Behavior, consider whether the behavior could be better modeled using a Component and System (or by adding a new System that manipulates existing components). You can also evaluate whether a Behavior makes more sense as a Component+System once you have implemented it as a Behavior.
 
-### Grouping Entities Together
+### Grouping entities together
 
 In addition to describing individual entity attributes, we can use components to describe relationships between entities. That means we can build scene graphs using components when we need them.
 
@@ -292,8 +293,18 @@ auto handle = entity.component<C>();
 auto &c = handle.get(); // c will show up nicely in the debugger.
 ```
 
-Building This Project
+Building this project
 ---------------------
+
+### Cinder
+
+If you don't already have Cinder installed, clone and build Cinder on your machine. Note that we clone recursively in order to get submodules initialized.
+
+```
+git clone git@github.com:sosolimited/Cinder.git --recursive
+cd Cinder/xcode
+./fullbuild.sh
+```
 
 ### Samples
 
@@ -316,34 +327,6 @@ All samples were tested using in XCode 6.4. If you run into issues with an earli
 - Gravity Wells
   - Objects fly through the world and are pulled toward attractors.
 
-### Cinder
+### Project template
 
-If you don't already have Cinder installed, clone and build Cinder on your machine. Note that we clone recursively in order to get submodules initialized.
-
-I keep a directory with a handful of Cinder versions on my machine. That way I can sketch things out a bit more quickly and keep old sketches working if they were built against a specific version of Cinder.
-
-```
-- Code
-	- cinder
-		- master
-		- v0.8.6
-		- v0.8.5
-```
-
-To get the master directory as above:
-
-```
-mkdir -p Code/cinder
-cd Code/cinder
-git clone --branch master git@github.com:sosolimited/Cinder.git master --recursive
-cd master/xcode
-./fullbuild.sh
-```
-
-To clone and build Cinder in a new directory ignoring folder structure, do the following:
-
-```
-git clone git@github.com:sosolimited/Cinder.git --recursive
-cd Cinder/xcode
-./fullbuild.sh
-```
+We have provided a cinderblock project template. If you create a new project from the template using TinderBox, you will have a simple working ECS application.
