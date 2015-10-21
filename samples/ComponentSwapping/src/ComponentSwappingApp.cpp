@@ -13,6 +13,11 @@ using namespace std;
 using namespace soso;
 
 ///
+/// @file Example showing basic assignment and removal of components.
+/// Use number keys 1-3 to add/remove different components from our entity.
+///
+
+///
 /// Each struct can be used as a component to indicate properties and behaviors of an entity.
 ///
 struct Oscillate
@@ -53,8 +58,9 @@ struct HSVColor
 
 ///
 /// Free functions are the simplest kind of system.
-/// They each look through the collection of entities
-/// select, one or more components and do one thing based on those components.
+/// They each look through the collection of entities,
+/// select one or more components,
+/// and do one thing based on those components.
 ///
 
 void applyOscillation(entityx::EntityManager &entities, double dt)
@@ -114,11 +120,11 @@ class ComponentSwappingApp : public App
 public:
   ComponentSwappingApp();
   void setup() override;
+	/// On KeyDown, our application adds or removes components from our test entity.
+	void keyDown(KeyEvent event) override;
   void update() override;
   void draw() override;
 
-	/// On KeyDown, our application adds and removes components from our test entity.
-	void keyDown(KeyEvent event) override;
 
 private:
   entityx::EventManager  _events;
@@ -132,6 +138,19 @@ ComponentSwappingApp::ComponentSwappingApp()
 : _entities(_events),
   _systems(_entities, _events)
 {}
+
+void ComponentSwappingApp::setup()
+{
+  _systems.add<BehaviorSystem>(_entities);
+  _systems.add<ExpiresSystem>();
+  _systems.configure();
+
+	_entity = _entities.create();
+	_entity.assign<Circle>();
+	auto pos = _entity.assign<Position>();
+	pos->position = getWindowCenter();
+	_entity.assign<Oscillate>();
+}
 
 void ComponentSwappingApp::keyDown(cinder::app::KeyEvent event)
 {
@@ -167,19 +186,6 @@ void ComponentSwappingApp::keyDown(cinder::app::KeyEvent event)
 		default:
 		break;
 	}
-}
-
-void ComponentSwappingApp::setup()
-{
-  _systems.add<BehaviorSystem>(_entities);
-  _systems.add<ExpiresSystem>();
-  _systems.configure();
-
-	_entity = _entities.create();
-	_entity.assign<Circle>();
-	auto pos = _entity.assign<Position>();
-	pos->position = getWindowCenter();
-	_entity.assign<Oscillate>();
 }
 
 void ComponentSwappingApp::update()
