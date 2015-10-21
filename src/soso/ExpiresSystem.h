@@ -14,7 +14,7 @@ namespace soso {
 class ExpiresSystem : public entityx::System<ExpiresSystem>
 {
 public:
-	void update( entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt ) override;
+  void update( entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt ) override;
 
 private:
 

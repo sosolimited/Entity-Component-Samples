@@ -13,7 +13,7 @@
 ///
 
 namespace entityx {
-	class EntityManager;
+  class EntityManager;
 }
 
 namespace soso {
