@@ -130,33 +130,33 @@ If your world only consists of a single or very few types of things, a shallow c
 
 ### Great ideas in ECS
 
-If you decide not to use an Entity Component System in your project, you can still use many of the concepts underlying the architecture.
+Entity Component Systems encourage some good habits in your programming, and make certain roads easier to follow. If you decide not to use an Entity Component System in your project, you can still use many of the concepts underlying the architecture.
 
 #### Favor composition over inheritance
 
-This is the big idea underlying Entity Component Systems, and it is a concept discussed in the original [Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) book.
+Composition is the big idea underlying entity component systems, and it is a concept discussed in the original [Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) book. This is the old is-a versus has-a relationship from OOP, where you should almost always choose has-a.
 
-To add functionality to an object, don’t inherit from something that provides it. Instead, compose something that provides that functionality. This allows for easy switching of behavior and the combination of many behaviors.
+To add functionality to an object, don’t inherit from something that provides it. Instead, compose something that provides that functionality. This allows for easy switching of behavior and the combination of many behaviors. In a class, composition is simply adding member variables.
 
-Entities provide a straightforward way to have sophisticated composition. Each component is something that can be composed into an entity. We add components to our entity that have functionality we want. When we no longer want our entity to have a particular behavior, we can remove the relevant component from the entity.
+In an entity component system, composition is simply adding components to an entity. Entities wouldn’t mean anything at all without the components they are composed of (see how often forms of the word composition show up there?). An extra nice feature of composition in an ECS is that it can be done at run-time.
 
 #### Keep interfaces small
 
-Keep the scope of what one object (or function) is responsible for small. If you have a scene graph describing how things are laid out in space, only use it to describe how things are laid out in space.
+Keep the scope of what one object (or function) is responsible for small. For example, if you have a scene graph object describing how things are laid out in space, only use it to describe how things are laid out in space. Keep the management of the sights, sounds, and smells of those things separate.
 
-You can always compose objects and functions to produce more complicated effects, with the benefit of each stage being easier to understand.
-
-By breaking things down into components and systems, ECS encourages us to think about only the pieces of data we really need inside our systems. This reduces the number of things we need to consider at any point in the code.
+By breaking the world down into components and systems, ECS encourages us to think about only the pieces of data we really need inside our systems.
 
 #### Act on similar things as a group
 
-Instead of having every object manage its own drawing or update behavior, define that behavior in a function that acts of a collection of those objects. First, this makes it easy to swap out one behavior for another without changing the collection of objects. Also, it makes defining certain behaviors, like flocking, more natural. Finally, batching enables efficiencies in many operations, like rendering.
+If you have many similar objects, consider moving some of the logic about what you do with those objects outside of them. You can think of this like a particle system, where the system applies functions to a collection of particles, or as a rendering system, which can find efficiencies in drawing a group of objects that the individual objects cannot.
 
-If you have many similar objects, consider moving some of the logic about what you do with those objects outside of them. You can think of this like a particle system, where the system applies functions to a collection of particles.
+ECS encourages batch processing, as it splits behavior into systems that act on a collection of components.
 
-#### A program consists of data and functions
+#### Separate your data and the functions that act on it
 
-It can help to think of your program as a set of data and a set of functions that operate on that data. Try to write your functions so they are easy to use across a range of data types. If you can clearly model the data and see the flow of its state changes, it becomes much easier to write functions that do what you want with that data.
+Keeping data simple makes it easy to write a range of functions that can act on it. Additionally, having functions separate from data makes it easier to generalize the functions to work on a range of types of data.
+
+Systems being kept separate from components in ECS makes it easy to swap out how you manage the behavior of the world without changing your model of the world. The underlying data stays the same, but you can try out many different approaches to using it (and even swap them out at runtime).
 
 ### Further reading
 
