@@ -1,7 +1,9 @@
 Entity Component Systems
 ========================
 
-This repository contains didactic sample applications built using an Entity Component System (ECS) architecture. They use the [Cinder](https://libcinder.org/) and [EntityX](https://github.com/alecthomas/entityx) libraries. In addition to the samples, you can read more about ECS below.
+This repository contains didactic sample applications built using an Entity Component System (ECS) architecture. The samples rely on [Cinder](https://libcinder.org/) and [EntityX](https://github.com/alecthomas/entityx) to provide a graphics framework and an entity component framework, respectively.
+
+An overview of the Entity Component System architecture and its benefits continues below.
 
 For everything to work out of the box, clone this repository as a Cinder block.
 
@@ -45,23 +47,23 @@ Understanding Entity Component Systems
 
 ### The Basics
 
-Entity component systems are a design pattern originating from the game industry. They are used to define game objects in a way that is simpler and more flexible than class-based inheritance. Instead of inheritance, they provide a straightforward way to compose behaviors to generate interesting objects in a game world.
+Entity component systems are a design pattern originating from the game industry. They are used to define game objects in a way that is simpler and more flexible than class-based inheritance. They provide a straightforward way to compose behaviors to generate interesting objects in a game world.
 
-Entity component systems consist of three main parts: `entities`, `components`, and `systems`. A `component` contains a bit of data. An `entity` is a collection of components. A `system` is a function that accepts entities as a parameter and does something based on their components.
+Entity component systems consist of three main parts: `entities`, `components`, and `systems`. A `component` contains a bit of data. An `entity` is a collection of related components. A `system` is a function that accepts entities as a parameter and does something based on their components.
 
 #### Components
 
-A `component` stores the minimal amount of data relevant to some task. It could be the position of an object in space, its bounding volume, a name, a flag for special treatment, or a list of other entities. In general, we try to store one attribute per component.
+A `component` stores the minimal amount of data relevant to some task. It could be the position of an object in space, its bounding volume, a name, a flag for special treatment, or a list of other entities.
 
 #### Entities
 
-An `entity` is a collection of components. It relates the components to each other, so you can say that some entity has both the name component "ginger" and the color component "red" and the point of interest component.
+An `entity` is a collection of components. It relates the components to each other, so you can say that some entity has three components: the name "ginger", the color "brown", and the "point of interest".
 
 #### Systems
 
-A `system` is a function that uses the data in components.
+A `system` is a function that uses the data stored in components.
 
-In order to make things happen in an ECS, all the entities are passed to functions that use one or more of the components to do their work. These functions are called systems. When systems need to store state (such as a collection of 3d meshes, movies, or audio files), they can be specified as an instance of a class or as a lambda closure.
+In order to make things happen in an ECS, entities are passed to functions that use one or more component(s) to do their work. These functions are called systems. When systems need to store state (such as a collection of 3d meshes, movies, or audio files), they can be specified as an instance of a class or as a lambda closure.
 
 #### Visualizing Entity Component Systems
 
@@ -79,9 +81,9 @@ A rendering system can traverse all the position and shape components to decide 
 
 ### Considerations when choosing an ECS architecture
 
-If your project is small enough, you probably don’t need to worry about architecting it all that carefully. In that case, you can likely fit everything in a single file and have it work fine. As projects grow larger, however, you will almost certainly want a more general abstraction of your virtual world.
+If your project is small enough, you may not need to worry about architecting it all that carefully. In that case, you can likely fit everything in a single file and have it work fine. As projects grow larger, however, you will almost certainly want a more general abstraction of your virtual world. At that point, using an ECS to organize your project can be very beneficial.
 
-Entity Component Systems provide a way to describe that world naturally and flexibly and to find things in the world easily. While things aren’t all roses with entities, they are generally better than the alternative class hierarchy.
+Entity Component Systems provide a way to describe a virtual world naturally and flexibly and to find things in the world easily. While things aren’t all roses with entities, they are generally better than the alternative class hierarchy.
 
 #### Why entities?
 
@@ -95,6 +97,8 @@ Entities provide interesting and useful characteristics:
   - Add and remove components at runtime to change how an object behaves.
 - Clear separation of different functionality.
   - This makes reasoning about and testing code simpler.
+- Easy to add new behaviors.
+  - Simply create a new component and system, and tack it on to an existing entity.
 - Memory layout can be more efficient.
   - EntityX puts every component in a semi-contiguous array, which makes it cache efficient.
   - Dynamic allocation (e.g. `make_shared`, `make_unique`, `new`), by contrast, doesn't necessarily group things together.
@@ -112,15 +116,17 @@ You may not want or need to use entities for your project if the following is tr
 
 #### What we are replacing
 
-An alternative solution is to have a classical inheritance hierarchy describing the types of things than can exist in our game world. I strongly discourage this alternative. Think of the platypus: it is easy to describe each part that makes it up (bill, egg-laying, fur, poison claws), but hard to categorize since those parts are associated with different branches of traditional animal taxonomy (birds, reptiles/birds, mammals, ?). Classical inheritance trees force us to categorize things, despite it often being easier to describe them.
+We’ve talked down class hierarchies along the way, so now let’s talk briefly about what they are.
 
-In a classical inheritance tree, a GameObject base class defines every common attribute and behavior of objects in the game world. Subclasses specialize those behaviors through virtual method overrides and add other functionality as needed.
+A classical inheritance hierarchy provides an alternative way to model a virtual world. I strongly discourage this alternative. Think of the platypus: it is easy to describe each part that makes it up (bill, egg-laying, fur, poison claws), but hard to categorize since those parts are associated with different branches of traditional animal taxonomy (birds, reptiles/birds, mammals, ?). Classical inheritance trees force us to put things in a taxonomy, despite it often being easier to describe them by their component parts.
 
-Because of the consistent interface, it is easy to store objects in an inheritance tree in a single container. While at first this abstraction feels good, it quickly becomes confusing: the interleaving of types within a container also interleaves the order in which different sections of code are run, making it difficult to reason about how the state of the world changes over time.
+In a classical inheritance tree, a base class defines every common attribute and behavior of objects in the game world. Subclasses specialize those behaviors through virtual method overrides and add other functionality as needed.
 
-Additionally, an inheritance hierarchy introduces new questions about where functionality belongs in a project. It becomes challenging to avoid duplicating behavior in multiple child types or storing extraneous behavior in a parent type.
+Because of the consistent interface, it is easy to store objects from an inheritance tree in a single container. While at first this abstraction feels good, it quickly becomes confusing: the interleaving of types within a container also interleaves the order in which different sections of code are run, making it difficult to reason about how the state of the world changes over time.
 
-If your world only consists of a single or very few types of things, a shallow GameObject hierarchy might be a good fit. However, if you want to change out behavior on the fly or have more organized control over how your objects are managed, having functionality dispersed across many subclasses and their parent class can be confusing.
+Additionally, an inheritance hierarchy introduces new questions about where functionality belongs in a project. It becomes challenging to avoid duplicating behavior across multiple child types or storing extraneous behavior in a parent type.
+
+If your world only consists of a single or very few types of things, a shallow class hierarchy might still be a good fit. However, if you want to change out behavior on the fly or have more organized control over how your objects are managed, having functionality dispersed across many subclasses and their parent class can be confusing.
 
 ### Great ideas in ECS
 
