@@ -323,7 +323,7 @@ Building this project
 If you don't already have Cinder installed, clone and build Cinder on your machine. Note that we clone recursively in order to initialize submodules.
 
 ```
-git clone git@github.com:sosolimited/Cinder.git --recursive
+git clone https://github.com/cinder/Cinder.git --recursive
 cd Cinder/xcode
 ./fullbuild.sh
 ```
@@ -334,7 +334,7 @@ Clone this repository into the `blocks/` directory of a recent version of the Ci
 
 ```
 cd Cinder/blocks/
-git clone git@github.com:sosolimited/Entity-Component-Samples.git --recursive
+git clone https://github.com/sosolimited/Entity-Component-Samples.git --recursive
 ```
 
 Open up one of the samples (in the `samples/` directory) in XCode and you should be good to go.
