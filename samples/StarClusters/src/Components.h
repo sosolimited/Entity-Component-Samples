@@ -22,7 +22,7 @@ namespace soso {
 ///
 struct Sun
 {
-	Sun() = default;
+  Sun() = default;
 };
 
 } // namespace soso

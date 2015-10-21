@@ -17,10 +17,10 @@ namespace soso {
 class VerletPhysicsSystem : public entityx::System<VerletPhysicsSystem>
 {
 public:
-	void update( entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt ) override;
+  void update( entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt ) override;
 
 private:
-	entityx::TimeDelta	previous_dt = 1.0 / 60.0;
+  entityx::TimeDelta  previous_dt = 1.0 / 60.0;
 };
 
 } // namespace soso

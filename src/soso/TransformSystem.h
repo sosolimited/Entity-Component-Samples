@@ -15,7 +15,7 @@ namespace soso {
 class TransformSystem : public entityx::System<TransformSystem>
 {
 public:
-	void update( entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt ) override;
+  void update( entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt ) override;
 
 private:
 
