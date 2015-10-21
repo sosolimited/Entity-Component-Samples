@@ -7,15 +7,19 @@
 #include "soso/ExpiresSystem.h"
 #include "soso/Expires.h"
 
+///
+/// @file application demonstrating the EntityX: Basic template for Tinderbox.
+///
+
 using namespace ci;
 using namespace ci::app;
 using namespace std;
 using namespace soso;
 
-class TinyGuiApp : public App
+class TemplateProjectApp : public App
 {
 public:
-  TinyGuiApp();
+  TemplateProjectApp();
   void setup() override;
   void update() override;
   void draw() override;
@@ -29,12 +33,12 @@ private:
   ci::Timer              _frame_timer;
 };
 
-TinyGuiApp::TinyGuiApp()
+TemplateProjectApp::TemplateProjectApp()
 : _entities(_events),
   _systems(_entities, _events)
 {}
 
-void TinyGuiApp::setup()
+void TemplateProjectApp::setup()
 {
   _systems.add<BehaviorSystem>(_entities);
   _systems.add<ExpiresSystem>();
@@ -43,7 +47,7 @@ void TinyGuiApp::setup()
   createTestEntities();
 }
 
-void TinyGuiApp::createTestEntities()
+void TemplateProjectApp::createTestEntities()
 {
   for (auto i = 0; i < 72; i += 1)
   {
@@ -52,7 +56,7 @@ void TinyGuiApp::createTestEntities()
   }
 }
 
-void TinyGuiApp::update()
+void TemplateProjectApp::update()
 {
   auto dt = _frame_timer.getSeconds();
   if (dt < std::numeric_limits<double>::epsilon() || dt > 0.1)
@@ -65,7 +69,7 @@ void TinyGuiApp::update()
   _systems.update<ExpiresSystem>(dt);
 }
 
-void TinyGuiApp::draw()
+void TemplateProjectApp::draw()
 {
   gl::clear();
 
@@ -86,4 +90,4 @@ void TinyGuiApp::draw()
   }
 }
 
-CINDER_APP( TinyGuiApp, RendererGl )
+CINDER_APP( TemplateProjectApp, RendererGl )
