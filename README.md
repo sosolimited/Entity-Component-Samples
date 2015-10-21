@@ -112,15 +112,13 @@ You may not want or need to use entities for your project if the following is tr
 
 #### What we are replacing
 
-An alternative solution is to have a classical inheritance hierarchy. We strongly discourage this alternative.
+An alternative solution is to have a classical inheritance hierarchy describing the types of things than can exist in our game world. I strongly discourage this alternative. Think of the platypus: it is easy to describe each part that makes it up (bill, egg-laying, fur, poison claws), but hard to categorize since those parts are associated with different branches of traditional animal taxonomy (birds, reptiles/birds, mammals, ?). Classical inheritance trees force us to categorize things, despite it often being easier to describe them.
 
-In a classical inheritance tree, a GameObject base class defines every common attribute and behavior. Subclasses specialize those behaviors through virtual method overrides and add other functionality as needed.
+In a classical inheritance tree, a GameObject base class defines every common attribute and behavior of objects in the game world. Subclasses specialize those behaviors through virtual method overrides and add other functionality as needed.
 
-Because of the consistent interface, objects in the inheritance tree are easy to store a single container to pass around. While at first this abstraction feels good, it can quickly become confusing as function overriding obscures what is happening at each step and the order of operations.
+Because of the consistent interface, it is easy to store objects in an inheritance tree in a single container. While at first this abstraction feels good, it quickly becomes confusing: the interleaving of types within a container also interleaves the order in which different sections of code are run, making it difficult to reason about how the state of the world changes over time.
 
-Additionally, an inheritance hierarchy introduces new questions about where functionality should go and makes it challenging to avoid duplicate behavior or extraneous behavior.
-
-So, while class-based hierarchies of GameObject-like structures can feel good (e.g. Flash sprites), they become unwieldy pretty quickly. Additionally, by hiding many kinds of complex behavior behind a simple-looking interface, they become difficult to reason about.
+Additionally, an inheritance hierarchy introduces new questions about where functionality belongs in a project. It becomes challenging to avoid duplicating behavior in multiple child types or storing extraneous behavior in a parent type.
 
 If your world only consists of a single or very few types of things, a shallow GameObject hierarchy might be a good fit. However, if you want to change out behavior on the fly or have more organized control over how your objects are managed, having functionality dispersed across many subclasses and their parent class can be confusing.
 
