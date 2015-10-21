@@ -18,34 +18,34 @@
 		00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		EF6CE9CFBBA7493684A2BA40 /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = A9FAB0D5CC5547419BDCB342 /* Pool.cc */; };
-		6255DC5F5E344DC28B5948FB /* System.cc in Sources */ = {isa = PBXBuildFile; fileRef = C35946BEA58446A79216C94B /* System.cc */; };
-		BC038B56CDAF4C35A442E127 /* Event.cc in Sources */ = {isa = PBXBuildFile; fileRef = 81D1CFDDDB0648D496453D4A /* Event.cc */; };
-		E5FF4D88114B472FAA05E9CA /* Entity.cc in Sources */ = {isa = PBXBuildFile; fileRef = BAB4C28CA8E74123835949FB /* Entity.cc */; };
-		580FCFC3ABBE4D33AE0CD08D /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = DE31D80FF18047158203089A /* System.h */; };
-		9900B2427B7B40759BC8187A /* quick.h in Headers */ = {isa = PBXBuildFile; fileRef = 3396A0A014CD4CA8B45BF6C5 /* quick.h */; };
-		5D4702885FEF46A3A09AD69F /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = 43838EFF9F694B1DAC29FD35 /* Event.h */; };
-		E72B648DAB654F7F93020D32 /* entityx.h in Headers */ = {isa = PBXBuildFile; fileRef = DDDF3AD083114E97B2CD540A /* entityx.h */; };
-		D0904326B35A48B29FCA95A0 /* Entity.h in Headers */ = {isa = PBXBuildFile; fileRef = ADAED71FCF2E448FBC272917 /* Entity.h */; };
-		7C6F877D430A44DE91A847A3 /* VerletPhysicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81EC64437B014A32A89D2834 /* VerletPhysicsSystem.cpp */; };
-		C59B1C7C09914C7487927FC3 /* TransformSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5D4C9FED9A3438C8A1FFD71 /* TransformSystem.cpp */; };
-		8CD2878A764D4B7CA2D7DB1A /* ExpiresSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6894FE381E8C48D1A3F42B78 /* ExpiresSystem.cpp */; };
-		8B7251DDAF1C40A180804677 /* BehaviorSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B0987F9434E109AD6D034 /* BehaviorSystem.cpp */; };
-		28CE1B8DCC5D4922BC06FE20 /* VerletPhysicsSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = B504F8E8D0D64A45BBB39F5B /* VerletPhysicsSystem.h */; };
-		C75C9E89CA55422D971D6FAF /* VerletBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 86AA87485D34459EB221C3D0 /* VerletBody.h */; };
-		07A3A12695454340B022B302 /* TransformSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB0527340E94864B83D524B /* TransformSystem.h */; };
-		1CBD3726C4E24DFC8EC17EF3 /* Transform.h in Headers */ = {isa = PBXBuildFile; fileRef = 9777F1AA549447A899C2943E /* Transform.h */; };
-		975547AA4CB0489E83BA9E99 /* RenderLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FE394108B434260A4B56882 /* RenderLayer.h */; };
-		E19DF8C09515477E8FE47557 /* HierarchyComponentT.h in Headers */ = {isa = PBXBuildFile; fileRef = F9DBE18A871346B3A91A9BB7 /* HierarchyComponentT.h */; };
-		DFC87EF52B964188946173C9 /* HierarchyComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 11FB6791956448BDB82A428E /* HierarchyComponent.h */; };
-		2CCD42CB0AF0418D8F4A058B /* ExpiresSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 211A3C38A3844BB8A251F1FC /* ExpiresSystem.h */; };
-		145E4C20BD724C4FB56E372D /* Expires.h in Headers */ = {isa = PBXBuildFile; fileRef = 99DC1C7E1A6D45ABA3845F68 /* Expires.h */; };
-		6D79048E35CC4FB99320B533 /* BehaviorSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 39796BA4A91A47F3A6AAA595 /* BehaviorSystem.h */; };
-		1ECFCCA0850749D5B9F22DD4 /* Behavior.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EE7AAB799E34898B59BC88E /* Behavior.h */; };
-		DAE25B52FB084DA19A2882AD /* TinyGuiApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A198F2919FCE41D5A6A91485 /* TinyGuiApp.cpp */; };
-		A7D990B0D2054240BFEE84A1 /* TinyGui_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 3CB7881C35E5485786525381 /* TinyGui_Prefix.pch */; };
-		57FBF568847D42A0839489DC /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 00BF2586E6074A84B9EEA7C6 /* CinderApp.icns */; };
-		D97101BA4D134F1ABD337446 /* Resources.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B4183056EB143798F1C87D9 /* Resources.h */; };
+		86E9E7FE189C4FD98D53FD6B /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE59655E3C4693B2BDF9E1 /* Pool.cc */; };
+		C5624F127CBD4ABDB7872D2E /* System.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9BDEFD1239354E2983D13D53 /* System.cc */; };
+		F72C50C2FE9F42CA95BC63F1 /* Event.cc in Sources */ = {isa = PBXBuildFile; fileRef = 839029FA646E4B2C9543DD1D /* Event.cc */; };
+		E5AD64E804184973B749A4C4 /* Entity.cc in Sources */ = {isa = PBXBuildFile; fileRef = F540E72108054AA38A25211F /* Entity.cc */; };
+		BF49F8AA3E8243D3A86AC5C7 /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = 39348CBAC7B845578AD15B9A /* System.h */; };
+		93DFD50279B74E018C97DF5B /* quick.h in Headers */ = {isa = PBXBuildFile; fileRef = 47D8AA13E4224EE29A377976 /* quick.h */; };
+		9F2780FBE3104BFB8C414883 /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C78FB25A4764625B92C7F84 /* Event.h */; };
+		B96ED6F8C8774C91A0CC4B6A /* entityx.h in Headers */ = {isa = PBXBuildFile; fileRef = 8461078C4F8B40FE84546DFA /* entityx.h */; };
+		47941C3C26D04C528BE14084 /* Entity.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FCE6DEB56224E5AAF1DBAE7 /* Entity.h */; };
+		316C2CA1C7EA4393B25D2D73 /* VerletPhysicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A721E8C79B10493798DEFF1C /* VerletPhysicsSystem.cpp */; };
+		E4236719FB89469DACE9C5BA /* TransformSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06FFAF8BC2DA42068EE37CA1 /* TransformSystem.cpp */; };
+		79D1B989C8084ACAB4EE088F /* ExpiresSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D564C1E2EE9D4A949B2AF246 /* ExpiresSystem.cpp */; };
+		D8C2299CDFB04A8C937214FC /* BehaviorSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8A5149164BD4CAA8D17ED32 /* BehaviorSystem.cpp */; };
+		FD2C6FF82D874966A4DC8569 /* VerletPhysicsSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 68A05BA74654416D877AAB9D /* VerletPhysicsSystem.h */; };
+		E1C9A536FCC1445197A76444 /* VerletBody.h in Headers */ = {isa = PBXBuildFile; fileRef = F351D698D2E54836999AA16D /* VerletBody.h */; };
+		A0737C3C06FF415E87CEA8C8 /* TransformSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = D6462DD5D1BE40ECA0F86F04 /* TransformSystem.h */; };
+		29661FF95FC04024BC300E93 /* Transform.h in Headers */ = {isa = PBXBuildFile; fileRef = B892E0B980F24F7B9D2BBDE9 /* Transform.h */; };
+		3F4459713E9E4ABABBC51563 /* RenderLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 11B67382C9B041399952D700 /* RenderLayer.h */; };
+		60193FD84D3E4E88ACA8B553 /* HierarchyComponentT.h in Headers */ = {isa = PBXBuildFile; fileRef = BF80A26757FB47C9B5285A95 /* HierarchyComponentT.h */; };
+		998DF7C6CB8047E491E6EFFE /* HierarchyComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D14E48B339949FEA2156BE4 /* HierarchyComponent.h */; };
+		6D328829EFA44B789054D208 /* ExpiresSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 56F38257ECE34F1DB92FFB57 /* ExpiresSystem.h */; };
+		748BFD1B6DF5469D9DD848D2 /* Expires.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5285252B5B4944B295B460 /* Expires.h */; };
+		3CA8DA09B3914B89BC8AF89D /* BehaviorSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = E2388247F36D456AACE6FB67 /* BehaviorSystem.h */; };
+		74730566EB724EFC866CEC13 /* Behavior.h in Headers */ = {isa = PBXBuildFile; fileRef = 37383B4D7EBA491FAEC04A2A /* Behavior.h */; };
+		C5C4E42281C449DFA7537274 /* TemplateProjectApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7ED31E2665EC4B2BA876C4D7 /* TemplateProjectApp.cpp */; };
+		CDB545F351594C33914C0F07 /* TemplateProject_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 80D1D1B01022441C81293159 /* TemplateProject_Prefix.pch */; };
+		894C5A64637B4DF98AA2A40D /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5E96A08D51524124BC3C49EC /* CinderApp.icns */; };
+		8533670CD80A4867AD619611 /* Resources.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F2B52BA4CAF49D4BDC30F68 /* Resources.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,36 +62,36 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		5323E6B10EAFCA74003A9687 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
-		8D1107320486CEB800E47090 /* TinyGui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyGui.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2B4183056EB143798F1C87D9 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../include/Resources.h; sourceTree = "<group>"; name = Resources.h; };
-		00BF2586E6074A84B9EEA7C6 /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; name = CinderApp.icns; };
-		C93A8E15B66B4FD58030216F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; name = Info.plist; };
-		3CB7881C35E5485786525381 /* TinyGui_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = TinyGui_Prefix.pch; sourceTree = "<group>"; name = TinyGui_Prefix.pch; };
-		A198F2919FCE41D5A6A91485 /* TinyGuiApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../src/TinyGuiApp.cpp; sourceTree = "<group>"; name = TinyGuiApp.cpp; };
-		6EE7AAB799E34898B59BC88E /* Behavior.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/Behavior.h; sourceTree = "<group>"; name = Behavior.h; };
-		39796BA4A91A47F3A6AAA595 /* BehaviorSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/BehaviorSystem.h; sourceTree = "<group>"; name = BehaviorSystem.h; };
-		99DC1C7E1A6D45ABA3845F68 /* Expires.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/Expires.h; sourceTree = "<group>"; name = Expires.h; };
-		211A3C38A3844BB8A251F1FC /* ExpiresSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/ExpiresSystem.h; sourceTree = "<group>"; name = ExpiresSystem.h; };
-		11FB6791956448BDB82A428E /* HierarchyComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/HierarchyComponent.h; sourceTree = "<group>"; name = HierarchyComponent.h; };
-		F9DBE18A871346B3A91A9BB7 /* HierarchyComponentT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/HierarchyComponentT.h; sourceTree = "<group>"; name = HierarchyComponentT.h; };
-		0FE394108B434260A4B56882 /* RenderLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/RenderLayer.h; sourceTree = "<group>"; name = RenderLayer.h; };
-		9777F1AA549447A899C2943E /* Transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/Transform.h; sourceTree = "<group>"; name = Transform.h; };
-		8BB0527340E94864B83D524B /* TransformSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/TransformSystem.h; sourceTree = "<group>"; name = TransformSystem.h; };
-		86AA87485D34459EB221C3D0 /* VerletBody.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/VerletBody.h; sourceTree = "<group>"; name = VerletBody.h; };
-		B504F8E8D0D64A45BBB39F5B /* VerletPhysicsSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/VerletPhysicsSystem.h; sourceTree = "<group>"; name = VerletPhysicsSystem.h; };
-		5A6B0987F9434E109AD6D034 /* BehaviorSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../../../src/soso/BehaviorSystem.cpp; sourceTree = "<group>"; name = BehaviorSystem.cpp; };
-		6894FE381E8C48D1A3F42B78 /* ExpiresSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../../../src/soso/ExpiresSystem.cpp; sourceTree = "<group>"; name = ExpiresSystem.cpp; };
-		B5D4C9FED9A3438C8A1FFD71 /* TransformSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../../../src/soso/TransformSystem.cpp; sourceTree = "<group>"; name = TransformSystem.cpp; };
-		81EC64437B014A32A89D2834 /* VerletPhysicsSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../../../src/soso/VerletPhysicsSystem.cpp; sourceTree = "<group>"; name = VerletPhysicsSystem.cpp; };
-		ADAED71FCF2E448FBC272917 /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/Entity.h; sourceTree = "<group>"; name = Entity.h; };
-		DDDF3AD083114E97B2CD540A /* entityx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/entityx.h; sourceTree = "<group>"; name = entityx.h; };
-		43838EFF9F694B1DAC29FD35 /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/Event.h; sourceTree = "<group>"; name = Event.h; };
-		3396A0A014CD4CA8B45BF6C5 /* quick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/quick.h; sourceTree = "<group>"; name = quick.h; };
-		DE31D80FF18047158203089A /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/System.h; sourceTree = "<group>"; name = System.h; };
-		BAB4C28CA8E74123835949FB /* Entity.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ../../../src/entityx/entityx/Entity.cc; sourceTree = "<group>"; name = Entity.cc; };
-		81D1CFDDDB0648D496453D4A /* Event.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ../../../src/entityx/entityx/Event.cc; sourceTree = "<group>"; name = Event.cc; };
-		C35946BEA58446A79216C94B /* System.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ../../../src/entityx/entityx/System.cc; sourceTree = "<group>"; name = System.cc; };
-		A9FAB0D5CC5547419BDCB342 /* Pool.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ../../../src/entityx/entityx/help/Pool.cc; sourceTree = "<group>"; name = Pool.cc; };
+		8D1107320486CEB800E47090 /* TemplateProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TemplateProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F2B52BA4CAF49D4BDC30F68 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../include/Resources.h; sourceTree = "<group>"; name = Resources.h; };
+		5E96A08D51524124BC3C49EC /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; name = CinderApp.icns; };
+		D105502690064AADB4A1E7D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; name = Info.plist; };
+		80D1D1B01022441C81293159 /* TemplateProject_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = TemplateProject_Prefix.pch; sourceTree = "<group>"; name = TemplateProject_Prefix.pch; };
+		7ED31E2665EC4B2BA876C4D7 /* TemplateProjectApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../src/TemplateProjectApp.cpp; sourceTree = "<group>"; name = TemplateProjectApp.cpp; };
+		37383B4D7EBA491FAEC04A2A /* Behavior.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/Behavior.h; sourceTree = "<group>"; name = Behavior.h; };
+		E2388247F36D456AACE6FB67 /* BehaviorSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/BehaviorSystem.h; sourceTree = "<group>"; name = BehaviorSystem.h; };
+		5C5285252B5B4944B295B460 /* Expires.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/Expires.h; sourceTree = "<group>"; name = Expires.h; };
+		56F38257ECE34F1DB92FFB57 /* ExpiresSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/ExpiresSystem.h; sourceTree = "<group>"; name = ExpiresSystem.h; };
+		1D14E48B339949FEA2156BE4 /* HierarchyComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/HierarchyComponent.h; sourceTree = "<group>"; name = HierarchyComponent.h; };
+		BF80A26757FB47C9B5285A95 /* HierarchyComponentT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/HierarchyComponentT.h; sourceTree = "<group>"; name = HierarchyComponentT.h; };
+		11B67382C9B041399952D700 /* RenderLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/RenderLayer.h; sourceTree = "<group>"; name = RenderLayer.h; };
+		B892E0B980F24F7B9D2BBDE9 /* Transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/Transform.h; sourceTree = "<group>"; name = Transform.h; };
+		D6462DD5D1BE40ECA0F86F04 /* TransformSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/TransformSystem.h; sourceTree = "<group>"; name = TransformSystem.h; };
+		F351D698D2E54836999AA16D /* VerletBody.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/VerletBody.h; sourceTree = "<group>"; name = VerletBody.h; };
+		68A05BA74654416D877AAB9D /* VerletPhysicsSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/VerletPhysicsSystem.h; sourceTree = "<group>"; name = VerletPhysicsSystem.h; };
+		F8A5149164BD4CAA8D17ED32 /* BehaviorSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../../../src/soso/BehaviorSystem.cpp; sourceTree = "<group>"; name = BehaviorSystem.cpp; };
+		D564C1E2EE9D4A949B2AF246 /* ExpiresSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../../../src/soso/ExpiresSystem.cpp; sourceTree = "<group>"; name = ExpiresSystem.cpp; };
+		06FFAF8BC2DA42068EE37CA1 /* TransformSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../../../src/soso/TransformSystem.cpp; sourceTree = "<group>"; name = TransformSystem.cpp; };
+		A721E8C79B10493798DEFF1C /* VerletPhysicsSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../../../src/soso/VerletPhysicsSystem.cpp; sourceTree = "<group>"; name = VerletPhysicsSystem.cpp; };
+		2FCE6DEB56224E5AAF1DBAE7 /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/Entity.h; sourceTree = "<group>"; name = Entity.h; };
+		8461078C4F8B40FE84546DFA /* entityx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/entityx.h; sourceTree = "<group>"; name = entityx.h; };
+		0C78FB25A4764625B92C7F84 /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/Event.h; sourceTree = "<group>"; name = Event.h; };
+		47D8AA13E4224EE29A377976 /* quick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/quick.h; sourceTree = "<group>"; name = quick.h; };
+		39348CBAC7B845578AD15B9A /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/System.h; sourceTree = "<group>"; name = System.h; };
+		F540E72108054AA38A25211F /* Entity.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ../../../src/entityx/entityx/Entity.cc; sourceTree = "<group>"; name = Entity.cc; };
+		839029FA646E4B2C9543DD1D /* Event.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ../../../src/entityx/entityx/Event.cc; sourceTree = "<group>"; name = Event.cc; };
+		9BDEFD1239354E2983D13D53 /* System.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ../../../src/entityx/entityx/System.cc; sourceTree = "<group>"; name = System.cc; };
+		4AAE59655E3C4693B2BDF9E1 /* Pool.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ../../../src/entityx/entityx/help/Pool.cc; sourceTree = "<group>"; name = Pool.cc; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,7 +119,7 @@
 		080E96DDFE201D6D7F000001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				A198F2919FCE41D5A6A91485 /* TinyGuiApp.cpp */,
+				7ED31E2665EC4B2BA876C4D7 /* TemplateProjectApp.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -154,12 +154,12 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D1107320486CEB800E47090 /* TinyGui.app */,
+				8D1107320486CEB800E47090 /* TemplateProject.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		29B97314FDCFA39411CA2CEA /* TinyGui */ = {
+		29B97314FDCFA39411CA2CEA /* TemplateProject */ = {
 			isa = PBXGroup;
 			children = (
 				01B97315FEAEA392516A2CEA /* Blocks */,
@@ -169,76 +169,76 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
-			name = TinyGui;
+			name = TemplateProject;
 			sourceTree = "<group>";
 		};
-		5A4D54711857418886A460A8 /* soso */ = {
+		69C887407E46471D87099950 /* soso */ = {
 			isa = PBXGroup;
 			children = (
-				6EE7AAB799E34898B59BC88E /* Behavior.h */,
-				39796BA4A91A47F3A6AAA595 /* BehaviorSystem.h */,
-				99DC1C7E1A6D45ABA3845F68 /* Expires.h */,
-				211A3C38A3844BB8A251F1FC /* ExpiresSystem.h */,
-				11FB6791956448BDB82A428E /* HierarchyComponent.h */,
-				F9DBE18A871346B3A91A9BB7 /* HierarchyComponentT.h */,
-				0FE394108B434260A4B56882 /* RenderLayer.h */,
-				9777F1AA549447A899C2943E /* Transform.h */,
-				8BB0527340E94864B83D524B /* TransformSystem.h */,
-				86AA87485D34459EB221C3D0 /* VerletBody.h */,
-				B504F8E8D0D64A45BBB39F5B /* VerletPhysicsSystem.h */,
-				5A6B0987F9434E109AD6D034 /* BehaviorSystem.cpp */,
-				6894FE381E8C48D1A3F42B78 /* ExpiresSystem.cpp */,
-				B5D4C9FED9A3438C8A1FFD71 /* TransformSystem.cpp */,
-				81EC64437B014A32A89D2834 /* VerletPhysicsSystem.cpp */,
+				37383B4D7EBA491FAEC04A2A /* Behavior.h */,
+				E2388247F36D456AACE6FB67 /* BehaviorSystem.h */,
+				5C5285252B5B4944B295B460 /* Expires.h */,
+				56F38257ECE34F1DB92FFB57 /* ExpiresSystem.h */,
+				1D14E48B339949FEA2156BE4 /* HierarchyComponent.h */,
+				BF80A26757FB47C9B5285A95 /* HierarchyComponentT.h */,
+				11B67382C9B041399952D700 /* RenderLayer.h */,
+				B892E0B980F24F7B9D2BBDE9 /* Transform.h */,
+				D6462DD5D1BE40ECA0F86F04 /* TransformSystem.h */,
+				F351D698D2E54836999AA16D /* VerletBody.h */,
+				68A05BA74654416D877AAB9D /* VerletPhysicsSystem.h */,
+				F8A5149164BD4CAA8D17ED32 /* BehaviorSystem.cpp */,
+				D564C1E2EE9D4A949B2AF246 /* ExpiresSystem.cpp */,
+				06FFAF8BC2DA42068EE37CA1 /* TransformSystem.cpp */,
+				A721E8C79B10493798DEFF1C /* VerletPhysicsSystem.cpp */,
 			);
 			name = soso;
 			sourceTree = "<group>";
 		};
-		B8AB5B8C01E74F7EAA94727C /* help */ = {
+		56191EEDD56A449486C9A7C4 /* help */ = {
 			isa = PBXGroup;
 			children = (
-				A9FAB0D5CC5547419BDCB342 /* Pool.cc */,
+				4AAE59655E3C4693B2BDF9E1 /* Pool.cc */,
 			);
 			name = help;
 			sourceTree = "<group>";
 		};
-		0DB62272B7A04A8F960DD64E /* entityx */ = {
+		01A206AE165D47648B0B4497 /* entityx */ = {
 			isa = PBXGroup;
 			children = (
-				ADAED71FCF2E448FBC272917 /* Entity.h */,
-				DDDF3AD083114E97B2CD540A /* entityx.h */,
-				43838EFF9F694B1DAC29FD35 /* Event.h */,
-				3396A0A014CD4CA8B45BF6C5 /* quick.h */,
-				DE31D80FF18047158203089A /* System.h */,
-				BAB4C28CA8E74123835949FB /* Entity.cc */,
-				81D1CFDDDB0648D496453D4A /* Event.cc */,
-				C35946BEA58446A79216C94B /* System.cc */,
-				B8AB5B8C01E74F7EAA94727C /* help */,
+				2FCE6DEB56224E5AAF1DBAE7 /* Entity.h */,
+				8461078C4F8B40FE84546DFA /* entityx.h */,
+				0C78FB25A4764625B92C7F84 /* Event.h */,
+				47D8AA13E4224EE29A377976 /* quick.h */,
+				39348CBAC7B845578AD15B9A /* System.h */,
+				F540E72108054AA38A25211F /* Entity.cc */,
+				839029FA646E4B2C9543DD1D /* Event.cc */,
+				9BDEFD1239354E2983D13D53 /* System.cc */,
+				56191EEDD56A449486C9A7C4 /* help */,
 			);
 			name = entityx;
 			sourceTree = "<group>";
 		};
-		7851F1B6B536449A89785FAA /* entityx */ = {
+		112DF369479141DF9A653AC0 /* entityx */ = {
 			isa = PBXGroup;
 			children = (
-				0DB62272B7A04A8F960DD64E /* entityx */,
+				01A206AE165D47648B0B4497 /* entityx */,
 			);
 			name = entityx;
 			sourceTree = "<group>";
 		};
-		DA1A200E59AA4526B08AD4BA /* src */ = {
+		03A5409446A342759BFA5CB3 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				5A4D54711857418886A460A8 /* soso */,
-				7851F1B6B536449A89785FAA /* entityx */,
+				69C887407E46471D87099950 /* soso */,
+				112DF369479141DF9A653AC0 /* entityx */,
 			);
 			name = src;
 			sourceTree = "<group>";
 		};
-		EDBCAED5CA364B3889FDE94A /* Entity Component System */ = {
+		438CFA4EEAA2470C9F8E33A9 /* Entity Component System */ = {
 			isa = PBXGroup;
 			children = (
-				DA1A200E59AA4526B08AD4BA /* src */,
+				03A5409446A342759BFA5CB3 /* src */,
 			);
 			name = "Entity Component System";
 			sourceTree = "<group>";
@@ -246,7 +246,7 @@
 		01B97315FEAEA392516A2CEA /* Blocks */ = {
 			isa = PBXGroup;
 			children = (
-				EDBCAED5CA364B3889FDE94A /* Entity Component System */,
+				438CFA4EEAA2470C9F8E33A9 /* Entity Component System */,
 			);
 			name = Blocks;
 			sourceTree = "<group>";
@@ -254,8 +254,8 @@
 		29B97315FDCFA39411CA2CEA /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				2B4183056EB143798F1C87D9 /* Resources.h */,
-				3CB7881C35E5485786525381 /* TinyGui_Prefix.pch */,
+				3F2B52BA4CAF49D4BDC30F68 /* Resources.h */,
+				80D1D1B01022441C81293159 /* TemplateProject_Prefix.pch */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -263,8 +263,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				00BF2586E6074A84B9EEA7C6 /* CinderApp.icns */,
-				C93A8E15B66B4FD58030216F /* Info.plist */,
+				5E96A08D51524124BC3C49EC /* CinderApp.icns */,
+				D105502690064AADB4A1E7D6 /* Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -281,9 +281,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8D1107260486CEB800E47090 /* TinyGui */ = {
+		8D1107260486CEB800E47090 /* TemplateProject */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "TinyGui" */;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "TemplateProject" */;
 			buildPhases = (
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
@@ -293,10 +293,10 @@
 			);
 			dependencies = (
 			);
-			name = TinyGui;
+			name = TemplateProject;
 			productInstallPath = "$(HOME)/Applications";
-			productName = TinyGui;
-			productReference = 8D1107320486CEB800E47090 /* TinyGui.app */;
+			productName = TemplateProject;
+			productReference = 8D1107320486CEB800E47090 /* TemplateProject.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -304,7 +304,7 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TinyGui" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TemplateProject" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -314,11 +314,11 @@
 				French,
 				German,
 			);
-			mainGroup = 29B97314FDCFA39411CA2CEA /* TinyGui */;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* TemplateProject */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8D1107260486CEB800E47090 /* TinyGui */,
+				8D1107260486CEB800E47090 /* TemplateProject */,
 			);
 		};
 /* End PBXProject section */
@@ -328,7 +328,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57FBF568847D42A0839489DC /* CinderApp.icns in Resources */,
+				894C5A64637B4DF98AA2A40D /* CinderApp.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,15 +339,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DAE25B52FB084DA19A2882AD /* TinyGuiApp.cpp in Sources */,
-				8B7251DDAF1C40A180804677 /* BehaviorSystem.cpp in Sources */,
-				8CD2878A764D4B7CA2D7DB1A /* ExpiresSystem.cpp in Sources */,
-				C59B1C7C09914C7487927FC3 /* TransformSystem.cpp in Sources */,
-				7C6F877D430A44DE91A847A3 /* VerletPhysicsSystem.cpp in Sources */,
-				E5FF4D88114B472FAA05E9CA /* Entity.cc in Sources */,
-				BC038B56CDAF4C35A442E127 /* Event.cc in Sources */,
-				6255DC5F5E344DC28B5948FB /* System.cc in Sources */,
-				EF6CE9CFBBA7493684A2BA40 /* Pool.cc in Sources */,
+				C5C4E42281C449DFA7537274 /* TemplateProjectApp.cpp in Sources */,
+				D8C2299CDFB04A8C937214FC /* BehaviorSystem.cpp in Sources */,
+				79D1B989C8084ACAB4EE088F /* ExpiresSystem.cpp in Sources */,
+				E4236719FB89469DACE9C5BA /* TransformSystem.cpp in Sources */,
+				316C2CA1C7EA4393B25D2D73 /* VerletPhysicsSystem.cpp in Sources */,
+				E5AD64E804184973B749A4C4 /* Entity.cc in Sources */,
+				F72C50C2FE9F42CA95BC63F1 /* Event.cc in Sources */,
+				C5624F127CBD4ABDB7872D2E /* System.cc in Sources */,
+				86E9E7FE189C4FD98D53FD6B /* Pool.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,13 +368,13 @@
 					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = TinyGui_Prefix.pch;
+				GCC_PREFIX_HEADER = TemplateProject_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder_d.a\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.libcinder.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = TinyGui;
+				PRODUCT_NAME = TemplateProject;
 				SYMROOT = ./build;
 				WRAPPER_EXTENSION = app;
 			};
@@ -395,13 +395,13 @@
 					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = TinyGui_Prefix.pch;
+				GCC_PREFIX_HEADER = TemplateProject_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder.a\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.libcinder.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = TinyGui;
+				PRODUCT_NAME = TemplateProject;
 				STRIP_INSTALLED_PRODUCT = YES;
 				SYMROOT = ./build;
 				WRAPPER_EXTENSION = app;
@@ -455,7 +455,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "TinyGui" */ = {
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "TemplateProject" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4B08A954540054247B /* Debug */,
@@ -464,7 +464,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TinyGui" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TemplateProject" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
