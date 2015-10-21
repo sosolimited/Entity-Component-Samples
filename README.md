@@ -3,9 +3,11 @@ Entity Component Systems
 
 This repository contains didactic sample applications built using an Entity Component System (ECS) architecture. The samples rely on [Cinder](https://libcinder.org/) and [EntityX](https://github.com/alecthomas/entityx) to provide a graphics framework and an entity component framework, respectively.
 
-An overview of the Entity Component System architecture and its benefits continues below.
+An overview of the Entity Component System architecture and its benefits (and some drawbacks) continues below.
 
 For everything to work out of the box, clone this repository as a Cinder block.
+
+Have fun!
 
 ### Contents
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -184,26 +186,26 @@ auto e = entities.create();
 e.destroy();
 ```
 
-One thing to watch out for is losing track of entities. Most of the time, this isn't an issue. However, if you have entities that aren’t visible on screen it might not be obvious when they exist after you intended to destroy them. Be careful when creating entities that don’t have an obvious presence at runtime. Although the EntityManager still knows about them, their memory is effectively leaked if they don’t have any components attached and you don’t clean them up.
+One thing to watch out for is losing track of entities. Most of the time, this isn't an issue. However, if you have entities that aren’t visible on screen it might not be obvious when they exist after you intended to destroy them.
 
 ### Adding and Removing Components
 
-As mentioned above, entities are an aggregation of components. We build them up by assigning a number of components to the same entity.
+We define an entity’s behavior by assigning a number of components to it.
 
 ```c++
 auto e = entities.create();
 e.assign<Transform>();
 e.assign<Color>();
-e.assign<Wobble>();
+e.assign<Oscillate>();
 ```
 
-If you no longer want an entity to have an attribute, simply remove the relevant component.
+When you no longer want an entity to have an attribute, simply remove the relevant component.
 
 ```c++
-e.remove<Wobble>();
+e.remove<Oscillate>();
 ```
 
-Constructor parameters can be passed to components when they are assigned to give them initial values.
+If you want to initialize a component with values other than its defaults, you can pass constructor parameters to the assign method.
 
 ```c++
 auto e = entities.create();
@@ -211,20 +213,28 @@ e.assign<Transform>(vec3(10, 10, 0));
 e.assign<Color>(vec3(1.0, 0.5, 0.0));
 ```
 
+If you want to edit a component after assignment, use the returned handle.
+
+```c++
+auto transform_handle = e.assign<Transform>();
+transform_handle->position = vec3(10);
+transform_handle->scale = vec3(0.25);
+```
+
 ### Using components in systems
 
 Systems look for entities that have a specific combination of components and use those components to perform actions. For example, a circle drawing system might draw every entity that has a transform and circle component, and set the color if the entity also has an optional style component.
 
 ```c++
-ComponentHandle<Transform>  xf;
-ComponentHandle<Circle>     cc;
+ComponentHandle<Transform>  transform;
+ComponentHandle<Circle>     circle;
 
-for (auto e : entities.entities_with_components(xf, cc)) {
-  auto sc = e.component<Style>();
-  if (sc) {
-    setColor(sc->color);
+for (auto e : entities.entities_with_components(transform, circle)) {
+  auto style = e.component<Style>();
+  if (style) {
+    setColor(style->color);
   }
-  drawCircle(xf->position, cc->radius);
+  drawCircle(transform->position, circle->radius);
 }
 ```
 
@@ -252,13 +262,13 @@ Before you start making everything a behavior, consider whether the behavior cou
 
 In addition to describing individual entity attributes, we can use components to describe relationships between entities. That means we can build scene graphs using components when we need them.
 
-There are many things to consider when building up a hierarchy component. At its most basic, it should enable traversal of the hierarchy, providing ordered access to each entity along the way. In C++, we also care about object lifetime management, so we make the lifetime of branches dependent on their root. Here, we define a Hierarchy component template that provides the following:
+There are many things to consider when building up a hierarchy component. At its most basic, it should enable traversal of the hierarchy, providing ordered access to each entity along the way. In C++, we also care about object lifetime management, so we make the lifetime of branches dependent on their root. In this repository, we define a Hierarchy component template that provides the following:
 
 1) Access to parent, self, and child entities.
 2) Lifetime management. Since there is no garbage collection in standard c++, we make sure the leaves are cleaned up with the root of the hierarchy.
-3) A template type defining the properties that it makes sense to keep in a hierarchical tree (position, transparency).
+3) A derived template type defining the properties that it makes sense to keep in a hierarchical tree (position, transparency).
 
-Using our Hierarchy component (and systems that care to traverse the hierarchy), we can make construction a group of items like the following straightforward:
+Using a hierarchy component (and systems that care to traverse the hierarchy), grouping items like the following becomes straightforward:
 
 ```
 Menu
@@ -269,7 +279,7 @@ Menu
   - MenuItemC
 ```
 
-First, we need to create the entities that will be in the group. Imagine that we have functions that create their respective entities and return the created entity. Creating the underlying objects would look like the following:
+First, we need to create the entities that will be in the group. Imagine that we have functions that create their respective entities and return the created entity. Creating the individual objects in the group would look like the following:
 
 ```c++
 auto menu = entities.create();
@@ -296,9 +306,9 @@ makeHierarchy(menu,
 
 ### Things to watch out for
 
-Your debugger doesn't always capture the information you want. Since entities are just an id in a table, LLDB has a hard time converting them into their component values when debugging.
+When working with entities and components, your debugger doesn’t always capture the information you want. Since entities are just an id in a table, LLDB has a hard time converting them into their component values when debugging.
 
-You should be able to dereference component handles in the GDB or LLDB console (e.g. `expr xf.get()`), but it doesn't always work. If you need the debug info, dereference the handle in the body of the function so the debugger unpacks the info for you.
+You should be able to dereference component handles in the GDB or LLDB console (e.g. `expr component_handle.get()`), but it doesn't always work. If you need the debug info, dereference the handle in the body of the function so the debugger unpacks the info for you.
 
 ```c++
 auto handle = entity.component<C>();
