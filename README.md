@@ -3,7 +3,7 @@ Entity Component Systems
 
 This repository contains didactic sample applications built using an Entity Component System (ECS) architecture. They use the [Cinder](https://libcinder.org/) and [EntityX](https://github.com/alecthomas/entityx) libraries. In addition to the samples, you can read more about ECS below.
 
-For everthing to work out of the box, clone this repository as a Cinder block.
+For everything to work out of the box, clone this repository as a Cinder block.
 
 ### Contents
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -292,11 +292,11 @@ makeHierarchy(menu,
 
 Your debugger doesn't always capture the information you want. Since entities are just an id in a table, LLDB has a hard time converting them into their component values when debugging.
 
-You should be able to dereference component handles in the console (e.g. `expr xf.get()`), but it doesn't always work. If you need the debug info, dereference the handle in the body of the function so the debugger unpacks the info for you.
+You should be able to dereference component handles in the GDB or LLDB console (e.g. `expr xf.get()`), but it doesn't always work. If you need the debug info, dereference the handle in the body of the function so the debugger unpacks the info for you.
 
 ```c++
 auto handle = entity.component<C>();
-auto &c = handle.get(); // c will show up nicely in the debugger.
+auto &c = *handle.get(); // c will show up nicely in the debugger.
 ```
 
 Building this project
@@ -304,7 +304,7 @@ Building this project
 
 ### Cinder
 
-If you don't already have Cinder installed, clone and build Cinder on your machine. Note that we clone recursively in order to get submodules initialized.
+If you don't already have Cinder installed, clone and build Cinder on your machine. Note that we clone recursively in order to initialize submodules.
 
 ```
 git clone git@github.com:sosolimited/Cinder.git --recursive
@@ -314,7 +314,7 @@ cd Cinder/xcode
 
 ### Samples
 
-Clone this repository into the `blocks/` directory of a recent version of the Cinder master branch. Note that we clone recursively in order to get submodules initialized.
+Clone this repository into the `blocks/` directory of a recent version of the Cinder master branch. Note that we clone recursively in order to initialize submodules.
 
 ```
 cd Cinder/blocks/
@@ -323,15 +323,22 @@ git clone git@github.com:sosolimited/Entity-Component-Sample.git --recursive
 
 Open up one of the samples (in the `samples/` directory) in XCode and you should be good to go.
 
-All samples were tested using in XCode 6.4. If you run into issues with an earlier version of XCode (like empty project files), please upgrade XCode.
+All samples were tested using XCode 6.4. If you run into issues with an earlier version of XCode (like empty project files), please upgrade XCode. Though untested elsewhere, the samples should build and run with any modern C++ compiler.
 
+- Component Swapping
+    - Demonstrates adding and removing components from an Entity to change its behavior at runtime.
+    - Use number keys 1-3 to add and remove different components.
 - Entity Creation
     - Demonstrates the basics of Entity creation, Component definition, and control through Systems.
     - Click and drag to create new entities.
 - Star Clusters
-    - Satellites in orbit around central star. Demonstrates creation of a scene graph and various approaches to traversing the graph for rendering.
+    - Demonstrates creation of a scene graph and various approaches to traversing the graph for rendering.
+    - Satellites in orbit around central star.
 - Gravity Wells
     - Objects fly through the world and are pulled toward attractors.
+- TemplateProject
+    - Demonstrates the Tinderbox template’s functionality.
+    - Visualizes the status of a number of Expires components.
 
 ### Project template
 
