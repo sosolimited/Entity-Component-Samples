@@ -332,6 +332,8 @@ cd Cinder/xcode
 
 Clone this repository into the `blocks/` directory of a recent version of the Cinder master branch. Note that we clone recursively in order to initialize submodules.
 
+Files are indented using 2-space-wide tabs.
+
 ```
 cd Cinder/blocks/
 git clone https://github.com/sosolimited/Entity-Component-Samples.git --recursive
