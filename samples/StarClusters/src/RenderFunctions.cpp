@@ -54,6 +54,7 @@ void soso::renderCirclesDepthSorted(entityx::EntityManager &entities)
 {
 	struct RenderInfo {
 		ci::vec3	position;
+		float			scale;
 		float			radius = 1.0f;
 		ci::Color color;
 
@@ -73,13 +74,15 @@ void soso::renderCirclesDepthSorted(entityx::EntityManager &entities)
 
 	for (auto __unused e : entities.entities_with_components(transform, circle)) {
 		auto pos = vec3(transform->worldTransform() * vec4(0, 0, 0, 1));
-		circles.insert(insertion_point(pos.z), RenderInfo{pos, circle->radius, circle->color});
+		auto scale = length(vec3(transform->worldTransform() * vec4(1, 0, 0, 0)));
+		circles.insert(insertion_point(pos.z), RenderInfo{pos, scale, circle->radius, circle->color});
 	}
 
 	gl::ScopedColor color(Color(1.0f, 1.0f, 1.0f));
 	for (auto &c : circles) {
 		gl::ScopedModelMatrix mat;
 		gl::translate(c.position);
+		gl::scale(vec3(c.scale));
 		gl::color(c.color);
 
 		gl::drawSolidCircle(vec2(0), c.radius);
