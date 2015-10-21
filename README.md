@@ -5,7 +5,7 @@ This repository contains didactic sample applications built using an Entity Comp
 
 An overview of the Entity Component System architecture and its benefits (and some drawbacks) continues below.
 
-For everything to work out of the box, clone this repository as a Cinder block.
+For everything to work out of the box, clone this repository as a Cinder block. The samples are set up for OSX and Xcode, but the code should work with any modern C++ compiler (and the ideas are agnostic).
 
 Have fun!
 
@@ -338,8 +338,6 @@ git clone https://github.com/sosolimited/Entity-Component-Samples.git --recursiv
 ```
 
 Open up one of the samples (in the `samples/` directory) in XCode and you should be good to go.
-
-All samples were tested using XCode 6.4. If you run into issues with an earlier version of XCode (like empty project files), please upgrade XCode. Though untested elsewhere, the samples should build and run with any modern C++ compiler.
 
 - Component Swapping
     - Demonstrates adding and removing components from an Entity to change its behavior at runtime.
