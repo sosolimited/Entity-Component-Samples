@@ -334,7 +334,7 @@ Clone this repository into the `blocks/` directory of a recent version of the Ci
 
 ```
 cd Cinder/blocks/
-git clone git@github.com:sosolimited/Entity-Component-Sample.git --recursive
+git clone git@github.com:sosolimited/Entity-Component-Samples.git --recursive
 ```
 
 Open up one of the samples (in the `samples/` directory) in XCode and you should be good to go.
