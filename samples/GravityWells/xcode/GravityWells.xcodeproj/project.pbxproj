@@ -173,6 +173,7 @@
 			);
 			name = Seekers;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		29B97315FDCFA39411CA2CEA /* Headers */ = {
 			isa = PBXGroup;

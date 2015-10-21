@@ -42,7 +42,7 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		11338CCA5B84456DA68A4E39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		137FB484CD0D490194470599 /* EntityCreation_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = EntityCreation_Prefix.pch; sourceTree = "<group>"; };
-		23D57CC57FFD419C8F116DD3 /* EntityCreationApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = EntityCreationApp.cpp; path = ../src/EntityCreationApp.cpp; sourceTree = "<group>"; };
+		23D57CC57FFD419C8F116DD3 /* EntityCreationApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = EntityCreationApp.cpp; path = ../src/EntityCreationApp.cpp; sourceTree = "<group>"; tabWidth = 2; };
 		275F330D8A6445F8BD600858 /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CinderApp.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -157,6 +157,7 @@
 			);
 			name = EntityCreation;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		29B97315FDCFA39411CA2CEA /* Headers */ = {
 			isa = PBXGroup;

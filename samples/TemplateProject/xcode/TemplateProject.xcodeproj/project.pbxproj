@@ -16,36 +16,18 @@
 		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
 		00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995581B128DF400A5C623 /* IOKit.framework */; };
 		00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
-		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
-		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		86E9E7FE189C4FD98D53FD6B /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE59655E3C4693B2BDF9E1 /* Pool.cc */; };
-		C5624F127CBD4ABDB7872D2E /* System.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9BDEFD1239354E2983D13D53 /* System.cc */; };
-		F72C50C2FE9F42CA95BC63F1 /* Event.cc in Sources */ = {isa = PBXBuildFile; fileRef = 839029FA646E4B2C9543DD1D /* Event.cc */; };
-		E5AD64E804184973B749A4C4 /* Entity.cc in Sources */ = {isa = PBXBuildFile; fileRef = F540E72108054AA38A25211F /* Entity.cc */; };
-		BF49F8AA3E8243D3A86AC5C7 /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = 39348CBAC7B845578AD15B9A /* System.h */; };
-		93DFD50279B74E018C97DF5B /* quick.h in Headers */ = {isa = PBXBuildFile; fileRef = 47D8AA13E4224EE29A377976 /* quick.h */; };
-		9F2780FBE3104BFB8C414883 /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C78FB25A4764625B92C7F84 /* Event.h */; };
-		B96ED6F8C8774C91A0CC4B6A /* entityx.h in Headers */ = {isa = PBXBuildFile; fileRef = 8461078C4F8B40FE84546DFA /* entityx.h */; };
-		47941C3C26D04C528BE14084 /* Entity.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FCE6DEB56224E5AAF1DBAE7 /* Entity.h */; };
 		316C2CA1C7EA4393B25D2D73 /* VerletPhysicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A721E8C79B10493798DEFF1C /* VerletPhysicsSystem.cpp */; };
-		E4236719FB89469DACE9C5BA /* TransformSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06FFAF8BC2DA42068EE37CA1 /* TransformSystem.cpp */; };
+		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		79D1B989C8084ACAB4EE088F /* ExpiresSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D564C1E2EE9D4A949B2AF246 /* ExpiresSystem.cpp */; };
-		D8C2299CDFB04A8C937214FC /* BehaviorSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8A5149164BD4CAA8D17ED32 /* BehaviorSystem.cpp */; };
-		FD2C6FF82D874966A4DC8569 /* VerletPhysicsSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 68A05BA74654416D877AAB9D /* VerletPhysicsSystem.h */; };
-		E1C9A536FCC1445197A76444 /* VerletBody.h in Headers */ = {isa = PBXBuildFile; fileRef = F351D698D2E54836999AA16D /* VerletBody.h */; };
-		A0737C3C06FF415E87CEA8C8 /* TransformSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = D6462DD5D1BE40ECA0F86F04 /* TransformSystem.h */; };
-		29661FF95FC04024BC300E93 /* Transform.h in Headers */ = {isa = PBXBuildFile; fileRef = B892E0B980F24F7B9D2BBDE9 /* Transform.h */; };
-		3F4459713E9E4ABABBC51563 /* RenderLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 11B67382C9B041399952D700 /* RenderLayer.h */; };
-		60193FD84D3E4E88ACA8B553 /* HierarchyComponentT.h in Headers */ = {isa = PBXBuildFile; fileRef = BF80A26757FB47C9B5285A95 /* HierarchyComponentT.h */; };
-		998DF7C6CB8047E491E6EFFE /* HierarchyComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D14E48B339949FEA2156BE4 /* HierarchyComponent.h */; };
-		6D328829EFA44B789054D208 /* ExpiresSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 56F38257ECE34F1DB92FFB57 /* ExpiresSystem.h */; };
-		748BFD1B6DF5469D9DD848D2 /* Expires.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5285252B5B4944B295B460 /* Expires.h */; };
-		3CA8DA09B3914B89BC8AF89D /* BehaviorSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = E2388247F36D456AACE6FB67 /* BehaviorSystem.h */; };
-		74730566EB724EFC866CEC13 /* Behavior.h in Headers */ = {isa = PBXBuildFile; fileRef = 37383B4D7EBA491FAEC04A2A /* Behavior.h */; };
-		C5C4E42281C449DFA7537274 /* TemplateProjectApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7ED31E2665EC4B2BA876C4D7 /* TemplateProjectApp.cpp */; };
-		CDB545F351594C33914C0F07 /* TemplateProject_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 80D1D1B01022441C81293159 /* TemplateProject_Prefix.pch */; };
+		86E9E7FE189C4FD98D53FD6B /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE59655E3C4693B2BDF9E1 /* Pool.cc */; };
 		894C5A64637B4DF98AA2A40D /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5E96A08D51524124BC3C49EC /* CinderApp.icns */; };
-		8533670CD80A4867AD619611 /* Resources.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F2B52BA4CAF49D4BDC30F68 /* Resources.h */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		C5624F127CBD4ABDB7872D2E /* System.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9BDEFD1239354E2983D13D53 /* System.cc */; };
+		C5C4E42281C449DFA7537274 /* TemplateProjectApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7ED31E2665EC4B2BA876C4D7 /* TemplateProjectApp.cpp */; };
+		D8C2299CDFB04A8C937214FC /* BehaviorSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8A5149164BD4CAA8D17ED32 /* BehaviorSystem.cpp */; };
+		E4236719FB89469DACE9C5BA /* TransformSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06FFAF8BC2DA42068EE37CA1 /* TransformSystem.cpp */; };
+		E5AD64E804184973B749A4C4 /* Entity.cc in Sources */ = {isa = PBXBuildFile; fileRef = F540E72108054AA38A25211F /* Entity.cc */; };
+		F72C50C2FE9F42CA95BC63F1 /* Event.cc in Sources */ = {isa = PBXBuildFile; fileRef = 839029FA646E4B2C9543DD1D /* Event.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,40 +40,40 @@
 		00B784B20FF439BC000DE1D7 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		00B995581B128DF400A5C623 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		00B995591B128DF400A5C623 /* IOSurface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOSurface.framework; path = System/Library/Frameworks/IOSurface.framework; sourceTree = SDKROOT; };
+		06FFAF8BC2DA42068EE37CA1 /* TransformSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = TransformSystem.cpp; path = ../../../src/soso/TransformSystem.cpp; sourceTree = "<group>"; };
+		0C78FB25A4764625B92C7F84 /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Event.h; path = ../../../src/entityx/entityx/Event.h; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		11B67382C9B041399952D700 /* RenderLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RenderLayer.h; path = ../../../src/soso/RenderLayer.h; sourceTree = "<group>"; };
+		1D14E48B339949FEA2156BE4 /* HierarchyComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HierarchyComponent.h; path = ../../../src/soso/HierarchyComponent.h; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		2FCE6DEB56224E5AAF1DBAE7 /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Entity.h; path = ../../../src/entityx/entityx/Entity.h; sourceTree = "<group>"; };
+		37383B4D7EBA491FAEC04A2A /* Behavior.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Behavior.h; path = ../../../src/soso/Behavior.h; sourceTree = "<group>"; };
+		39348CBAC7B845578AD15B9A /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = System.h; path = ../../../src/entityx/entityx/System.h; sourceTree = "<group>"; };
+		3F2B52BA4CAF49D4BDC30F68 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
+		47D8AA13E4224EE29A377976 /* quick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = quick.h; path = ../../../src/entityx/entityx/quick.h; sourceTree = "<group>"; };
+		4AAE59655E3C4693B2BDF9E1 /* Pool.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Pool.cc; path = ../../../src/entityx/entityx/help/Pool.cc; sourceTree = "<group>"; };
 		5323E6B10EAFCA74003A9687 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
+		56F38257ECE34F1DB92FFB57 /* ExpiresSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ExpiresSystem.h; path = ../../../src/soso/ExpiresSystem.h; sourceTree = "<group>"; };
+		5C5285252B5B4944B295B460 /* Expires.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Expires.h; path = ../../../src/soso/Expires.h; sourceTree = "<group>"; };
+		5E96A08D51524124BC3C49EC /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CinderApp.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; };
+		68A05BA74654416D877AAB9D /* VerletPhysicsSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VerletPhysicsSystem.h; path = ../../../src/soso/VerletPhysicsSystem.h; sourceTree = "<group>"; };
+		7ED31E2665EC4B2BA876C4D7 /* TemplateProjectApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = TemplateProjectApp.cpp; path = ../src/TemplateProjectApp.cpp; sourceTree = "<group>"; tabWidth = 2; };
+		80D1D1B01022441C81293159 /* TemplateProject_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = TemplateProject_Prefix.pch; sourceTree = "<group>"; };
+		839029FA646E4B2C9543DD1D /* Event.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Event.cc; path = ../../../src/entityx/entityx/Event.cc; sourceTree = "<group>"; };
+		8461078C4F8B40FE84546DFA /* entityx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = entityx.h; path = ../../../src/entityx/entityx/entityx.h; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* TemplateProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TemplateProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F2B52BA4CAF49D4BDC30F68 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../include/Resources.h; sourceTree = "<group>"; name = Resources.h; };
-		5E96A08D51524124BC3C49EC /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; name = CinderApp.icns; };
-		D105502690064AADB4A1E7D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; name = Info.plist; };
-		80D1D1B01022441C81293159 /* TemplateProject_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = TemplateProject_Prefix.pch; sourceTree = "<group>"; name = TemplateProject_Prefix.pch; };
-		7ED31E2665EC4B2BA876C4D7 /* TemplateProjectApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../src/TemplateProjectApp.cpp; sourceTree = "<group>"; name = TemplateProjectApp.cpp; };
-		37383B4D7EBA491FAEC04A2A /* Behavior.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/Behavior.h; sourceTree = "<group>"; name = Behavior.h; };
-		E2388247F36D456AACE6FB67 /* BehaviorSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/BehaviorSystem.h; sourceTree = "<group>"; name = BehaviorSystem.h; };
-		5C5285252B5B4944B295B460 /* Expires.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/Expires.h; sourceTree = "<group>"; name = Expires.h; };
-		56F38257ECE34F1DB92FFB57 /* ExpiresSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/ExpiresSystem.h; sourceTree = "<group>"; name = ExpiresSystem.h; };
-		1D14E48B339949FEA2156BE4 /* HierarchyComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/HierarchyComponent.h; sourceTree = "<group>"; name = HierarchyComponent.h; };
-		BF80A26757FB47C9B5285A95 /* HierarchyComponentT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/HierarchyComponentT.h; sourceTree = "<group>"; name = HierarchyComponentT.h; };
-		11B67382C9B041399952D700 /* RenderLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/RenderLayer.h; sourceTree = "<group>"; name = RenderLayer.h; };
-		B892E0B980F24F7B9D2BBDE9 /* Transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/Transform.h; sourceTree = "<group>"; name = Transform.h; };
-		D6462DD5D1BE40ECA0F86F04 /* TransformSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/TransformSystem.h; sourceTree = "<group>"; name = TransformSystem.h; };
-		F351D698D2E54836999AA16D /* VerletBody.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/VerletBody.h; sourceTree = "<group>"; name = VerletBody.h; };
-		68A05BA74654416D877AAB9D /* VerletPhysicsSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/soso/VerletPhysicsSystem.h; sourceTree = "<group>"; name = VerletPhysicsSystem.h; };
-		F8A5149164BD4CAA8D17ED32 /* BehaviorSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../../../src/soso/BehaviorSystem.cpp; sourceTree = "<group>"; name = BehaviorSystem.cpp; };
-		D564C1E2EE9D4A949B2AF246 /* ExpiresSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../../../src/soso/ExpiresSystem.cpp; sourceTree = "<group>"; name = ExpiresSystem.cpp; };
-		06FFAF8BC2DA42068EE37CA1 /* TransformSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../../../src/soso/TransformSystem.cpp; sourceTree = "<group>"; name = TransformSystem.cpp; };
-		A721E8C79B10493798DEFF1C /* VerletPhysicsSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../../../src/soso/VerletPhysicsSystem.cpp; sourceTree = "<group>"; name = VerletPhysicsSystem.cpp; };
-		2FCE6DEB56224E5AAF1DBAE7 /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/Entity.h; sourceTree = "<group>"; name = Entity.h; };
-		8461078C4F8B40FE84546DFA /* entityx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/entityx.h; sourceTree = "<group>"; name = entityx.h; };
-		0C78FB25A4764625B92C7F84 /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/Event.h; sourceTree = "<group>"; name = Event.h; };
-		47D8AA13E4224EE29A377976 /* quick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/quick.h; sourceTree = "<group>"; name = quick.h; };
-		39348CBAC7B845578AD15B9A /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../src/entityx/entityx/System.h; sourceTree = "<group>"; name = System.h; };
-		F540E72108054AA38A25211F /* Entity.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ../../../src/entityx/entityx/Entity.cc; sourceTree = "<group>"; name = Entity.cc; };
-		839029FA646E4B2C9543DD1D /* Event.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ../../../src/entityx/entityx/Event.cc; sourceTree = "<group>"; name = Event.cc; };
-		9BDEFD1239354E2983D13D53 /* System.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ../../../src/entityx/entityx/System.cc; sourceTree = "<group>"; name = System.cc; };
-		4AAE59655E3C4693B2BDF9E1 /* Pool.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = ../../../src/entityx/entityx/help/Pool.cc; sourceTree = "<group>"; name = Pool.cc; };
+		9BDEFD1239354E2983D13D53 /* System.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = System.cc; path = ../../../src/entityx/entityx/System.cc; sourceTree = "<group>"; };
+		A721E8C79B10493798DEFF1C /* VerletPhysicsSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = VerletPhysicsSystem.cpp; path = ../../../src/soso/VerletPhysicsSystem.cpp; sourceTree = "<group>"; };
+		B892E0B980F24F7B9D2BBDE9 /* Transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Transform.h; path = ../../../src/soso/Transform.h; sourceTree = "<group>"; };
+		BF80A26757FB47C9B5285A95 /* HierarchyComponentT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HierarchyComponentT.h; path = ../../../src/soso/HierarchyComponentT.h; sourceTree = "<group>"; };
+		D105502690064AADB4A1E7D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D564C1E2EE9D4A949B2AF246 /* ExpiresSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = ExpiresSystem.cpp; path = ../../../src/soso/ExpiresSystem.cpp; sourceTree = "<group>"; };
+		D6462DD5D1BE40ECA0F86F04 /* TransformSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TransformSystem.h; path = ../../../src/soso/TransformSystem.h; sourceTree = "<group>"; };
+		E2388247F36D456AACE6FB67 /* BehaviorSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BehaviorSystem.h; path = ../../../src/soso/BehaviorSystem.h; sourceTree = "<group>"; };
+		F351D698D2E54836999AA16D /* VerletBody.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VerletBody.h; path = ../../../src/soso/VerletBody.h; sourceTree = "<group>"; };
+		F540E72108054AA38A25211F /* Entity.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Entity.cc; path = ../../../src/entityx/entityx/Entity.cc; sourceTree = "<group>"; };
+		F8A5149164BD4CAA8D17ED32 /* BehaviorSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = BehaviorSystem.cpp; path = ../../../src/soso/BehaviorSystem.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +98,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01A206AE165D47648B0B4497 /* entityx */ = {
+			isa = PBXGroup;
+			children = (
+				2FCE6DEB56224E5AAF1DBAE7 /* Entity.h */,
+				8461078C4F8B40FE84546DFA /* entityx.h */,
+				0C78FB25A4764625B92C7F84 /* Event.h */,
+				47D8AA13E4224EE29A377976 /* quick.h */,
+				39348CBAC7B845578AD15B9A /* System.h */,
+				F540E72108054AA38A25211F /* Entity.cc */,
+				839029FA646E4B2C9543DD1D /* Event.cc */,
+				9BDEFD1239354E2983D13D53 /* System.cc */,
+				56191EEDD56A449486C9A7C4 /* help */,
+			);
+			name = entityx;
+			sourceTree = "<group>";
+		};
+		01B97315FEAEA392516A2CEA /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				438CFA4EEAA2470C9F8E33A9 /* Entity Component System */,
+			);
+			name = Blocks;
+			sourceTree = "<group>";
+		};
+		03A5409446A342759BFA5CB3 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				69C887407E46471D87099950 /* soso */,
+				112DF369479141DF9A653AC0 /* entityx */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
 		080E96DDFE201D6D7F000001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +166,14 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
+		112DF369479141DF9A653AC0 /* entityx */ = {
+			isa = PBXGroup;
+			children = (
+				01A206AE165D47648B0B4497 /* entityx */,
+			);
+			name = entityx;
+			sourceTree = "<group>";
+		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,85 +193,6 @@
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = TemplateProject;
-			sourceTree = "<group>";
-		};
-		69C887407E46471D87099950 /* soso */ = {
-			isa = PBXGroup;
-			children = (
-				37383B4D7EBA491FAEC04A2A /* Behavior.h */,
-				E2388247F36D456AACE6FB67 /* BehaviorSystem.h */,
-				5C5285252B5B4944B295B460 /* Expires.h */,
-				56F38257ECE34F1DB92FFB57 /* ExpiresSystem.h */,
-				1D14E48B339949FEA2156BE4 /* HierarchyComponent.h */,
-				BF80A26757FB47C9B5285A95 /* HierarchyComponentT.h */,
-				11B67382C9B041399952D700 /* RenderLayer.h */,
-				B892E0B980F24F7B9D2BBDE9 /* Transform.h */,
-				D6462DD5D1BE40ECA0F86F04 /* TransformSystem.h */,
-				F351D698D2E54836999AA16D /* VerletBody.h */,
-				68A05BA74654416D877AAB9D /* VerletPhysicsSystem.h */,
-				F8A5149164BD4CAA8D17ED32 /* BehaviorSystem.cpp */,
-				D564C1E2EE9D4A949B2AF246 /* ExpiresSystem.cpp */,
-				06FFAF8BC2DA42068EE37CA1 /* TransformSystem.cpp */,
-				A721E8C79B10493798DEFF1C /* VerletPhysicsSystem.cpp */,
-			);
-			name = soso;
-			sourceTree = "<group>";
-		};
-		56191EEDD56A449486C9A7C4 /* help */ = {
-			isa = PBXGroup;
-			children = (
-				4AAE59655E3C4693B2BDF9E1 /* Pool.cc */,
-			);
-			name = help;
-			sourceTree = "<group>";
-		};
-		01A206AE165D47648B0B4497 /* entityx */ = {
-			isa = PBXGroup;
-			children = (
-				2FCE6DEB56224E5AAF1DBAE7 /* Entity.h */,
-				8461078C4F8B40FE84546DFA /* entityx.h */,
-				0C78FB25A4764625B92C7F84 /* Event.h */,
-				47D8AA13E4224EE29A377976 /* quick.h */,
-				39348CBAC7B845578AD15B9A /* System.h */,
-				F540E72108054AA38A25211F /* Entity.cc */,
-				839029FA646E4B2C9543DD1D /* Event.cc */,
-				9BDEFD1239354E2983D13D53 /* System.cc */,
-				56191EEDD56A449486C9A7C4 /* help */,
-			);
-			name = entityx;
-			sourceTree = "<group>";
-		};
-		112DF369479141DF9A653AC0 /* entityx */ = {
-			isa = PBXGroup;
-			children = (
-				01A206AE165D47648B0B4497 /* entityx */,
-			);
-			name = entityx;
-			sourceTree = "<group>";
-		};
-		03A5409446A342759BFA5CB3 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				69C887407E46471D87099950 /* soso */,
-				112DF369479141DF9A653AC0 /* entityx */,
-			);
-			name = src;
-			sourceTree = "<group>";
-		};
-		438CFA4EEAA2470C9F8E33A9 /* Entity Component System */ = {
-			isa = PBXGroup;
-			children = (
-				03A5409446A342759BFA5CB3 /* src */,
-			);
-			name = "Entity Component System";
-			sourceTree = "<group>";
-		};
-		01B97315FEAEA392516A2CEA /* Blocks */ = {
-			isa = PBXGroup;
-			children = (
-				438CFA4EEAA2470C9F8E33A9 /* Entity Component System */,
-			);
-			name = Blocks;
 			sourceTree = "<group>";
 		};
 		29B97315FDCFA39411CA2CEA /* Headers */ = {
@@ -278,6 +222,44 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		438CFA4EEAA2470C9F8E33A9 /* Entity Component System */ = {
+			isa = PBXGroup;
+			children = (
+				03A5409446A342759BFA5CB3 /* src */,
+			);
+			name = "Entity Component System";
+			sourceTree = "<group>";
+		};
+		56191EEDD56A449486C9A7C4 /* help */ = {
+			isa = PBXGroup;
+			children = (
+				4AAE59655E3C4693B2BDF9E1 /* Pool.cc */,
+			);
+			name = help;
+			sourceTree = "<group>";
+		};
+		69C887407E46471D87099950 /* soso */ = {
+			isa = PBXGroup;
+			children = (
+				37383B4D7EBA491FAEC04A2A /* Behavior.h */,
+				E2388247F36D456AACE6FB67 /* BehaviorSystem.h */,
+				5C5285252B5B4944B295B460 /* Expires.h */,
+				56F38257ECE34F1DB92FFB57 /* ExpiresSystem.h */,
+				1D14E48B339949FEA2156BE4 /* HierarchyComponent.h */,
+				BF80A26757FB47C9B5285A95 /* HierarchyComponentT.h */,
+				11B67382C9B041399952D700 /* RenderLayer.h */,
+				B892E0B980F24F7B9D2BBDE9 /* Transform.h */,
+				D6462DD5D1BE40ECA0F86F04 /* TransformSystem.h */,
+				F351D698D2E54836999AA16D /* VerletBody.h */,
+				68A05BA74654416D877AAB9D /* VerletPhysicsSystem.h */,
+				F8A5149164BD4CAA8D17ED32 /* BehaviorSystem.cpp */,
+				D564C1E2EE9D4A949B2AF246 /* ExpiresSystem.cpp */,
+				06FFAF8BC2DA42068EE37CA1 /* TransformSystem.cpp */,
+				A721E8C79B10493798DEFF1C /* VerletPhysicsSystem.cpp */,
+			);
+			name = soso;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -304,6 +286,8 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TemplateProject" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -358,17 +342,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				DEAD_CODE_STRIPPING = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TemplateProject_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = TemplateProject_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -390,12 +374,12 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TemplateProject_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"NDEBUG=1",
 					"$(inherited)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = TemplateProject_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -412,7 +396,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CINDER_PATH = "../../../../..";
+				CINDER_PATH = ../../../../..;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				ENABLE_TESTABILITY = YES;
@@ -422,12 +406,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = (
-					"\"$(CINDER_PATH)/include\" ../include",
-					../../../src,
-					../../../src/soso/config,
-					../../../src/entityx,
-				);
+				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../../../src ../../../src/soso/config ../../../src/entityx";
 			};
 			name = Debug;
 		};
@@ -435,7 +414,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CINDER_PATH = "../../../../..";
+				CINDER_PATH = ../../../../..;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -443,12 +422,7 @@
 				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = (
-					"\"$(CINDER_PATH)/include\" ../include",
-					../../../src,
-					../../../src/soso/config,
-					../../../src/entityx,
-				);
+				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../../../src ../../../src/soso/config ../../../src/entityx";
 			};
 			name = Release;
 		};
