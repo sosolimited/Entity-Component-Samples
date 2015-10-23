@@ -85,7 +85,7 @@ A rendering system can traverse all the position and shape components to decide 
 
 If your project is small enough, you may not need to worry about architecting it all that carefully. In that case, you can likely fit everything in a single file and have it work fine. As projects grow larger, however, you will almost certainly want a more general abstraction of your virtual world. At that point, using an ECS to organize your project can be very beneficial.
 
-Entity Component Systems provide a way to describe a virtual world naturally and flexibly and to find things in the world easily. While things aren’t all roses with entities, they are generally better than the alternative class hierarchy.
+Entity Component Systems provide a flexible way to describe a virtual world and a way to easily find objects in that world. While things aren’t all roses with entities, they are generally better than the alternative class hierarchy.
 
 #### Why entities?
 
@@ -115,6 +115,7 @@ You may not want or need to use entities for your project if the following is tr
 - Everything in the world is the same or very similar (maybe make a particle system).
 - There are only a few types of behaviors those things engage in.
 - Your programming language provides other powerful object composition techniques.
+- You aren’t modeling a world full of stuff.
 
 #### What we are replacing
 
@@ -132,7 +133,7 @@ If your world only consists of a single or very few types of things, a shallow c
 
 ### Great ideas in ECS
 
-Entity Component Systems encourage some good habits in your programming, and make certain roads easier to follow. If you decide not to use an Entity Component System in your project, you can still use many of the concepts underlying the architecture.
+Entity Component Systems encourage some good habits in your programming by making certain roads easier to follow. If you decide not to use an Entity Component System in your project, you can still use many of the concepts underlying the architecture.
 
 #### Favor composition over inheritance
 
@@ -140,7 +141,7 @@ Composition is the big idea underlying entity component systems, and it is a con
 
 To add functionality to an object, don’t inherit from something that provides it. Instead, compose something that provides that functionality. This allows for easy switching of behavior and the combination of many behaviors. In a class, composition is simply adding member variables.
 
-In an entity component system, composition is simply adding components to an entity. Entities wouldn’t mean anything at all without the components they are composed of (see how often forms of the word composition show up there?). An extra nice feature of composition in an ECS is that it can be done at run-time.
+In an entity component system, composition is simply adding components to an entity. Entities wouldn’t mean anything at all without the components they are composed of (see how often forms of the word composition show up there?). An extra-nice feature of composition in an ECS is that it can be done at run-time.
 
 #### Keep interfaces small
 
@@ -264,9 +265,9 @@ In addition to describing individual entity attributes, we can use components to
 
 There are many things to consider when building up a hierarchy component. At its most basic, it should enable traversal of the hierarchy, providing ordered access to each entity along the way. In C++, we also care about object lifetime management, so we make the lifetime of branches dependent on their root. In this repository, we define a Hierarchy component template that provides the following:
 
-1) Access to parent, self, and child entities.
-2) Lifetime management. Since there is no garbage collection in standard c++, we make sure the leaves are cleaned up with the root of the hierarchy.
-3) A derived template type defining the properties that it makes sense to keep in a hierarchical tree (position, transparency).
+1. Access to parent, self, and child entities.
+2. Lifetime management. Since there is no garbage collection in standard c++, we make sure the leaves are cleaned up with the root of the hierarchy.
+3. A derived template type defining the properties that it makes sense to keep in a hierarchical tree (position, transparency).
 
 Using a hierarchy component (and systems that care to traverse the hierarchy), grouping items like the following becomes straightforward:
 
