@@ -18,7 +18,7 @@ using namespace cinder;
 
 void soso::renderAllEntitiesAsCircles(entityx::EntityManager &entities)
 {
-  gl::ScopedDepth depth(true, true);
+  gl::ScopedDepth depth(true);
 
   entityx::ComponentHandle<Transform> transform;
   for (auto __unused e : entities.entities_with_components(transform)) {
@@ -30,7 +30,7 @@ void soso::renderAllEntitiesAsCircles(entityx::EntityManager &entities)
 
 void soso::renderCircles(entityx::EntityManager &entities)
 {
-  gl::ScopedDepth depth(true, true);
+  gl::ScopedDepth depth(true);
 
   entityx::ComponentHandle<Transform> transform;
   entityx::ComponentHandle<Circle>    circle;
