@@ -257,6 +257,8 @@ assignBehavior(e, [] (Entity entity, double dt) {
 });
 ```
 
+If you have time to implement a scripting layer for your project, the behavior component is an excellent place to start integration. Instead of running a custom C++ function every frame, you can run your custom script’s update function every frame. If you implement something like this, let me know!
+
 Before you start making everything a behavior, consider whether the behavior could be better modeled using a component and system (or by adding a new system that manipulates existing components). You can also evaluate whether a behavior makes more sense as a component+system once you have implemented it as a behavior.
 
 ### Grouping entities together
