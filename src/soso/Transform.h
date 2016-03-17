@@ -8,6 +8,7 @@
 #pragma once
 
 #include "HierarchyComponentT.h"
+#include "cinder/app/App.h"
 
 namespace soso {
 
@@ -18,7 +19,7 @@ struct Transform : public HierarchyComponentT<Transform>
 {
 	Transform() = delete;
 	using HierarchyComponentT<Transform>::HierarchyComponentT;
-	Transform(entityx::Entity entity, const ci::vec3 &position, const ci::vec3 &scale = ci::vec3(1), const ci::vec3 &pivot = ci::vec3(0), const ci::quat &orientation = ci::quat() )
+	Transform(entityx::Entity entity, const ci::vec3 &position, const ci::vec3 &scale = ci::vec3(1), const ci::vec3 &pivot = ci::vec3(0), const glm::quat &orientation = glm::quat() )
 	: HierarchyComponentT(entity),
 		position(position),
 		scale(scale),
@@ -29,7 +30,7 @@ struct Transform : public HierarchyComponentT<Transform>
 	ci::vec3	position = ci::vec3(0);
 	ci::vec3	scale = ci::vec3(1);
 	ci::vec3	pivot = ci::vec3(0); // relative center of orientation and scaling.
-	ci::quat	orientation;
+	glm::quat	orientation;
 
 	const ci::mat4& worldTransform() const { return _world_transform; }
 	const ci::mat4& localTransform() const { return _local_transform; }

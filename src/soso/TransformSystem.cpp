@@ -4,6 +4,7 @@
 //  Created by Soso Limited on 1/8/15.
 //
 //
+#define __unused __attribute__((unused))
 
 #include "TransformSystem.h"
 #include "HierarchyComponent.h"

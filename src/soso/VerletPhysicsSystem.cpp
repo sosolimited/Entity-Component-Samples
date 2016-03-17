@@ -4,6 +4,7 @@
 //  Created by Soso Limited on 7/7/15.
 //
 //
+#define __unused __attribute__((unused))
 
 #include "VerletPhysicsSystem.h"
 #include "VerletBody.h"

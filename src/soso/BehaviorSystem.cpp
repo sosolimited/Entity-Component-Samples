@@ -4,6 +4,7 @@
 //  Created by Soso Limited on 7/8/15.
 //
 //
+#define __unused __attribute__((unused))
 
 #include "BehaviorSystem.h"
 #include "Behavior.h"

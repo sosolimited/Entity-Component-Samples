@@ -8,6 +8,7 @@
 #pragma once
 
 #include "entityx/Entity.h"
+#include "cinder/app/App.h"
 
 namespace soso {
 
