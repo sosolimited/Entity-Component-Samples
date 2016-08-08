@@ -1,4 +1,4 @@
 [submodule "EntityX"]
 	path = src/entityx
-	url = git@github.com:sosolimited/entityx.git
+	url = https://github.com/sosolimited/entityx.git
 	branch = master
