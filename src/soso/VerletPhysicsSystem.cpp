@@ -18,7 +18,7 @@ using namespace entityx;
 void VerletPhysicsSystem::update( EntityManager &entities, EventManager &events, TimeDelta dt )
 {
   ComponentHandle<VerletBody> body;
-  for( auto __unused e : entities.entities_with_components( body ) )
+  for( auto e : entities.entities_with_components( body ) )
   {
     auto &b = *body.get();
     auto current = b.position;
@@ -49,7 +49,7 @@ void VerletPhysicsSystem::update( EntityManager &entities, EventManager &events,
   // solve constraints
   ComponentHandle<VerletDistanceConstraint> constraint;
   const auto constraint_iterations = 2;
-  for( auto __unused e : entities.entities_with_components( constraint ) )
+  for( auto e : entities.entities_with_components( constraint ) )
   {
     if( (! constraint->a.valid()) || (! constraint->b.valid()) ) {
       // would be cooler if the bodies knew about all constraints on them so this couldn't happen.
