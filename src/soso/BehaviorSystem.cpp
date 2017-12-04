@@ -32,7 +32,7 @@ BehaviorSystem::BehaviorSystem( entityx::EntityManager &entities )
 void BehaviorSystem::mouseDown( const ci::app::MouseEvent &event )
 {
   ComponentHandle<BehaviorComponent> behavior;
-  for( auto __unused e : _entities.entities_with_components( behavior ) )
+  for( auto e : _entities.entities_with_components( behavior ) )
   {
     auto &behaviors = behavior->behaviors;
     for( auto &b : behaviors ) {
@@ -44,7 +44,7 @@ void BehaviorSystem::mouseDown( const ci::app::MouseEvent &event )
 void BehaviorSystem::mouseDrag( const ci::app::MouseEvent &event )
 {
   ComponentHandle<BehaviorComponent> behavior;
-  for( auto __unused e : _entities.entities_with_components( behavior ) )
+  for( auto e : _entities.entities_with_components( behavior ) )
   {
     auto &behaviors = behavior->behaviors;
     for( auto &b : behaviors ) {
@@ -56,7 +56,7 @@ void BehaviorSystem::mouseDrag( const ci::app::MouseEvent &event )
 void BehaviorSystem::mouseMove( const ci::app::MouseEvent &event )
 {
   ComponentHandle<BehaviorComponent> behavior;
-  for( auto __unused e : _entities.entities_with_components( behavior ) )
+  for( auto e : _entities.entities_with_components( behavior ) )
   {
     auto &behaviors = behavior->behaviors;
     for( auto &b : behaviors ) {
@@ -68,7 +68,7 @@ void BehaviorSystem::mouseMove( const ci::app::MouseEvent &event )
 void BehaviorSystem::mouseUp( const ci::app::MouseEvent &event )
 {
   ComponentHandle<BehaviorComponent> behavior;
-  for( auto __unused e : _entities.entities_with_components( behavior ) )
+  for( auto e : _entities.entities_with_components( behavior ) )
   {
     auto &behaviors = behavior->behaviors;
     for( auto &b : behaviors ) {
@@ -82,7 +82,7 @@ void BehaviorSystem::update( EntityManager &entities, EventManager &events, Time
 
   ComponentHandle<BehaviorComponent> behavior;
 
-  for( auto __unused e : entities.entities_with_components( behavior ) )
+  for( auto e : entities.entities_with_components( behavior ) )
   {
     auto &behaviors = behavior->behaviors;
     for( auto &b : behaviors ) {

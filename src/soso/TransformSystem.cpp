@@ -21,7 +21,7 @@ void TransformSystem::update(EntityManager &entities, EventManager &events, Time
   /// we will be able to walk through and simply update in linear order.
   /// We could also do that if we wrote our own memory allocator for transforms (which we are unlikely to pursue).
 
-  for (Entity __unused e : entities.entities_with_components(transform))
+  for (Entity e : entities.entities_with_components(transform))
   {
     if (transform->isRoot())
     {

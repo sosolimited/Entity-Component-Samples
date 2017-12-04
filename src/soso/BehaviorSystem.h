@@ -9,6 +9,9 @@
 
 #include "entityx/System.h"
 
+#include "cinder/app/MouseEvent.h"
+#include "cinder/Signals.h"
+
 namespace soso {
 
 class BehaviorSystem : public entityx::System<BehaviorSystem>

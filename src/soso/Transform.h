@@ -9,6 +9,10 @@
 
 #include "HierarchyComponentT.h"
 
+#include "cinder/Vector.h"
+#include "cinder/Quaternion.h"
+#include "cinder/Matrix.h"
+
 namespace soso {
 
 ///

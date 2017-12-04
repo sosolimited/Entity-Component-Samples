@@ -9,7 +9,6 @@
 	library	= "EntityX"
 	git			= "git@github.com:sosolimited/Entity-Component-Sample.git"
 	>
-	<supports os="macosx" />
 	<!-- Generic Systems and Components -->
 	<includePath>src</includePath>
 	<headerPattern>src/soso/*.h</headerPattern>
